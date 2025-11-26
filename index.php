@@ -11,7 +11,9 @@ if (!isset($_SESSION['login']) && $page !== 'login' && $page !== 'login_process'
     header("Location: index.php?page=login");
     exit;
 }
-
+if($page!=='login'){
+    top_navigasi();
+}
 switch ($page) {
     case 'login':
         auth_login_page();

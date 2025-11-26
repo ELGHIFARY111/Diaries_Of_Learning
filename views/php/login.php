@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="./views/css/login.css">
 </head>
 <body>
-    <h2>Silahkan Login</h2>
-    <form action="index.php?page=login_process" method="POST">
-        <label>Username:</label><br>
-        <input type="text" name="username" required><br><br>
-        
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
-        
-        <button type="submit">Login</button>
-    </form>
+    <div class="login-box">
+        <h2>Silahkan Login</h2>
+        <form action="index.php?page=login_process" method="POST">
+            <div class="input-group">
+                <label>Username:</label>
+                <input type="text" name="username" required>
+            </div>
+            <div class="input-group">
+                <label>Password:</label>
+                <input type="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 </body>
 </html>
