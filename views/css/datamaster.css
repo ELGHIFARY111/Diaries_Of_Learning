@@ -1,3 +1,9 @@
+/* datamaster.css */
+
+/* Add box-sizing to prevent padding from increasing width */
+* {
+    box-sizing: border-box;
+}
 
 .head {
     display: flex;
@@ -10,6 +16,7 @@ h2 {
     margin: 0;
 }
 
+/* Buttons */
 .tambah { 
     background: #5cb85c; 
     color: white;
@@ -20,9 +27,7 @@ h2 {
     font-size: 14px;
     font-weight: 600; 
 }
-.tambah:hover {
-    background: #4a934a;
-}
+.tambah:hover { background: #4a934a; }
 
 .edit { 
     background: #17a2b8; 
@@ -33,9 +38,7 @@ h2 {
     cursor: pointer;
     font-size: 13px;
 }
-.edit:hover {
-    background: #138496;
-}
+.edit:hover { background: #138496; }
 
 .hapus { 
     background: #dc3545; 
@@ -46,10 +49,9 @@ h2 {
     cursor: pointer;
     font-size: 13px;
 }
-.hapus:hover {
-    background: #c82333;
-}
+.hapus:hover { background: #c82333; }
 
+/* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -75,26 +77,31 @@ td {
     font-size: 14px;
 }
 
-tr:nth-child(even) {
-    background: #f9f9f9;
-}
+tr:nth-child(even) { background: #f9f9f9; }
 
-tr:last-child td {
-    border-bottom: none;
-}
+tr:last-child td { border-bottom: none; }
 
 td form {
     display: inline-block;
     margin: 0 3px;
 }
+
+/* Container Fixes */
 .container {
-    max-width: 1100px;
+    /* Adjusted layout logic */
     margin: 30px auto;
+    /* Pushes content to the right of the sidebar (240px sidebar + 30px gap) */
+    margin-left: 270px; 
+    /* Ensures content doesn't touch the right edge of the screen */
+    margin-right: 30px; 
     padding: 20px;
-    background-color: #ffffffff;
+    background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     border-radius: 6px;
+    /* Removes max-width limit to let it fill remaining space, or you can keep it */
+    max-width: calc(100% - 300px); 
 }
+
 .container h2 { 
     font-size: 20px;
     font-weight: bold;
@@ -105,6 +112,8 @@ td form {
     margin-top: 0;
     margin-bottom: 20px;
 }
+
+/* Forms */
 .form-container {
     margin-top: 30px;
     padding: 20px;
@@ -113,24 +122,21 @@ td form {
     border-radius: 5px;
     max-width: 600px;
 }
-.form-container h3 {
-    margin-top: 0;
-}
-.form-group {
-    margin-bottom: 15px;
-}
-.form-group label {
-    /* display: block; */
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-.form-group input, .form-group select, .form-group textarea {
+
+.form-container h3 { margin-top: 0; }
+.form-group { margin-bottom: 15px; }
+.form-group label { margin-bottom: 5px; font-weight: bold; display: block; }
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
     width: 100%;
     padding: 8px;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Crucial for inputs to stay within container */
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 .btn-simpan {
     background-color: #4CAF50;
     color: white;
@@ -138,6 +144,7 @@ td form {
     border: none;
     cursor: pointer;
 }
+
 .btn-batal {
     background-color: #f44336;
     color: white;
@@ -146,16 +153,7 @@ td form {
     border-radius: 3px;
     font-size: 13.33px;
 }
-.alert {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
-.alert-error {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-}
+
+.alert { padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+.alert-error { background-color: #f8d7da; color: #721c24; }
+.alert-success { background-color: #d4edda; color: #155724; }

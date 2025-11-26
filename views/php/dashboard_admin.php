@@ -1,61 +1,43 @@
+<link rel="stylesheet" href="./views/css/datamaster.css"> 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./views/css/dashboard_admin.css">
-</head>
-<body>
-    <div class="container">
-        <h2>akun user</h2>
-        <div class="header-container">
-            <!-- <div class="button-group">
-                <a href="report_transaksi.php" class="btn-laporan">Lihat Laporan Penjualan</a>
-                <a href="form_transaksi.php" class="btn-tambah">Tambah Transaksi</a>
-            </div> -->
+<div class="container">
+    <h2>Akun User</h2>
+    <div class="header-container">
         </div>
-        <div class="container-user">
-            <table border="1" cellpadding="8" cellspacing="0">
+    <div class="container-user">
+        <table border="0" cellpadding="8" cellspacing="0"> <thead>
                 <tr>
                     <th>No</th>
                     <th>ID User</th>
                     <th>ID Sekolah</th>
-                    <th>username</th>
-                    <th>password hash</th>
-                    <th>Nama Lengkap</th>
+                    <th>Username</th>
                     <th>Role</th>
-                    <th>email</th>
+                    <th>Email</th>
                     <th>Tindakan</th>
                 </tr>
+            </thead>
+            <tbody>
                 <?php $no=1; while ($row = mysqli_fetch_assoc($data)) { ?>
                 <tr>
-                    <?php
-                        echo "<td>$no</td>";
-                        $no+=1;
-                    ?>
+                    <td><?= $no++ ?></td>
                     <td><?= $row['id_user'] ?></td>
                     <td><?= $row['id_sekolah'] ?></td>
                     <td><?= $row['username'] ?></td>
-                    <td><?= $row['password_hash'] ?></td>
-                    <td><?= $row['nama_lengkap'] ?></td>
                     <td><?= $row['role'] ?></td>
                     <td><?= $row['email'] ?></td>
                     <td class="form_action">
-                        <form class="detail" action="detail_transaksi.php" method="get">
+                        <form class="detail" action="detail_transaksi.php" method="get" style="display:inline;">
                             <input type="hidden" name="id" value="<?= $row['id_user'] ?>">
-                            <button class="btn-detail" type="submit">Lihat Detail</button>
+                            <button class="edit" type="submit">Detail</button>
                         </form>
-                        <form action="hapus.php" method="get" onsubmit="return confirm('Anda yakin akan menghapus transaksi ini?')">
+                        <form action="hapus.php" method="get" onsubmit="return confirm('Hapus?')" style="display:inline;">
                             <input type="hidden" name="id" value="<?= $row['id_user'] ?>">
-                            <button class="btn-hapus" type="submit">Hapus</button>
+                            <button class="hapus" type="submit">Hapus</button>
                         </form>
                     </td>
                 </tr>
                 <?php } ?>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
-</body>
-</html>
+</div>
