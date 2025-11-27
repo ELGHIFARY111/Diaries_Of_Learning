@@ -1,0 +1,40 @@
+.topbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 50px;
+    background: #003366;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    z-index: 9999;
+}
+
+.profile {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.profile-menu {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    background: white;
+    color: black;
+    border: 1px solid #ccc;
+    width: 150px;
+    display: none;
+    border-radius: 5px;
+}
+
+.profile-menu a {
+    display: block;
+    padding: 8px 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.profile-menu a:hover {
+    background: #f0f0f0;
+}

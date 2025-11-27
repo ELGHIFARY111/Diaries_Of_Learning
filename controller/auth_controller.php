@@ -14,6 +14,7 @@ function auth_authenticate($koneksi) {
             $_SESSION['login'] = true;
             $_SESSION['user_nama'] = $user['nama_lengkap'];
             $_SESSION['user_role'] = $user['role'];
+            
             header("Location: index.php?page=user");
             exit;
         } else {
@@ -29,4 +30,6 @@ function auth_logout() {
     header("Location: index.php?page=login");
     exit;
 }
+
+
 ?>
