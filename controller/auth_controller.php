@@ -14,8 +14,13 @@ function auth_authenticate($koneksi) {
             $_SESSION['login'] = true;
             $_SESSION['user_nama'] = $user['nama_lengkap'];
             $_SESSION['user_role'] = $user['role'];
-            
-            header("Location: index.php?page=user");
+            if($user['role']== 1){
+                header("Location: index.php?page=admin");
+            }elseif($user['role']==2){
+                header("Location: index.php?page=guru");
+            }else{
+                header("Location: index.php?page=user");
+            }
             exit;
         } else {
             echo "<script>alert('Password salah!'); window.location='index.php?page=login';</script>";

@@ -16,11 +16,12 @@
 
         <!-- Manajemen Institusi -->
         <li>
-            <a class="dropdown-btn">Manajemen Institusi</a>
+            <a class="dropdown-btn">Database</a>
             <div class="dropdown-container">
                 <a href="index.php?page=institusi/sekolah">Sekolah</a>
                 <a href="index.php?page=institusi/guru">Guru</a>
                 <a href="index.php?page=institusi/siswa">Siswa</a>
+                <a href="index.php?page=institusi/user">user</a>
             </div>
         </li>
 

@@ -14,8 +14,7 @@ if (!isset($_SESSION['login']) && $page !== 'login' && $page !== 'login_process'
 }
 
 if ($page !== 'login') {
-    top_navigasi_superadmin();      // Sidebar
-    top_profile_bar();   
+    top_navigasi_superadmin();
 }
 
 switch ($page) {
@@ -38,6 +37,10 @@ switch ($page) {
 
     case 'institusi/sekolah':
         institusi_sekolah_index($koneksi);
+        break;
+
+    case 'institusi/user':
+        institusi_user_index($koneksi);
         break;
 
     case 'institusi/sekolah_tambah':
