@@ -3,10 +3,16 @@
 <div class="sidebar">
 
     <div class="brand">Diary of Learning</div>
-    <div class="username_admin">Superadmin</div>
+    <div class="username_admin"></div>
 
     <ul>
-
+        <!-- username -->
+        <li>
+            <a class="dropdown-btn"><?= $_SESSION['user_nama'] ?></a>
+            <div class="dropdown-container">
+                <a href="index.php?page=logout">logout</a>
+            </div>
+        </li>
         <!-- Dashboard -->
         <li>
             <a href="index.php?page=dashboard">Dashboard</a>
@@ -19,8 +25,6 @@
             <a class="dropdown-btn">Database</a>
             <div class="dropdown-container">
                 <a href="index.php?page=institusi/sekolah">Sekolah</a>
-                <a href="index.php?page=institusi/guru">Guru</a>
-                <a href="index.php?page=institusi/siswa">Siswa</a>
                 <a href="index.php?page=institusi/user">user</a>
             </div>
         </li>

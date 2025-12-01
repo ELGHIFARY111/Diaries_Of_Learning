@@ -8,12 +8,14 @@ require_once "./controller/global_controller.php";
 
 $page = $_GET['page'] ?? '';
 
-if (!isset($_SESSION['login']) && $page !== 'login' && $page !== 'login_process') {
+
+if(!isset($_SESSION['login']) && $page !== 'login' && $page !== 'login_process' && $page !== 'regist' && $page !== 'regist_process') {
     header("Location: index.php?page=login");
     exit;
 }
 
-if ($page !== 'login') {
+
+if ($page !== 'login'&& $page!== 'regist') {
     top_navigasi_superadmin();
 }
 
@@ -27,8 +29,16 @@ switch ($page) {
         auth_login_page();
         break;
 
+    case 'regist':
+        auth_regist_page($koneksi);
+        break;
+
     case 'login_process':
         auth_authenticate($koneksi);
+        break;
+
+    case 'regist_process': 
+        auth_regist_process($koneksi);
         break;
 
     case 'logout':

@@ -19,6 +19,7 @@
             </div>
             <button type="submit">Login</button>
         </form>
+        <p>Belum punya akun? silahkan <a href='index.php?page=regist'>registrasi</a></p>
     </div>
 </body>
 </html>

@@ -16,14 +16,15 @@ function dashboard_admin_page($koneksi) {
 function institusi_sekolah_index($koneksi)
 {
     $data_sekolah = sekolah_get_all($koneksi);
+    $no=1;
     include "./views/superAdmin/institusi/sekolah.php";
 }
-function institusi_user_index($koneksi)
-{
-    $result = user_get_all($koneksi);
+
+function institusi_user_index($koneksi) {
+    $filter = isset($_GET['filter_role']) ? $_GET['filter_role'] : null;
+    $data_user = user_get_all($koneksi, $filter);
     include "./views/superAdmin/institusi/user.php";
 }
-
 function institusi_sekolah_tambah_page()
 {
     include "./views/superAdmin/institusi/sekolah_tambah.php";
