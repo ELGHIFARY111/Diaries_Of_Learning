@@ -8,7 +8,7 @@ require_once "./controller/global_controller.php";
 
 $page = $_GET['page'] ?? '';
 
-$page_exception=['login','login_process','regist','regist_proscess'];
+$page_exception=['login','login_process','regist','regist_process'];
 if(!isset($_SESSION['login']) && !in_array($page,$page_exception)) {
     header("Location: index.php?page=login");
     exit;

@@ -1,0 +1,227 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+:root {
+    /* Variabel Warna Utama (Konsisten) */
+    --color-primary: #007bff; /* Biru Utama (Aksi/Aktif) */
+    --color-secondary: #6c757d; /* Abu Sekunder (Teks Biasa) */
+    --color-sidebar-bg: #2c3e50; 
+    --color-content-bg: #f4f7f9; /* Light Blue-Gray (Background Konten) */
+    --color-white: #ffffff;
+    --color-warning-dark: #e67e22; /* Oranye untuk password */
+}
+
+html, body {
+    min-height: 100vh;
+    background-color: var(--color-content-bg);
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 2. LAYOUT UTAMA (Fixed Sidebar) */
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* 3. SIDEBAR (MENU KIRI) - Fixed */
+.sidebar {
+    width: 250px;
+    background-color: var(--color-sidebar-bg);
+    color: var(--color-white);
+    padding: 20px;
+    position: fixed; /* Membuat sidebar tetap */
+    top: 0;
+    left: 0;
+    height: 100%; 
+    z-index: 1000; 
+    overflow-y: auto;
+    display: flex; 
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.15);
+}
+
+.logo {
+    font-size: 24px; 
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #343a40; 
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    color: #adb5bd; 
+    text-decoration: none;
+    padding: 12px 15px; 
+    margin-bottom: 8px;
+    border-radius: 8px; 
+    transition: all 0.3s ease;
+}
+
+.menu a:hover {
+    background-color: #343a40; 
+    color: var(--color-white);
+}
+
+.menu a.aktif {
+    background-color: var(--color-primary); 
+    color: var(--color-white);
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.user-info {
+    margin-top: auto; 
+    font-size: 14px;
+    color: #adb5bd;
+    border-top: 1px solid #343a40;
+    padding-top: 15px;
+}
+.user-info b { color: var(--color-white); }
+
+/* 4. KONTEN UTAMA (KANAN) */
+.content {
+    flex-grow: 1;
+    padding: 40px; 
+    margin-left: 250px; /* Offset sesuai lebar sidebar */
+}
+
+.header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+.header h2 {
+    font-size: 2.2em;
+    color: #212529;
+    font-weight: 700;
+}
+.header p {
+    color: var(--color-secondary);
+    font-size: 1.05em;
+}
+
+/* 5. Styling Profil Utama (CARD) */
+.profile-card {
+    background: var(--color-white);
+    padding: 40px; /* Padding lebih besar */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Shadow yang lebih lembut */
+    max-width: 750px;
+    margin: 0 auto; 
+    text-align: center;
+}
+
+/* Foto Profil */
+.profile-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: #dee2e6; /* Abu terang */
+    margin: 0 auto 20px auto;
+    display: block;
+    border: 5px solid var(--color-primary); /* Border tebal warna utama */
+    overflow: hidden;
+    line-height: 120px;
+    font-size: 3.5em; /* Inisial lebih besar */
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+.profile-name {
+    font-size: 2em;
+    color: #212529;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.profile-role {
+    font-size: 1.2em;
+    color: var(--color-secondary);
+    margin-bottom: 30px;
+}
+
+/* Detail Informasi (Grid) */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    text-align: left;
+    margin-top: 25px;
+}
+
+.detail-item {
+    padding: 15px 20px;
+    border-left: 4px solid #ced4da; /* Garis vertikal sebagai highlight */
+    border-radius: 6px;
+    background-color: #f8f9fa;
+}
+
+.detail-item label {
+    display: block;
+    font-size: 0.85em;
+    color: var(--color-secondary);
+    font-weight: 600;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.detail-item p {
+    font-size: 1.15em;
+    color: #212529;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Tombol Aksi */
+.action-buttons {
+    margin-top: 40px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-action {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-edit {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-edit:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.btn-password {
+    background-color: var(--color-warning-dark);
+    color: var(--color-white);
+}
+
+.btn-password:hover {
+    background-color: #cd6700;
+    transform: translateY(-2px);
+}
+
+/* Footer Info */
+.footer-info {
+    font-size: 0.8em; 
+    color: var(--color-secondary); 
+    margin-top: 15px;
+}
