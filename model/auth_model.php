@@ -22,15 +22,17 @@ function auth_regist_user($koneksi, $data){
         return "duplicate";
     }
 
-    $password_hash = hash('sha256', $password_raw);
+$password_hash = hash('sha256', $password_raw);
     
     $id_sekolah_fix = "NULL"; 
-    $role_user_db = 3;
+    $role_user_db = 3; // Default untuk siswa
+
     if ($selected_role === 'guru') {
         $role_user_db = 2;
     } 
-    else {
+    else if ($selected_role === 'siswa') {
         $role_user_db = 3;
+
         if (!empty($input_kode_sekolah)) {
             $q_cek = mysqli_query($koneksi, "SELECT id_sekolah FROM sekolah WHERE kode_sekolah = '$input_kode_sekolah'");
             if ($row = mysqli_fetch_assoc($q_cek)) {
