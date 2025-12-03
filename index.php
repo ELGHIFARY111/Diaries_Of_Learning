@@ -5,6 +5,7 @@ require_once "./connection/koneksi.php";
 require_once "./controller/auth_controller.php";
 require_once "./controller/superAdmin_controller.php";
 require_once "./controller/guru_controller.php";
+require_once "./controller/murid_controller.php";
 require_once "./controller/global_controller.php";
 
 $page = $_GET['page'] ?? '';
@@ -20,6 +21,8 @@ if ($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==1) {
     top_navigasi_superadmin();
 }elseif($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==2){
     navigasi_guru();
+}elseif($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==3){
+    navigasi_murid();
 }
 
 switch ($page) {
@@ -95,10 +98,23 @@ switch ($page) {
     case 'guru/profil':
         profil_page($koneksi);
         break;
-
-    case 'guru/review_catatan':
-        review_catatan_page($koneksi);
+// murid
+    case 'murid':
+        murid_dashboard_page($koneksi);
         break;
+
+    case 'murid/catatanMurid':
+        catatan_murid_page($koneksi);
+        break;
+
+    case 'murid/kosakataMurid':
+        kosakata_murid_page($koneksi);
+        break;
+
+    case 'murid/misiMurid':
+        misi_murid_page($koneksi);
+        break;
+
 
 // eror
     default:

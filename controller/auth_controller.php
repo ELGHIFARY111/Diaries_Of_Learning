@@ -50,7 +50,7 @@ function auth_authenticate($koneksi) {
             } elseif($user['role'] == 'guru' || $user['role'] == '2'){
                 header("Location: index.php?page=guru");
             } else {
-                header("Location: index.php?page=user");
+                header("Location: index.php?page=murid");
             }
             exit;
         } else {

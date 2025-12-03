@@ -5,27 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Siswa - Simple</title>
-    <link rel="stylesheet" href="../css/homeMuridStyle.css">
+    <link rel="stylesheet" href="./views/css/homeMuridStyle.css">
 </head>
 
 <body>
 
     <div class="container">
-
-        <div class="sidebar">
-            <div class="logo">📘 Diary Sekolah</div>
-            <div class="menu">
-                <a href="#" class="aktif">🏠 Dashboard</a>
-                <a href="catatanMurid.php">📝 Catatan Harian</a>
-                <a href="kosakataMurid.php">📖 Kosakata</a>
-                <a href="misiMurid.php">🎯 Misi Saya</a>
-                <a href="#">🚪 Logout</a>
-            </div>
-            <div class="user-info">
-                Login sebagai:<br>
-                <b>Dian Anggraini <?= "(siswa)" ?></b>
-            </div>
-        </div>
 
         <div class="content">
 

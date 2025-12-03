@@ -5,28 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank Kosakata - Diary Sekolah</title>
-    <link rel="stylesheet" href="../css/kosakataMuridStyle.css">
+    <link rel="stylesheet" href="./views/css/kosakataMuridStyle.css">
 </head>
 
 <body>
 
     <div class="container">
-
-        <div class="sidebar">
-            <div class="logo">📘 Diary Sekolah</div>
-            <div class="menu">
-                <a href="homeMurid.php">🏠 Dashboard</a>
-                <a href="catatan.php">📝 Catatan Harian</a>
-                <a href="#" class="aktif">📖 Kosakata</a>
-                <a href="misiMurid.php">🎯 Misi Saya</a>
-                <a href="#">🚪 Logout</a>
-            </div>
-            <div class="user-info">
-                Login sebagai:<br>
-                <b>Dian Anggraini <?= "(siswa)" ?></b>
-            </div>
-        </div>
-
         <div class="content">
 
             <div class="header">
