@@ -1,145 +1,133 @@
-/* --- CSS ANDA (SUDAH ADA) --- */
-body {
-    font-family: Arial, sans-serif;
-    background: #e9ecef;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+/* === GLOBAL === */
+* {
+    box-sizing: border-box;
+    font-family: "Inter", Arial, sans-serif;
 }
 
-.login-box {
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
     background: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
-    box-sizing: border-box;
+    position: relative;
     overflow: hidden;
 }
 
-.login-box h2 {
-    font-size: 22px;
-    font-weight: 600;
-    background: #0d6efd;
-    padding: 20px;
-    color: white;
-    margin: -30px -30px 30px -30px;
-    text-align: center;
-    letter-spacing: 1px;
+a {
+    text-decoration: none;
 }
 
+/* === LEFT SIDE (FORM) === */
+.left-panel {
+    position: relative;
+    z-index: 2;
+
+    width: 40vw;
+    height: 100vh;
+    background: #ffffff;
+
+    padding: 50px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.08);
+}
+
+/* === RIGHT SIDE (FULL BACKGROUND IMAGE) === */
+.right-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: calc(100vw - 40vw);
+    height: 100vh;
+
+    background-image: url('../assets/login.png');
+    background-size: cover;         /* FULL COVER TANPA ZOOM BERLEBIHAN */
+    background-position: center;    /* POSISI TENGAH AGAR GAMBAR PRESISI */
+    background-repeat: no-repeat;
+
+    border-top-left-radius: 10%;
+    border-bottom-left-radius: 10%;
+
+    overflow: hidden;               /* BIAR GAMBAR IKUT MELENGKUNG */
+    z-index: 1;
+}
+
+/* Hapus img kecil yang muncul */
+.right-panel img {
+    display: none;
+}
+
+/* === INPUT === */
 .input-group {
     margin-bottom: 20px;
 }
 
 .input-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
     font-size: 14px;
-    color: #495057;
+    font-weight: 600;
 }
 
 .input-group input {
     width: 100%;
     padding: 12px;
-    box-sizing: border-box;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: all 0.3s;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
 }
 
 .input-group input:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+    border-color: #6a5acd;
+    box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.25);
     outline: none;
 }
 
-.login-box button {
-    background: #0d6efd;
-    color: white;
+/* === BUTTON === */
+button {
+    background: #6a5acd;
     border: none;
     padding: 12px;
-    border-radius: 5px;
-    cursor: pointer;
     width: 100%;
-    font-size: 16px;
+    border-radius: 6px;
+    color: white;
     font-weight: 600;
+    font-size: 15px;
     margin-top: 10px;
-    transition: background-color 0.2s;
-}
-
-.login-box button:hover {
-    background: #0b5ed7;
-}
-
-.error-alert {
-    background-color: #f8d7da;
-    color: #842029;
-    border: 1px solid #f5c6cb;
-    padding: 12px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    font-size: 14px;
-    text-align: center;
-}
-
-.input-group input::-webkit-calendar-picker-indicator {
     cursor: pointer;
-    opacity: 0.6;
-    transition: 0.3s;
 }
 
-.input-group input:hover::-webkit-calendar-picker-indicator {
-    opacity: 1;
+button:hover {
+    background: #5a4fcf;
 }
 
-.input-group input[list] {
-    background-color: #fff;
-}
-.input-group input::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    opacity: 0.6;
-    transition: 0.3s;
-}
-
-.input-group input:hover::-webkit-calendar-picker-indicator {
-    opacity: 1;
-}
-
+/* === TAB === */
 .tab-container {
     display: flex;
-    background-color: #f0f0f0;
-    border-radius: 25px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    background: #eee;
+    border-radius: 30px;
     overflow: hidden;
-    border: 1px solid #ddd;
 }
 
 .tab-item {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
     text-align: center;
-    text-decoration: none; /* Hilangkan garis bawah link */
-    font-weight: bold;
+    font-weight: 600;
+    background: #eee;
     color: #555;
-    transition: background 0.3s;
+    cursor: pointer;
+    user-select: none;
+    transition: .3s;
 }
 
-/* Kelas Active (Dikontrol PHP) */
 .tab-item.active {
-    background-color: #0056b3;
+    background: #6a5acd;
     color: white;
 }
 
 .tab-item:hover {
-    background-color: #e0e0e0;
-}
-.tab-item.active:hover {
-    background-color: #004494;
+    background: #ddd;
 }
