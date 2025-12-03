@@ -1,0 +1,72 @@
+.content {
+    margin-left: 260px;
+    padding: 25px;
+    font-family: Arial, sans-serif;
+}
+
+.section-title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.panel {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+.panel h3 {
+    margin: 0 0 12px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c8ad4;
+}
+
+.panel label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.panel input, .panel textarea, .panel select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.save-btn {
+    background: #2c8ad4;
+    color: white;
+    border: 0;
+    padding: 10px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.table-log {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-log th {
+    background: #2c8ad4;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.table-log td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.table-log tr:hover {
+    background: #f8f8f8;
+}

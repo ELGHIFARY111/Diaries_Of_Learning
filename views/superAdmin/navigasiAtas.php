@@ -29,15 +29,7 @@
             </div>
         </li>
 
-        <!-- Misi Global -->
-        <li>
-            <a class="dropdown-btn">Misi Global</a>
-            <div class="dropdown-container">
-                <a href="index.php?page=misi/daftar">Daftar Misi Global</a>
-                <a href="index.php?page=misi/tambah">Tambah Misi</a>
-                <a href="index.php?page=misi/kosakata">Kelola Kosakata Misi</a>
-            </div>
-        </li>
+
 
         <!-- Monitoring & Analitik -->
         <li>
@@ -53,7 +45,7 @@
         <li>
             <a class="dropdown-btn">Pengaturan Sistem</a>
             <div class="dropdown-container">
-                <a href="index.php?page=pengaturan/profi">Profil Superadmin</a>
+                <a href="index.php?page=pengaturan/profil">Profil Superadmin</a>
                 <a href="index.php?page=pengaturan/log">Log Aktivitas</a>
                 <a href="index.php?page=pengaturan/konfigurasi">Konfigurasi Aplikasi</a>
             </div>

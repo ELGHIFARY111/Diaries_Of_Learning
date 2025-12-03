@@ -59,25 +59,34 @@ switch ($page) {
         institusi_user_index($koneksi);
         break;
 
-    case 'institusi/sekolah_tambah':
-        institusi_sekolah_tambah_page();
+    case 'monitoring/catatan':
+        monitoring_catatan_page($koneksi);
         break;
 
-    case 'institusi/sekolah_tambah_process':
-        institusi_sekolah_tambah_process($koneksi);
+    case 'monitoring/progres':
+        monitoring_progres_page($koneksi);
         break;
 
-    case 'institusi/sekolah_edit':
-        institusi_sekolah_edit_page($koneksi);
+    case 'monitoring/sekolah':
+        monitoring_sekolah_page($koneksi);
+        break;
+        
+    case 'pengaturan/profil':
+        pengaturan_profil_page($koneksi);
         break;
 
-    case 'institusi/sekolah_edit_process':
-        institusi_sekolah_edit_process($koneksi);
+    case 'pengaturan/log':
+        pengaturan_log_page($koneksi);
         break;
 
-    case 'institusi/sekolah_hapus':
-        institusi_sekolah_hapus($koneksi);
+    case 'pengaturan/konfigurasi':
+        pengaturan_konfigurasi_page($koneksi);
         break;
+
+
+
+
+
 // guru
     case 'guru':
         guru_dashboard_page($koneksi);
