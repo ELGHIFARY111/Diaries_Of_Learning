@@ -2,8 +2,9 @@
 session_start();
 
 require_once "./connection/koneksi.php";
-require_once "./controller/superAdmin_controller.php";
 require_once "./controller/auth_controller.php";
+require_once "./controller/superAdmin_controller.php";
+require_once "./controller/guru_controller.php";
 require_once "./controller/global_controller.php";
 
 $page = $_GET['page'] ?? '';
@@ -15,16 +16,14 @@ if(!isset($_SESSION['login']) && !in_array($page,$page_exception)) {
 }
 
 
-if ($page !== 'login'&& $page!== 'regist') {
+if ($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==1) {
     top_navigasi_superadmin();
+}elseif($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==2){
+    navigasi_guru();
 }
 
 switch ($page) {
-
-    case 'dashboard':
-        dashboard_admin_page($koneksi);
-        break;
-
+// auth 
     case 'login':
         auth_login_page();
         break;
@@ -43,6 +42,10 @@ switch ($page) {
 
     case 'logout':
         auth_logout();
+        break;
+// admin
+    case 'dashboard':
+        dashboard_admin_page($koneksi);
         break;
 
     case 'institusi/sekolah':
@@ -72,7 +75,32 @@ switch ($page) {
     case 'institusi/sekolah_hapus':
         institusi_sekolah_hapus($koneksi);
         break;
+// guru
+    case 'guru':
+        guru_dashboard_page($koneksi);
+        break;
 
+    case 'guru/laporan_progres':
+        laporan_progres_page($koneksi);
+        break;
+
+    case 'guru/misi_kosakata':
+        misi_kosakata_page($koneksi);
+        break;
+
+    case 'guru/monitoring':
+        monitoring_page($koneksi);
+        break;
+
+    case 'guru/profil':
+        profil_page($koneksi);
+        break;
+
+    case 'guru/review_catatan':
+        review_catatan_page($koneksi);
+        break;
+
+// eror
     default:
         echo "Halaman tidak ditemukan";
         break;

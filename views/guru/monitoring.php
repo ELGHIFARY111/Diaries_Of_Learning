@@ -13,25 +13,6 @@
 <body>
 
     <div class="container">
-
-        <div class="sidebar">
-            <div class="logo">📘 Diary of Learning</div>
-            <div class="menu">
-                <a href="#">🏠 Dashboard</a>
-                <a href="#" class="aktif">🧑‍🎓 Daftar Siswa</a>
-                <a href="#">🎯 Misi Kosa Kata Sekolah</a>
-                <a href="#">📝 Review Catatan Siswa</a>
-                <a href="#">📊 Laporan Progres</a>
-                <a href="#">👤 Profil Guru</a>
-                <a href="#">🚪 Logout</a>
-            </div>
-            <div class="user-info">
-                Login sebagai:<br>
-                <b>Bapak Andi (Guru)</b>
-                <br>SMA Bintang Timur
-            </div>
-        </div>
-
         <div class="content">
 
             <div class="header">

@@ -1,36 +1,16 @@
 <!DOCTYPE html>
-<html lang="id">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Guru - Diary of Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./view/css/dashboard_guru.css">
+    <title>Dashboard Guru</title>
+    <link rel="stylesheet" href="./views/css/dashboard_guru.css">
 </head>
 
 <body>
 
     <div class="container">
-
-                <div class="sidebar">
-            <div class="logo">📘 Diary of Learning</div>
-            <div class="menu">
-                <a href="#" class="aktif">🏠 Dashboard</a>
-                <a href="#">🧑‍🎓 Daftar Siswa</a>
-                <a href="#">🎯 Misi Kosa Kata Sekolah</a>
-                <a href="#">📝 Review Catatan Siswa</a>
-                <a href="#">📊 Laporan Progres</a>
-                <a href="#">👤 Profil Guru</a>
-                <a href="#">🚪 Logout</a>
-            </div>
-            <div class="user-info">
-                Login sebagai:<br>
-                <b>Bapak Andi (Guru)</b>
-                <br>SMA Bintang Timur
-            </div>
-        </div>
-
                 <div class="content">
 
             <div class="header">

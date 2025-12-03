@@ -25,7 +25,7 @@ function auth_regist_user($koneksi, $data){
 $password_hash = hash('sha256', $password_raw);
     
     $id_sekolah_fix = "NULL"; 
-    $role_user_db = 3; // Default untuk siswa
+    $role_user_db = 3;
 
     if ($selected_role === 'guru') {
         $role_user_db = 2;
