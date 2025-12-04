@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Guru - Diary of Learning</title>
+    <title>Diary of Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./views/css/profil_guru.css">
 </head>
@@ -15,7 +15,7 @@
         <div class="content">
 
             <div class="header">
-                <h2>👤 Profil Guru</h2>
+                <h2>Profil Guru</h2>
                 <p>Informasi akun dan data institusi Anda saat ini.</p>
             </div>
             
@@ -66,13 +66,13 @@
                 
                 <div class="action-buttons">
                     <button class="btn-action btn-edit">
-                        📝 Edit Data Profil
+                        Edit Data Profil
                     </button>
                     <button class="btn-action btn-password">
-                        🔑 Ubah Kata Sandi
+                        Ubah Kata Sandi
                     </button>
                 </div>
-                <p class="footer-info">*Tombol di atas hanya simulasi navigasi ke halaman edit.</p>
+                <p class="footer-info">footer.</p>
             </div>
 
         </div>

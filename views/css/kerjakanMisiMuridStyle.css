@@ -21,8 +21,8 @@ body {
 
 /* Sidebar Tetap */
 .sidebar {
-    width: 250px;
-    background-color: #2c3e50;
+    width: 280px;
+    background: linear-gradient(to bottom, #8e44ad, #3498db);
     color: white;
     padding: 20px;
     flex-shrink: 0;
@@ -31,6 +31,8 @@ body {
     left: 0;
     height: 100vh;
     overflow-y: auto;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .logo {
@@ -68,7 +70,7 @@ body {
     flex-grow: 1;
     padding: 30px;
     background-color: #f4f4f4;
-    margin-left: 250px;
+    margin-left: 280px;
 }
 
 /* =========================================

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Review Catatan Siswa - Diary of Learning (Guru)</title>
+    <title>Diary of Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./views/css/review_catatan_guru.css">
 </head>
@@ -13,8 +13,6 @@
 
     <div class="container">
 
-
-        <!-- KONTEN UTAMA (Kanan) -->
         <div class="content">
 
             <div class="header">
@@ -24,7 +22,6 @@
                 </div>
             </div>
             
-            <!-- Filter Area -->
             <div class="filter-area">
                 <label for="filterStatus">Filter Status:</label>
                 <select id="filterStatus">
@@ -44,7 +41,6 @@
                 <input type="date" value="2025-10-15">
             </div>
 
-            <!-- Tabel Data -->
             <div class="data-table-wrapper">
                 <table class="data-table">
                     <thead>
@@ -67,7 +63,7 @@
                             <td>
                                 <div class="aksi-group">
                                     <button class="btn-lihat">Lihat Review</button>
-                                    <button class="btn-check">✅ Tandai Dicek</button>
+                                    <button class="btn-check">Tandai Dicek</button>
                                 </div>
                             </td>
                         </tr>
@@ -94,7 +90,7 @@
                             <td>
                                 <div class="aksi-group">
                                     <button class="btn-lihat">Lihat Review</button>
-                                    <button class="btn-check">✅ Tandai Dicek</button>
+                                    <button class="btn-check">Tandai Dicek</button>
                                 </div>
                             </td>
                         </tr>
