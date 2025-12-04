@@ -82,11 +82,6 @@ switch ($page) {
     case 'pengaturan/konfigurasi':
         pengaturan_konfigurasi_page($koneksi);
         break;
-
-
-
-
-
 // guru
     case 'guru':
         guru_dashboard_page($koneksi);
@@ -106,6 +101,10 @@ switch ($page) {
 
     case 'guru/profil':
         profil_page($koneksi);
+        break;
+
+    case 'guru/review_catatan':
+        review_catatan_page($koneksi);
         break;
 // murid
     case 'murid':
