@@ -6,7 +6,7 @@
             Dashboard
          </a>
 
-         <a href="index.php?page=guru/laporan_progres" 
+         <a href="index.php?page=guru/monitoring" 
             class="<?= ($active == 'siswa') ? 'aktif' : '' ?>">
             Daftar Siswa
          </a>
@@ -16,17 +16,17 @@
             Misi Kosa Kata Sekolah
          </a>
 
-         <a href="index.php?page=guru/monitoring" 
+         <a href="index.php?page=guru/review_catatan" 
             class="<?= ($active == 'review') ? 'aktif' : '' ?>">
             Review Catatan Siswa
          </a>
 
-         <a href="index.php?page=guru/profil" 
+         <a href="index.php?page=guru/laporan_progres" 
             class="<?= ($active == 'laporan') ? 'aktif' : '' ?>">
             Laporan Progres
          </a>
 
-         <a href="index.php?page=guru/review_catatan" 
+         <a href="index.php?page=guru/profil" 
             class="<?= ($active == 'profil') ? 'aktif' : '' ?>">
             Profil Guru
          </a>
