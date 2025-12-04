@@ -22,17 +22,17 @@ html, body {
 
 .sidebar {
     width: 250px;
-    background-color: #2c3e50;
+    background-color:  #6a5acd;
     color: white;
     padding: 20px;
     
-    /* FIX PENTING: Membuat Sidebar Fixed */
+   
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%; /* Mengambil tinggi penuh viewport */
-    z-index: 1000; /* Memastikan di atas konten */
-    overflow-y: auto; /* Mengizinkan scroll di sidebar jika menu terlalu banyak */
+    height: 100%; 
+    z-index: 1000; 
+    overflow-y: auto; 
     
     display: flex;
     flex-direction: column;
@@ -77,11 +77,9 @@ html, body {
 }
 .user-info b { color: white; }
 
-/* 4. KONTEN UTAMA (KANAN) */
 .content {
     flex-grow: 1;
     padding: 30px;
-    /* FIX PENTING: Menggeser konten agar tidak tertutup sidebar fixed */
     margin-left: 250px; 
 }
 
@@ -98,7 +96,6 @@ html, body {
     color: #7f8c8d;
 }
 
-/* KARTU STATISTIK (HIGHLIGHT) */
 .stats-box {
     display: flex;
     gap: 25px; 
@@ -129,7 +126,6 @@ html, body {
 .card:nth-child(3) h3 { color: #2ecc71; }
 
 
-/* TOMBOL AKSI (CTA) */
 .action-area {
     display: flex;
     gap: 20px;
@@ -167,8 +163,6 @@ html, body {
 .btn-primary:hover {
     background-color: #2980b9;
 }
-
-/* DETAIL BOTTOM SECTION (TABLE/LIST) */
 .bottom-section {
     display: flex;
     gap: 25px;

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Progres - Diary of Learning (Guru)</title>
+    <title>Laporan Progres - Diary of Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./views/css/laporan_progres_guru.css">
     
@@ -18,7 +18,7 @@
                 <div class="content">
 
             <div class="header">
-                <h2>Laporan Progres Belajar Siswa 📈</h2>
+                <h2>Laporan Progres Belajar Siswa</h2>
                 <p>Analisis kinerja siswa secara kolektif dan individu selama periode ini.</p>
             </div>
             

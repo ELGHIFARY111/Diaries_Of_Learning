@@ -7,13 +7,12 @@
 }
 
 :root {
-    /* Variabel Warna Utama (Konsisten) */
-    --color-primary: #007bff; /* Biru Utama (Aksi/Aktif) */
-    --color-secondary: #6c757d; /* Abu Sekunder (Teks Biasa) */
+    --color-primary: #007bff; 
+    --color-secondary: #6c757d; 
     --color-sidebar-bg: #2c3e50; 
-    --color-content-bg: #f4f7f9; /* Light Blue-Gray (Background Konten) */
+    --color-content-bg: #f4f7f9; 
     --color-white: #ffffff;
-    --color-warning-dark: #e67e22; /* Oranye untuk password */
+    --color-warning-dark: #e67e22; 
 }
 
 html, body {
@@ -23,19 +22,19 @@ html, body {
     line-height: 1.6;
 }
 
-/* 2. LAYOUT UTAMA (Fixed Sidebar) */
+
 .container {
     display: flex;
     min-height: 100vh;
 }
 
-/* 3. SIDEBAR (MENU KIRI) - Fixed */
+
 .sidebar {
     width: 250px;
     background-color: var(--color-sidebar-bg);
     color: var(--color-white);
     padding: 20px;
-    position: fixed; /* Membuat sidebar tetap */
+    position: fixed; 
     top: 0;
     left: 0;
     height: 100%; 
@@ -86,11 +85,11 @@ html, body {
 }
 .user-info b { color: var(--color-white); }
 
-/* 4. KONTEN UTAMA (KANAN) */
+
 .content {
     flex-grow: 1;
     padding: 40px; 
-    margin-left: 250px; /* Offset sesuai lebar sidebar */
+    margin-left: 250px; 
 }
 
 .header {
@@ -108,29 +107,29 @@ html, body {
     font-size: 1.05em;
 }
 
-/* 5. Styling Profil Utama (CARD) */
+
 .profile-card {
     background: var(--color-white);
-    padding: 40px; /* Padding lebih besar */
+    padding: 40px; 
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Shadow yang lebih lembut */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
     max-width: 750px;
     margin: 0 auto; 
     text-align: center;
 }
 
-/* Foto Profil */
+
 .profile-photo {
     width: 130px;
     height: 130px;
     border-radius: 50%;
-    background-color: #dee2e6; /* Abu terang */
+    background-color: #dee2e6; 
     margin: 0 auto 20px auto;
     display: block;
-    border: 5px solid var(--color-primary); /* Border tebal warna utama */
+    border: 5px solid var(--color-primary); 
     overflow: hidden;
     line-height: 120px;
-    font-size: 3.5em; /* Inisial lebih besar */
+    font-size: 3.5em; 
     color: var(--color-primary);
     font-weight: bold;
 }
@@ -148,7 +147,6 @@ html, body {
     margin-bottom: 30px;
 }
 
-/* Detail Informasi (Grid) */
 .detail-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -159,7 +157,7 @@ html, body {
 
 .detail-item {
     padding: 15px 20px;
-    border-left: 4px solid #ced4da; /* Garis vertikal sebagai highlight */
+    border-left: 4px solid #ced4da; 
     border-radius: 6px;
     background-color: #f8f9fa;
 }
@@ -180,7 +178,6 @@ html, body {
     font-weight: 600;
 }
 
-/* Tombol Aksi */
 .action-buttons {
     margin-top: 40px;
     display: flex;
@@ -219,7 +216,6 @@ html, body {
     transform: translateY(-2px);
 }
 
-/* Footer Info */
 .footer-info {
     font-size: 0.8em; 
     color: var(--color-secondary); 

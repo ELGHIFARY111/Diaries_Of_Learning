@@ -202,14 +202,13 @@ html, body {
 }
 .badge-warning { 
     background-color: var(--color-warning); 
-    color: #333; /* Teks gelap karena latar kuning */
+    color: #333;
 }
 .badge-danger { 
     background-color: var(--color-danger); 
     color: white; 
 }
 
-/* 8. DETAIL BUTTON */
 .btn-detail {
     background-color: var(--color-primary);
     color: var(--color-white);
@@ -225,11 +224,10 @@ html, body {
     background-color: #0056b3;
 }
 
-/* 9. PROGRES BAR DITINGKATKAN */
 .progress-bar-container {
     width: 90%;
     background: #e9ecef; 
-    height: 8px; /* Lebih ramping */
+    height: 8px; 
     border-radius: 4px;
     margin-top: 5px;
     overflow: hidden;
@@ -240,7 +238,7 @@ html, body {
     border-radius: 4px;
     transition: width 0.4s ease;
 }
-/* Style khusus jika progres mendekati selesai (opsional) */
+
 .progress-fill-success {
     background: var(--color-success) !important;
 }
@@ -252,7 +250,6 @@ html, body {
     font-weight: 500;
 }
 
-/* Kosakata Dikuasai: Teks lebih besar */
 .data-table tr td:nth-child(4) .progress-text {
     font-weight: 700;
     font-size: 1em;
@@ -260,7 +257,6 @@ html, body {
     margin-top: 0;
 }
 
-/* Teks Footer */
 .table-footer-info {
     text-align: center; 
     margin-top: 20px; 
