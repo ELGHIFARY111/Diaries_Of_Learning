@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="./views/css/monitoring.css">
+<link rel="stylesheet" href="./views/css/datamaster.css"> 
 
 <div class="content">
     <h2 class="title">Monitoring Progres</h2>

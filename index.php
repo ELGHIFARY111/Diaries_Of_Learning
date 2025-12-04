@@ -16,7 +16,7 @@ if(!isset($_SESSION['login']) && !in_array($page,$page_exception)) {
     exit;
 }
 
-
+// nav
 if ($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==1) {
     top_navigasi_superadmin();
 }elseif($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==2){
@@ -24,7 +24,7 @@ if ($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==1) {
 }elseif($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==3){
     navigasi_murid();
 }
-
+// page
 switch ($page) {
 // auth 
     case 'login':
