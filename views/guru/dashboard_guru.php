@@ -14,7 +14,7 @@
                 <div class="content">
 
             <div class="header">
-                <h2>Selamat Datang, Bapak Andi! 👋</h2>
+                <h2>Selamat Datang, Bapak Arik! </h2>
                 <p>Dashboard Pengawasan Institusi: SMA Bintang Timur. Pantau aktivitas belajar siswa Anda.</p>
             </div>
 
@@ -35,14 +35,14 @@
 
             <h3 style="margin-bottom: 15px; font-size: 1.5em; color: #2c3e50;">Aksi Cepat Supervisor</h3>
             <div class="action-area">
-                <a href="#" class="btn-action btn-success">🎯 Buat Misi Baru Institusi</a>
-                <a href="#" class="btn-action btn-primary">📝 Review Catatan Masuk (12)</a>
+                <a href="#" class="btn-action btn-success"> Buat Misi Baru Institusi</a>
+                <a href="#" class="btn-action btn-primary"> Review Catatan Masuk (12)</a>
             </div>
 
             <div class="bottom-section">
 
                 <div class="box">
-                    <h3>📈 Progres Siswa Terbaru</h3>
+                    <h3>Progres Siswa Terbaru</h3>
                     <div class="list-item">
                         <b>Dian Anggraini</b>
                         <p>Aktivitas: Menulis Refleksi | Nilai: 80.50%</p>
@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="box">
-                    <h3>📝 Catatan Harian Terbaru</h3>
+                    <h3> Catatan Harian Terbaru</h3>
                     <div class="list-item">
                         <b>Edo Firmansyah</b>
                         <span style="color: #27ae60;">'Refleksi Pelajaran Sejarah'</span>

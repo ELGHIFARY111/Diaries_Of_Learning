@@ -9,24 +9,20 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%; 
-    background-color: #f8f8f8; /* Latar belakang lebih terang */
+    background-color: #f8f8f8; 
     color: #333;
 }
-
-/* 2. LAYOUT UTAMA (Fixed Sidebar Logic) */
 .container {
     min-height: 100vh;
     width: 100%;
 }
 
-/* 3. SIDEBAR (MENU KIRI) */
 .sidebar {
     width: 250px;
     background-color: #2c3e50;
     color: white;
     padding: 20px;
     flex-shrink: 0;
-    /* FIX: Membuat Sidebar Fixed */
     position: fixed;
     top: 0;
     left: 0;
@@ -77,11 +73,9 @@ html, body {
 }
 .user-info b { color: white; }
 
-/* 4. KONTEN UTAMA (KANAN) */
 .content {
     flex-grow: 1;
     padding: 30px;
-    /* FIX: Menggeser konten agar tidak tertutup sidebar fixed */
     margin-left: 250px; 
 }
 
@@ -98,8 +92,6 @@ html, body {
 .header p {
     color: #7f8c8d;
 }
-
-/* Kartu Ringkasan (Summary Cards) - DITINGKATKAN */
 .summary-cards {
     display: flex;
     gap: 25px;
@@ -111,10 +103,10 @@ html, body {
     background: white;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08); /* Shadow modern */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08); 
     flex: 1; 
     min-width: 220px;
-    border-bottom: 3px solid #3498db; /* Garis bawah sebagai highlight */
+    border-bottom: 3px solid #3498db; 
     transition: all 0.3s;
 }
 .card:hover {
@@ -138,19 +130,17 @@ html, body {
 
 .card .indicator {
     font-size: 0.9em;
-    color: #2ecc71; /* Hijau */
+    color: #2ecc71; 
     font-weight: 600;
 }
 .card .indicator.red {
-    color: #e74c3c; /* Merah */
+    color: #e74c3c;
 }
 
-/* Warna highlight card yang berbeda */
-.summary-cards .card:nth-child(2) { border-bottom-color: #f1c40f; } /* Kuning */
-.summary-cards .card:nth-child(3) { border-bottom-color: #e74c3c; } /* Merah */
-.summary-cards .card:nth-child(4) { border-bottom-color: #2ecc71; } /* Hijau */
+.summary-cards .card:nth-child(2) { border-bottom-color: #f1c40f; } 
+.summary-cards .card:nth-child(3) { border-bottom-color: #e74c3c; } 
+.summary-cards .card:nth-child(4) { border-bottom-color: #2ecc71; } 
 
-/* Area Filter - DITINGKATKAN */
 .filter-options {
     display: flex;
     gap: 15px;
@@ -158,8 +148,8 @@ html, body {
     flex-wrap: wrap;
 }
 .filter-options select {
-    padding: 10px 15px; /* Padding lebih besar */
-    border: 1px solid #bdc3c7; /* Border lebih soft */
+    padding: 10px 15px; 
+    border: 1px solid #bdc3c7; 
     border-radius: 6px;
     background-color: white;
     color: #2c3e50;
@@ -168,7 +158,6 @@ html, body {
 }
 
 
-/* Area Grafik - DITINGKATKAN */
 .chart-area {
     background: white;
     padding: 25px;
@@ -185,11 +174,10 @@ html, body {
     padding-bottom: 10px;
 }
 
-/* Simulasi Grafik */
 .graph-placeholder {
-    height: 350px; /* Lebih tinggi */
+    height: 350px; 
     background: #ecf0f1;
-    border: 2px dashed #bdc3c7; /* Garis putus-putus lebih tegas */
+    border: 2px dashed #bdc3c7; 
     border-radius: 6px;
     display: flex;
     align-items: center;
