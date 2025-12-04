@@ -17,67 +17,6 @@ html, body {
     width: 100%;
 }
 
-.sidebar {
-    width: 280px;
-    background: linear-gradient(to bottom, #8e44ad, #3498db);
-    color: white;
-    padding: 20px;
-
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    
-   
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%; 
-    z-index: 1000; 
-    overflow-y: auto; 
-    
-    display: flex;
-    flex-direction: column;
-}
-
-
-.logo {
-    font-size: 22px; 
-    font-weight: 700;
-    margin-bottom: 30px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #3e5672; 
-}
-
-.menu a {
-    display: block;
-    color: #b0c0d0; 
-    text-decoration: none;
-    padding: 15px 12px; 
-    margin-bottom: 5px;
-    border-radius: 6px; 
-    transition: all 0.2s;
-}
-
-.menu a:hover {
-    background-color: #34495e; 
-    color: white;
-}
-
-.menu a.aktif {
-    background-color: #3498db; 
-    color: white;
-    font-weight: 600;
-    box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
-}
-
-.user-info {
-    margin-top: auto; 
-    font-size: 14px;
-    color: #b0c0d0;
-    border-top: 1px solid #3e5672;
-    padding-top: 15px;
-}
-.user-info b { color: white; }
-
 .content {
     flex-grow: 1;
     padding: 30px;

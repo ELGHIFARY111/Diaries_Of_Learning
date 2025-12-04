@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="./views/css/novigasi_guru.css">
+<link rel="stylesheet" href="./views/css/navigasi_guru.css">
 <div class="sidebar">
       <div class="logo">Diary of Learning</div>
       <div class="menu">

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="./views/css/navigasiMurid.css">
+<link rel="stylesheet" href="./views/css/navigasi_murid.css">
 <div class="sidebar">
     <div class="logo">📘 Diary Sekolah</div>
     
