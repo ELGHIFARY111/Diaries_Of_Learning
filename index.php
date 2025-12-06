@@ -16,13 +16,19 @@ if(!isset($_SESSION['login']) && !in_array($page,$page_exception)) {
     exit;
 }
 
-// nav
-if ($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==1) {
-    top_navigasi_superadmin();
-}elseif($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==2){
-    navigasi_guru();
-}elseif($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==3){
-    navigasi_murid();
+
+
+$role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : ''; 
+if ($page !== 'login' && $page !== 'regist' && $page !== 'regist_process' && $page !== 'login_process') {
+    if ($role == '1' || $role == 'superadmin') {
+        top_navigasi_superadmin();
+    } 
+    elseif ($role == '2' || $role == 'guru') {
+        navigasi_guru();
+    } 
+    elseif ($role == '3' || $role == 'siswa' || $role == 'murid') {
+        navigasi_murid();
+    }
 }
 // page
 switch ($page) {
@@ -129,3 +135,7 @@ switch ($page) {
         echo "Halaman tidak ditemukan";
         break;
 }
+
+
+
+// nav
