@@ -16,7 +16,14 @@ if(!isset($_SESSION['login']) && !in_array($page,$page_exception)) {
     exit;
 }
 
-
+// nav
+if ($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==1) {
+    top_navigasi_superadmin();
+}elseif($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==2){
+    navigasi_guru();
+}elseif($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==3){
+    navigasi_murid();
+}
 // page
 switch ($page) {
 // auth 
@@ -121,12 +128,4 @@ switch ($page) {
     default:
         echo "Halaman tidak ditemukan";
         break;
-}
-// nav
-if ($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==1) {
-    top_navigasi_superadmin();
-}elseif($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==2){
-    navigasi_guru();
-}elseif($page !== 'login'&& $page!== 'regist' && $_SESSION['user_role']==3){
-    navigasi_murid();
 }

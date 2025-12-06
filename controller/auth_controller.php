@@ -15,49 +15,97 @@ function auth_regist_page($koneksi) {
     include "./views/php/registrasi.php";
 }
 
+// --- PROSES REGISTRASI ---
 function auth_regist_process($koneksi) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $status = auth_regist_user($koneksi, $_POST);
+        $errors = [];
+        $data = $_POST;
+        
+        // 1. Validasi Input
+        if (empty($data['username'])) $errors['username'] = "Username wajib diisi.";
+        if (empty($data['password'])) $errors['password'] = "Password wajib diisi.";
+        elseif (strlen($data['password']) < 6) $errors['password'] = "Password minimal 6 karakter.";
+        
+        if (empty($data['nama_lengkap'])) $errors['nama_lengkap'] = "Nama lengkap wajib diisi.";
+        
+        if (empty($data['email'])) $errors['email'] = "Email wajib diisi.";
+        elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) $errors['email'] = "Format email salah.";
+
+        // Validasi Sekolah (Khusus Siswa)
+        if (isset($data['user_role_selection']) && $data['user_role_selection'] == 'siswa') {
+            if (empty($data['sekolah']) && empty($data['kode_sekolah'])) {
+                $errors['sekolah'] = "Pilih sekolah atau masukkan kode sekolah.";
+            }
+        }
+
+        // 2. Jika ada error validasi dasar
+        if (!empty($errors)) {
+            $peran_sekarang = $data['user_role_selection'];
+            $data_sekolah = sekolah_get_all($koneksi);
+            include "./views/php/registrasi.php"; // Muat ulang view dengan error
+            return;
+        }
+
+        // 3. Cek Database (Model)
+        $status = auth_regist_user($koneksi, $data);
         
         if ($status === "duplicate") {
-            echo "<script>alert('Username atau Email sudah terdaftar!'); window.history.back();</script>";
+            $errors['username'] = "Username atau Email sudah terdaftar.";
+            $errors['email'] = "Cek kembali email anda.";
+            
+            $peran_sekarang = $data['user_role_selection'];
+            $data_sekolah = sekolah_get_all($koneksi);
+            include "./views/php/registrasi.php";
+            return;
         } elseif ($status === true) {
             echo "<script>alert('Registrasi Berhasil! Silakan Login.'); window.location='index.php';</script>";
         } else {
-            echo "<script>alert('Registrasi Gagal! " . $status . "'); window.history.back();</script>";
+            echo "<script>alert('Error System: " . $status . "'); window.history.back();</script>";
         }
     }
 }
 
+// --- PROSES LOGIN ---
 function auth_authenticate($koneksi) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    
-    $user = auth_get_user_by_username($koneksi, $username);
-    
-    if ($user) {
-        $input_hash = hash('sha256', $password);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $errors = [];
 
-        if ($input_hash === $user['password_hash']) {
+        // 1. Validasi Input Kosong
+        if (empty($username)) $errors['username'] = "Username harus diisi.";
+        if (empty($password)) $errors['password'] = "Password harus diisi.";
+
+        // 2. Jika input ada, baru cek database
+        if (empty($errors)) {
+            $user = auth_get_user_by_username($koneksi, $username);
             
-            $_SESSION['login'] = true;
-            $_SESSION['user_id'] = $user['id_user'];
-            $_SESSION['user_nama'] = $user['nama_lengkap'];
-            $_SESSION['user_role'] = $user['role'];
-            
-            if($user['role'] == 'superadmin' || $user['role'] == '1'){
-                header("Location: index.php?page=admin");
-            } elseif($user['role'] == 'guru' || $user['role'] == '2'){
-                header("Location: index.php?page=guru");
+            if ($user) {
+                $input_hash = hash('sha256', $password);
+                if ($input_hash === $user['password_hash']) {
+                    // Login Sukses
+                    $_SESSION['login'] = true;
+                    $_SESSION['user_id'] = $user['id_user'];
+                    $_SESSION['user_nama'] = $user['nama_lengkap'];
+                    $_SESSION['user_role'] = $user['role'];
+                    
+                    if($user['role'] == 'superadmin' || $user['role'] == '1'){
+                        header("Location: index.php?page=admin");
+                    } elseif($user['role'] == 'guru' || $user['role'] == '2'){
+                        header("Location: index.php?page=guru");
+                    } else {
+                        header("Location: index.php?page=murid");
+                    }
+                    exit;
+                } else {
+                    $errors['password'] = "Password salah!";
+                }
             } else {
-                header("Location: index.php?page=murid");
+                $errors['username'] = "Username tidak ditemukan!";
             }
-            exit;
-        } else {
-            echo "<script>alert('Password salah!'); window.location='index.php?page=login';</script>";
         }
-    } else {
-        echo "<script>alert('Username tidak ditemukan!'); window.location='index.php?page=login';</script>";
+
+        include "./views/php/login.php";
     }
 }
 
