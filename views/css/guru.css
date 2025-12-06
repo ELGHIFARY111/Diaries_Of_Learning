@@ -215,6 +215,7 @@ a:hover {
 }
 
 .progress-bar {
+    max-height: 6px;
     height: 6px;
     background-color: var(--color-border);
     border-radius: 3px;
