@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -17,25 +17,25 @@
 
             <div class="header">
                 <div class="header-text">
-                    <h2>Tinjauan Catatan Harian Siswa</h2>
-                    <p>Daftar lengkap entri jurnal bahasa Inggris yang perlu Anda tinjau dan beri umpan balik.</p>
+                    <h2>Student Daily Note Review</h2>
+                    <p>A complete list of English journal entries that you need to review and provide feedback for.</p>
                 </div>
             </div>
             
             <div class="filter-area">
                 <label for="filterStatus">Filter Status:</label>
                 <select id="filterStatus">
-                    <option>Belum Ditinjau</option>
-                    <option>Sudah Ditinjau</option>
-                    <option>Semua Catatan</option>
+                    <option>Not Yet Reviewed</option>
+                    <option>Already Reviewed</option>
+                    <option>All Notes</option>
                 </select>
 
-                <label for="filterTipe">Filter Tipe:</label>
+                <label for="filterTipe">Filter Type:</label>
                 <select id="filterTipe">
-                    <option>Semua Tipe</option>
-                    <option>Teks</option>
+                    <option>All Types</option>
+                    <option>Text</option>
                     <option>Audio</option>
-                    <option>Gambar</option>
+                    <option>Image</option>
                 </select>
                 
                 <input type="date" value="2025-10-15">
@@ -45,25 +45,25 @@
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Tanggal Catatan</th>
-                            <th>Nama Siswa</th>
-                            <th>Judul</th>
-                            <th>Tipe</th>
-                            <th>Status Review</th>
-                            <th>Aksi</th>
+                            <th>Note Date</th>
+                            <th>Student Name</th>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Review Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>2025-10-01</td>
                             <td>Edo Firmansyah (1006)</td>
-                            <td>Refleksi Pelajaran Sejarah yang panjang sekali hingga lebih dari 50 karakter</td>
-                            <td><span class="badge badge-teks">Teks</span></td>
-                            <td><span class="badge badge-review">BELUM</span></td>
+                            <td>History Lesson Reflection which is very long up to more than 50 characters</td>
+                            <td><span class="badge badge-teks">Text</span></td>
+                            <td><span class="badge badge-review">PENDING</span></td>
                             <td>
                                 <div class="aksi-group">
-                                    <button class="btn-lihat">Lihat Review</button>
-                                    <button class="btn-check">Tandai Dicek</button>
+                                    <button class="btn-lihat">View Review</button>
+                                    <button class="btn-check">Mark as Checked</button>
                                 </div>
                             </td>
                         </tr>
@@ -71,12 +71,12 @@
                         <tr>
                             <td>2025-10-10</td>
                             <td>Dian Anggraini (1005)</td>
-                            <td>Refleksi Akhir Minggu</td>
-                            <td><span class="badge badge-teks">Teks</span></td>
-                            <td><span class="badge badge-checked">SUDAH</span></td>
+                            <td>Weekend Reflection</td>
+                            <td><span class="badge badge-teks">Text</span></td>
+                            <td><span class="badge badge-checked">COMPLETED</span></td>
                             <td>
                                 <div class="aksi-group">
-                                    <button class="btn-lihat btn-disabled">Lihat Umpan Balik</button>
+                                    <button class="btn-lihat btn-disabled">View Feedback</button>
                                 </div>
                             </td>
                         </tr>
@@ -84,13 +84,13 @@
                         <tr>
                             <td>2025-10-05</td>
                             <td>Fiona Cahyadi (1007)</td>
-                            <td>Integrity is a valuable trait. (Dari Kosa Kata)</td>
-                            <td><span class="badge badge-teks">Teks</span></td>
-                            <td><span class="badge badge-review">BELUM</span></td>
+                            <td>Integrity is a valuable trait. (From Vocabulary)</td>
+                            <td><span class="badge badge-teks">Text</span></td>
+                            <td><span class="badge badge-review">PENDING</span></td>
                             <td>
                                 <div class="aksi-group">
-                                    <button class="btn-lihat">Lihat Review</button>
-                                    <button class="btn-check">Tandai Dicek</button>
+                                    <button class="btn-lihat">View Review</button>
+                                    <button class="btn-check">Mark as Checked</button>
                                 </div>
                             </td>
                         </tr>
@@ -99,7 +99,7 @@
                 </table>
             </div>
             
-            <p style="text-align: center; margin-top: 25px; font-size: 0.9em; color: #7f8c8d;">Menampilkan 3 catatan dari total - catatan yang tersedia di sekolah Anda.</p>
+            <p style="text-align: center; margin-top: 25px; font-size: 0.9em; color: #7f8c8d;">Showing 3 notes out of a total of - notes available in your school.</p>
 
         </div>
 

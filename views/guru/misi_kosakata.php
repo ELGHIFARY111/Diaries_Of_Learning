@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -18,10 +18,10 @@
 
             <div class="header">
                 <div class="header-text">
-                    <h2>Misi Kosa Kata Sekolah</h2>
-                    <p>Kelola dan pantau misi kosakata yang Anda buat khusus untuk siswa di institusi ini.</p>
+                    <h2>School Vocabulary Missions</h2>
+                    <p>Manage and monitor the vocabulary missions you create specifically for students in this institution.</p>
                 </div>
-                <a href="#" class="btn-success">Buat Misi Baru</a>
+                <a href="#" class="btn-success">Create New Mission</a>
             </div>
             
 
@@ -29,29 +29,29 @@
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Nama Misi</th>
-                            <th>Deskripsi Singkat</th>
-                            <th>Durasi</th>
-                            <th>Target Kosa Kata</th>
-                            <th style="min-width: 150px;">Progres Siswa</th>
+                            <th>Mission Name</th>
+                            <th>Short Description</th>
+                            <th>Duration</th>
+                            <th>Vocabulary Target</th>
+                            <th style="min-width: 150px;">Student Progress</th>
                             <th>Status</th>
-                            <th style="width: 150px;">Aksi</th>
+                            <th style="width: 150px;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Tantangan 10 Kata Sifat (B1)</td>
-                            <td>Temukan 10 kata sifat unik dari artikel berita.</td>
-                            <td>12 Okt - 25 Okt 2025</td>
-                            <td>10 Kata</td>
+                            <td>10 Adjectives Challenge (B1)</td>
+                            <td>Find 10 unique adjectives from a news article.</td>
+                            <td>Oct 12 - Oct 25, 2025</td>
+                            <td>10 Words</td>
                             <td class="progress-indicator">
-                                <div class="progress-percentage">85% Selesai</div>
+                                <div class="progress-percentage">85% Complete</div>
                                 <div class="progress-bar-container">
                                     <div class="progress-bar" style="width: 85%;"></div>
                                 </div>
-                                <div class="progress-text">42 dari 50 Siswa Lulus</div>
+                                <div class="progress-text">42 out of 50 Students Passed</div>
                             </td>
-                            <td><span class="badge badge-active">AKTIF</span></td>
+                            <td><span class="badge badge-active">ACTIVE</span></td>
                             <td>
                                 <div class="aksi-group">
                                     <button class="btn-aksi">Detail</button>
@@ -61,43 +61,43 @@
                         </tr>
 
                         <tr>
-                            <td>5 Idiom Makanan</td>
-                            <td>Pelajari 5 idiom umum yang berkaitan dengan makanan.</td>
-                            <td>1 Sep - 30 Sep 2025</td>
-                            <td>5 Idiom</td>
+                            <td>5 Food Idioms</td>
+                            <td>Learn 5 common idioms related to food.</td>
+                            <td>Sep 1 - Sep 30, 2025</td>
+                            <td>5 Idioms</td>
                             <td class="progress-indicator">
-                                <div class="progress-percentage">98% Selesai</div>
+                                <div class="progress-percentage">98% Complete</div>
                                 <div class="progress-bar-container">
                                     <div class="progress-bar progress-bar-complete" style="width: 98%;"></div>
                                 </div>
-                                <div class="progress-text">49 dari 50 Siswa Lulus</div>
+                                <div class="progress-text">49 out of 50 Students Passed</div>
                             </td>
-                            <td><span class="badge badge-expired">SELESAI</span></td>
+                            <td><span class="badge badge-expired">COMPLETED</span></td>
                             <td>
                                 <div class="aksi-group">
-                                    <button class="btn-aksi" style="background-color: var(--color-secondary);">Lapor</button>
-                                    <button class="btn-delete">Hapus</button>
+                                    <button class="btn-aksi" style="background-color: var(--color-secondary);">Report</button>
+                                    <button class="btn-delete">Delete</button>
                                 </div>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Misi November: Kata Kerja Transitif</td>
-                            <td>Misi persiapan yang akan dimulai bulan depan.</td>
-                            <td>1 Nov - 30 Nov 2025</td>
-                            <td>15 Kata</td>
+                            <td>November Mission: Transitive Verbs</td>
+                            <td>A preparation mission that will start next month.</td>
+                            <td>Nov 1 - Nov 30, 2025</td>
+                            <td>15 Words</td>
                             <td class="progress-indicator">
-                                <div class="progress-percentage">0% Selesai</div>
+                                <div class="progress-percentage">0% Complete</div>
                                 <div class="progress-bar-container">
                                     <div class="progress-bar" style="width: 0%; background-color: #adb5bd;"></div>
                                 </div>
-                                <div class="progress-text">0 dari 50 Siswa Lulus</div>
+                                <div class="progress-text">0 out of 50 Students Passed</div>
                             </td>
-                            <td><span class="badge badge-upcoming">SEGERA</span></td>
+                            <td><span class="badge badge-upcoming">UPCOMING</span></td>
                             <td>
                                 <div class="aksi-group">
                                     <button class="btn-aksi">Edit</button>
-                                    <button class="btn-delete">Batalkan</button>
+                                    <button class="btn-delete">Cancel</button>
                                 </div>
                             </td>
                         </tr>
@@ -107,7 +107,7 @@
             </div>
             
             <div class="footer-link">
-                <a href="#">Lihat Misi Global</a>
+                <a href="#">View Global Missions</a>
             </div>
 
         </div>

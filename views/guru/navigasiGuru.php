@@ -9,35 +9,35 @@
 
          <a href="index.php?page=guru/monitoring&active=siswa&aktif=true" 
             class="<?= ($active == 'siswa') ? 'aktif' : '' ?>">
-            Daftar Siswa
+            Student List
          </a>
 
          <a href="index.php?page=guru/misi_kosakata&active=misi&aktif=true" 
             class="<?= ($active == 'misi') ? 'aktif' : '' ?>">
-            Misi Kosa Kata Sekolah
+            School Vocabulary Missions
          </a>
 
          <a href="index.php?page=guru/review_catatan&active=review&aktif=true" 
             class="<?= ($active == 'review') ? 'aktif' : '' ?>">
-            Review Catatan Siswa
+            Review Student Notes
          </a>
 
          <a href="index.php?page=guru/laporan_progres&active=laporan&aktif=true" 
             class="<?= ($active == 'laporan') ? 'aktif' : '' ?>">
-            Laporan Progres
+            Progress Report
          </a>
 
          <a href="index.php?page=guru/profil&active=profil&aktif=true" 
             class="<?= ($active == 'profil') ? 'aktif' : '' ?>">
-            Profil Guru
+            Teacher Profile
          </a>
 
          <a href="index.php?page=logout">Logout</a>
       </div>
 
       <div class="user-info">
-         Login sebagai:<br>
-         <b>Bapak Arik</b>
-         <br>SMA Bintang Timur
+         Logged in as:<br>
+         <b>Mr. Arik</b>
+         <br>Bintang Timur High School
       </div>
 </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -15,8 +15,8 @@
         <div class="content">
 
             <div class="header">
-                <h2>Profil Guru</h2>
-                <p>Informasi akun dan data institusi Anda saat ini.</p>
+                <h2>Teacher Profile</h2>
+                <p>Your current account information and institution data.</p>
             </div>
             
             <div class="profile-card">
@@ -28,15 +28,15 @@
             <div class="profile-photo">
                 A
             </div>
-            <div class="profile-name">Bapak Arik</div>
-            <div class="profile-role">Guru Pengajar | SMA Bintang Timur</div>
+            <div class="profile-name">Mr. Arik</div>
+            <div class="profile-role">Teaching Staff | Bintang Timur High School</div>
 
             <div class="action-buttons-sidebar">
                 <button class="btn-action btn-edit">
-                    Edit Data Profil
+                    Edit Profile Data
                 </button>
                 <button class="btn-action btn-password">
-                    Ubah Kata Sandi
+                    Change Password
                 </button>
             </div>
             
@@ -46,32 +46,32 @@
                 <div class="detail-grid">
                     
                     <div class="detail-item">
-                        <label>Nama Lengkap</label>
-                        <p>Bapak Arik</p>
+                        <label>Full Name</label>
+                        <p>Mr. Arik</p>
                     </div>
                     
                     <div class="detail-item">
-                        <label>Username/ID Login</label>
+                        <label>Username/Login ID</label>
                         <p>gurua</p>
                     </div>
                     
                     <div class="detail-item">
-                        <label>Email Kontak</label>
+                        <label>Contact Email</label>
                         <p>arik.g@bt.com</p>
                     </div>
                     
                     <div class="detail-item">
-                        <label>Jabatan</label>
-                        <p>Guru Pengajar</p>
+                        <label>Position</label>
+                        <p>Teaching Staff</p>
                     </div>
                     
                     <div class="detail-item">
-                        <label>Nama Sekolah</label>
-                        <p>SMA Bintang Timur</p>
+                        <label>School Name</label>
+                        <p>Bintang Timur High School</p>
                     </div>
                     
                     <div class="detail-item">
-                        <label>ID Sekolah</label>
+                        <label>School ID</label>
                         <p>100</p>
                     </div>
                     

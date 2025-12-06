@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -16,25 +16,25 @@
         <div class="content">
 
             <div class="header">
-                <h2>Daftar Siswa SMA Bintang Timur</h2>
-                <p>Ringkasan progres dan detail akun siswa yang Anda awasi.</p>
+                <h2>Student List of Bintang Timur High School</h2>
+                <p>A summary of the progress and account details of the students you supervise.</p>
             </div>
             
             <div class="search-area">
-                <input type="text" placeholder="Cari Nama atau ID Siswa..." id="searchSiswa">
-                <button onclick="alert('Simulasi fungsi pencarian...')">Cari</button>
+                <input type="text" placeholder="Search Student Name or ID..." id="searchSiswa">
+                <button onclick="alert('Simulation of search function...')">Search</button>
             </div>
 
             <div class="data-table-wrapper">
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th>ID Siswa</th>
-                            <th>Nama Lengkap</th>
-                            <th>Progres Menulis (%)</th>
-                            <th>Kosakata Dikuasai</th>
-                            <th>Status Misi Sekolah</th>
-                            <th style="width: 100px;">Aksi</th>
+                            <th>Student ID</th>
+                            <th>Full Name</th>
+                            <th>Writing Progress (%)</th>
+                            <th>Vocabulary Mastered</th>
+                            <th>School Mission Status</th>
+                            <th style="width: 100px;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,10 +48,10 @@
                                 <div class="progress-text">80.5%</div>
                             </td>
                             <td>
-                                <div class="progress-text">124 Kata</div>
+                                <div class="progress-text">124 Words</div>
                             </td>
-                            <td><span class="badge badge-warning">Dalam Proses</span></td>
-                            <td><button class="btn-detail">Profil</button></td>
+                            <td><span class="badge badge-warning">In Progress</span></td>
+                            <td><button class="btn-detail">Profile</button></td>
                         </tr>
 
                         <tr>
@@ -64,10 +64,10 @@
                                 <div class="progress-text">95.0%</div>
                             </td>
                             <td>
-                                <div class="progress-text">90 Kata</div>
+                                <div class="progress-text">90 Words</div>
                             </td>
-                            <td><span class="badge badge-danger">Belum Mulai</span></td>
-                            <td><button class="btn-detail">Profil</button></td>
+                            <td><span class="badge badge-danger">Not Started</span></td>
+                            <td><button class="btn-detail">Profile</button></td>
                         </tr>
 
                         <tr>
@@ -80,10 +80,10 @@
                                 <div class="progress-text">45.0%</div>
                             </td>
                             <td>
-                                <div class="progress-text">201 Kata</div>
+                                <div class="progress-text">201 Words</div>
                             </td>
-                            <td><span class="badge badge-success">Lulus</span></td>
-                            <td><button class="btn-detail">Profil</button></td>
+                            <td><span class="badge badge-success">Passed</span></td>
+                            <td><button class="btn-detail">Profile</button></td>
                         </tr>
                         
                         <tr>
@@ -96,17 +96,17 @@
                                 <div class="progress-text">62.0%</div>
                             </td>
                             <td>
-                                <div class="progress-text">155 Kata</div>
+                                <div class="progress-text">155 Words</div>
                             </td>
-                            <td><span class="badge badge-warning">Dalam Proses</span></td>
-                            <td><button class="btn-detail">Profil</button></td>
+                            <td><span class="badge badge-warning">In Progress</span></td>
+                            <td><button class="btn-detail">Profile</button></td>
                         </tr>
                         
                     </tbody>
                 </table>
             </div>
             
-            <p class="table-footer-info">Menampilkan 4 dari 50 total siswa.</p>
+            <p class="table-footer-info">Showing 4 out of 50 total students.</p>
 
         </div>
 

@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Progres - Diary of Learning</title>
+    <title>Progress Report - Diary of Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./views/css/guru.css">
     
@@ -18,66 +17,66 @@
                 <div class="content">
 
             <div class="header">
-                <h2>Laporan Progres Belajar Siswa</h2>
-                <p>Analisis kinerja siswa secara kolektif dan individu selama periode ini.</p>
+                <h2>Student Learning Progress Report</h2>
+                <p>Analyze collective and individual student performance during this period.</p>
             </div>
             
             <div class="filter-options">
                 <select>
-                    <option>Periode: Oktober 2025</option>
-                    <option>Periode: Semester Ganjil</option>
-                    <option>Periode: Keseluruhan</option>
+                    <option>Period: October 2025</option>
+                    <option>Period: Odd Semester</option>
+                    <option>Period: Overall</option>
                 </select>
                 <select>
-                    <option>Metrik: Semua Metrik</option>
-                    <option>Metrik: Menulis</option>
-                    <option>Metrik: Kosakata</option>
+                    <option>Metric: All Metrics</option>
+                    <option>Metric: Writing</option>
+                    <option>Metric: Vocabulary</option>
                 </select>
             </div>
             
             <div class="summary-cards">
                 <div class="card">
-                    <h3>Rata-Rata Entri/Minggu</h3>
+                    <h3>Average Entries/Week</h3>
                     <p class="value">4.5</p>
-                    <p class="indicator">▲ 0.2 dari bulan lalu</p>
+                    <p class="indicator">▲ 0.2 from last month</p>
                 </div>
                 
                 <div class="card">
-                    <h3>Total Kosakata Baru</h3>
+                    <h3>Total New Vocabulary</h3>
                     <p class="value">2,104</p>
-                    <p class="indicator">▲ 15% dari bulan lalu</p>
+                    <p class="indicator">▲ 15% from last month</p>
                 </div>
                 
                 <div class="card">
-                    <h3>Rasio Feedback Guru</h3>
+                    <h3>Teacher Feedback Ratio</h3>
                     <p class="value">88%</p>
-                    <p class="indicator red">▼ 2% dari bulan lalu</p>
+                    <p class="indicator red">▼ 2% from last month</p>
                 </div>
                 
                 <div class="card">
-                    <h3>Persentase Misi Lulus</h3>
+                    <h3>Mission Pass Percentage</h3>
                     <p class="value">72%</p>
-                    <p class="indicator">▲ 5% dari bulan lalu</p>
+                    <p class="indicator">▲ 5% from last month</p>
                 </div>
             </div>
 
             <div class="chart-area">
-                <h3>Aktivitas Menulis Harian (Entri Harian)</h3>
+                <h3>Daily Writing Activity (Daily Entries)</h3>
                 <div class="graph-placeholder">
-                    [Placeholder Grafik Batang: Jumlah Entri per Hari dalam Sebulan]
+                    [Bar Chart Placeholder: Number of Entries per Day in a Month]
                 </div>
             </div>
             
             <div class="chart-area">
-                <h3>Akumulasi Penemuan Kosakata Baru</h3>
+                <h3>Accumulated New Vocabulary Discovery</h3>
                 <div class="graph-placeholder">
-                    [Placeholder Grafik Garis: Total Kosakata yang Ditemukan dari Waktu ke Waktu]
+                    [Line Chart Placeholder: Total Vocabulary Discovered Over Time]
                 </div>
             </div>
             
             <p style="text-align: center; margin-top: 30px;">
                 <a href="#" class="download-btn">
-                    ⬇ Download Laporan Detil (Excel)
+                    ⬇ Download Detailed Report (Excel)
                 </a>
             </p>
 
