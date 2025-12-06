@@ -1,11 +1,22 @@
+/* ================================================= */
+/* FILE 1: navigasi_guru.css (Sidebar dengan tema Gelap & Ungu) */
+/* ================================================= */
+
 :root {
-    --color-primary: #007bff; 
-    --color-secondary: #6c757d; 
-    --color-success: #28a745;
-    --color-danger: #dc3545; 
+    /* Variabel Warna Baru (Konsisten dengan file konten utama) */
+    --color-primary: #6c5ce7; /* Ungu Primer */
+    --color-secondary: #a29bfe; /* Ungu Muda */
+    --color-accent-blue: #0984e3; /* Biru Aksentuasi */
+    
+    --color-success: #00b894;
+    --color-danger: #ff7675; 
+    
+    /* Sidebar Background yang Disesuaikan (Lebih gelap seperti di screenshot) */
     --color-sidebar-bg: #2c3e50; 
     --color-content-bg: #f4f7f9; 
     --color-white: #ffffff;
+
+    --color-sidebar-text: #adb5bd; /* Warna teks standar */
 }
 
 
@@ -22,7 +33,7 @@
     overflow-y: auto;
     display: flex; 
     flex-direction: column;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.15);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.25); 
 }
 
 .logo {
@@ -30,37 +41,40 @@
     font-weight: 700;
     margin-bottom: 30px;
     padding-bottom: 15px;
-    border-bottom: 1px solid #343a40; 
+    border-bottom: 1px solid #34495e; 
+    color: var(--color-white);
 }
 
 .menu a {
     display: flex;
     align-items: center;
-    color: #adb5bd; 
+    color: var(--color-sidebar-text); 
     text-decoration: none;
-    padding: 12px 15px; 
+    padding: 12px 10px; 
     margin-bottom: 8px;
     border-radius: 8px; 
     transition: all 0.3s ease;
+    flex-wrap: wrap; 
+    line-height: 1.2;
 }
 
 .menu a:hover {
-    background-color: #343a40; 
-    color: var(--color-white);
+    background-color: rgba(108, 92, 231, 0.1); 
+    color: var(--color-secondary);
 }
 
 .menu a.aktif {
-    background-color: var(--color-primary); 
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); 
     color: var(--color-white);
-    font-weight: 600;
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+    font-weight: 700; 
+    box-shadow: 0 4px 10px rgba(108, 92, 231, 0.4); 
 }
 
 .user-info {
     margin-top: auto; 
     font-size: 14px;
-    color: #adb5bd;
-    border-top: 1px solid #343a40;
+    color: var(--color-sidebar-text);
+    border-top: 1px solid #34495e; 
     padding-top: 15px;
 }
 .user-info b { color: var(--color-white); }
