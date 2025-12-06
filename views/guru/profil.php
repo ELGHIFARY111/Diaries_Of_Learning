@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diary of Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./views/css/profil_guru.css">
+    <link rel="stylesheet" href="./views/css/guru.css">
 </head>
 
 <body>
@@ -20,16 +20,29 @@
             </div>
             
             <div class="profile-card">
-                
-                <div class="profile-photo">
-                    A
-                </div>
+    
+    <div class="profile-layout">
+        
+        <div class="profile-sidebar">
+            
+            <div class="profile-photo">
+                A
+            </div>
+            <div class="profile-name">Bapak Arik</div>
+            <div class="profile-role">Guru Pengajar | SMA Bintang Timur</div>
 
-                <div class="profile-name">Bapak Arik</div>
-                <div class="profile-role">Guru Pengajar | SMA Bintang Timur</div>
+            <div class="action-buttons-sidebar">
+                <button class="btn-action btn-edit">
+                    Edit Data Profil
+                </button>
+                <button class="btn-action btn-password">
+                    Ubah Kata Sandi
+                </button>
+            </div>
+            
+        </div>
+            <div class="profile-details-area">
                 
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
-
                 <div class="detail-grid">
                     
                     <div class="detail-item">
@@ -64,14 +77,10 @@
                     
                 </div>
                 
-                <div class="action-buttons">
-                    <button class="btn-action btn-edit">
-                        Edit Data Profil
-                    </button>
-                    <button class="btn-action btn-password">
-                        Ubah Kata Sandi
-                    </button>
-                </div>
+            </div>
+            </div>
+        <p class="footer-info">footer.</p>
+    </div>
                 <p class="footer-info">footer.</p>
             </div>
 
