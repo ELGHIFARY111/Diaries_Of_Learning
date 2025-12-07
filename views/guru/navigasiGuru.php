@@ -31,6 +31,10 @@
             class="<?= ($active == 'profil') ? 'aktif' : '' ?>">
             Teacher Profile
          </a>
+         <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true" 
+            class="<?= ($active == 'leaderboard') ? 'aktif' : '' ?>">
+            Leaderboard
+         </a>
 
          <a href="index.php?page=logout">Logout</a>
       </div>

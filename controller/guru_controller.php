@@ -238,4 +238,8 @@ function detail_progres_misi_page($koneksi) {
 
     include "./views/guru/detail_progres_misi.php";
 }
+function leaderboard_guru_page() {
+    $active = $_GET['active'] ?? 'aktif';
+    include "./views/guru/leaderboard.php";
+}
 ?>

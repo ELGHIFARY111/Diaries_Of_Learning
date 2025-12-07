@@ -19,7 +19,6 @@
             <div class="header">
                 <div class="header-text">
                     <h2>School Vocabulary Missions</h2>
-                    <p>Kelola misi hafalan kosakata untuk siswa Anda.</p>
                 </div>
                 <a href="index.php?page=guru/tambah_misi" class="btn-action btn-success">
                     + Create New Mission

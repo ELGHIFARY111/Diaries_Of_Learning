@@ -154,6 +154,10 @@ switch ($page) {
     case 'guru/detail_progres_misi':
         detail_progres_misi_page($koneksi);
         break;
+    case 'guru/leaderboard_guru':
+        leaderboard_guru_page($koneksi);
+        break;
+    
 // murid
     case 'murid':
         murid_dashboard_page($koneksi);
