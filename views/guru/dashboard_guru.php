@@ -11,86 +11,84 @@
 <body>
 
     <div class="container">
-                <div class="content">
+        <div class="content">
 
             <div class="header">
-                <h2>Welcome, Mr. Arik! </h2>
-                <p>Institution Supervision Dashboard: Bintang Timur High School. Monitor your students' learning activities.</p>
+                <h2>Welcome, <?= htmlspecialchars($nama_guru) ?>! </h2>
+                <p>Institution Supervision Dashboard: <b><?= htmlspecialchars($nama_sekolah) ?></b>. Monitor your students' learning activities.</p>
             </div>
 
             <div class="stats-box">
                 <div class="card">
                     <p>Total Students Supervised</p>
-                    <h3>50</h3>
+                    <h3><?= $total_siswa ?></h3>
                 </div>
                 <div class="card">
                     <p>Notes Awaiting Review</p>
-                    <h3>12</h3>
+                    <h3><?= $total_pending ?></h3>
                 </div>
                 <div class="card">
                     <p>Active School Missions</p>
-                    <h3>1</h3>
+                    <h3><?= $total_misi ?></h3>
                 </div>
             </div>
 
             <h3 style="margin-bottom: 15px; font-size: 1.5em; color: #2c3e50;">Supervisor Quick Actions</h3>
             <div class="action-area">
-                <a href="#" class="btn-action btn-success"> Create New Institution Mission</a>
-                <a href="#" class="btn-action btn-primary"> Review Incoming Notes (12)</a>
+                <a href="index.php?page=guru/misi_kosakata" class="btn-action btn-success"> Create New Institution Mission</a>
+                <a href="index.php?page=guru/review_catatan" class="btn-action btn-primary"> Review Incoming Notes (<?= $total_pending ?>)</a>
             </div>
 
             <div class="bottom-section">
 
                 <div class="box">
                     <h3>Latest Student Progress</h3>
-                    <div class="list-item">
-                        <b>Dian Anggraini</b>
-                        <p>Activity: Writing Reflection | Score: 80.50%</p>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 80.5%;"></div>
+                    <?php 
+                    if (mysqli_num_rows($list_progres) > 0) {
+                        while ($row = mysqli_fetch_assoc($list_progres)) { 
+                    ?>
+                        <div class="list-item">
+                            <b><?= htmlspecialchars($row['nama_lengkap']) ?></b>
+                            <p>Activity: <?= ucfirst($row['jenis_progres']) ?> | Score: <?= $row['nilai'] ?>%</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: <?= $row['nilai'] ?>%;"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="list-item">
-                        <b>Edo Firmansyah</b>
-                        <p>Activity: Writing Reflection | Score: 95.00%</p>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 95%;"></div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <b>Fiona Cahyadi</b>
-                        <p>Activity: Vocabulary Mission | Progress: 5/10 Units</p>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 50%;"></div>
-                        </div>
-                    </div>
+                    <?php 
+                        }
+                    } else {
+                        echo "<p style='color:#aaa; padding:10px;'>No progress updates yet.</p>";
+                    }
+                    ?>
                 </div>
 
                 <div class="box">
                     <h3> Latest Daily Notes</h3>
-                    <div class="list-item">
-                        <b>Edo Firmansyah</b>
-                        <span style="color: #27ae60;">'History Lesson Reflection'</span>
-                        <p style="margin-top: 5px; color: #aaa;">2025-10-01 (Awaiting Review)</p>
-                    </div>
-                    <div class="list-item">
-                        <b>Dian Anggraini</b>
-                        <span style="color: #2980b9;">'Vocabulary: Ambiguous'</span>
-                        <p style="margin-top: 5px; color: #aaa;">2025-10-05 (Review Complete)</p>
-                    </div>
-                    <div class="list-item">
-                        <b>Fiona Cahyadi</b>
-                        <span style="color: #27ae60;">'Group Assignment Report'</span>
-                        <p style="margin-top: 5px; color: #aaa;">2025-10-07 (Awaiting Review)</p>
-                    </div>
+                    <?php 
+                    if (mysqli_num_rows($list_catatan) > 0) {
+                        while ($note = mysqli_fetch_assoc($list_catatan)) {
+                            $is_pending = ($note['status_review'] == 'pending');
+                            $color = $is_pending ? '#e67e22' : '#27ae60';
+                            $status_text = $is_pending ? 'Awaiting Review' : 'Review Complete';
+                    ?>
+                        <div class="list-item">
+                            <b><?= htmlspecialchars($note['nama_lengkap']) ?></b>
+                            <span style="color: <?= $color ?>;">'<?= htmlspecialchars($note['judul']) ?>'</span>
+                            <p style="margin-top: 5px; color: #aaa;">
+                                <?= $note['tanggal_catatan'] ?> (<?= $status_text ?>)
+                            </p>
+                        </div>
+                    <?php 
+                        }
+                    } else {
+                        echo "<p style='color:#aaa; padding:10px;'>No daily notes found.</p>";
+                    }
+                    ?>
                 </div>
 
             </div>
-
         </div>
-
     </div>
 
 </body>
-
 </html>

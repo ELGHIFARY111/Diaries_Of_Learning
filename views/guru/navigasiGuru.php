@@ -9,7 +9,7 @@
 
          <a href="index.php?page=guru/monitoring&active=siswa&aktif=true" 
             class="<?= ($active == 'siswa') ? 'aktif' : '' ?>">
-            Student List
+            School
          </a>
 
          <a href="index.php?page=guru/misi_kosakata&active=misi&aktif=true" 

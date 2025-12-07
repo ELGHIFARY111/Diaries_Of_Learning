@@ -19,95 +19,81 @@
             <div class="header">
                 <div class="header-text">
                     <h2>School Vocabulary Missions</h2>
-                    <p>Manage and monitor the vocabulary missions you create specifically for students in this institution.</p>
+                    <p>Kelola misi hafalan kosakata untuk siswa Anda.</p>
                 </div>
-                <a href="#" class="btn-success">Create New Mission</a>
+                <a href="index.php?page=guru/tambah_misi" class="btn-action btn-success">
+                    + Create New Mission
+                </a>
             </div>
-            
 
             <div class="data-table-wrapper">
                 <table class="data-table">
                     <thead>
                         <tr>
                             <th>Mission Name</th>
-                            <th>Short Description</th>
+                            <th>Description</th>
                             <th>Duration</th>
-                            <th>Vocabulary Target</th>
-                            <th style="min-width: 150px;">Student Progress</th>
+                            <th>Target</th>
                             <th>Status</th>
                             <th style="width: 150px;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>10 Adjectives Challenge (B1)</td>
-                            <td>Find 10 unique adjectives from a news article.</td>
-                            <td>Oct 12 - Oct 25, 2025</td>
-                            <td>10 Words</td>
-                            <td class="progress-indicator">
-                                <div class="progress-percentage">85% Complete</div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-bar" style="width: 85%;"></div>
-                                </div>
-                                <div class="progress-text">42 out of 50 Students Passed</div>
-                            </td>
-                            <td><span class="badge badge-active">ACTIVE</span></td>
-                            <td>
-                                <div class="aksi-group">
-                                    <button class="btn-aksi">Detail</button>
-                                    <button class="btn-aksi">Edit</button>
-                                </div>
-                            </td>
-                        </tr>
+                        <?php if (mysqli_num_rows($daftar_misi) > 0): ?>
+                            <?php while ($misi = mysqli_fetch_assoc($daftar_misi)):
+                                $today = date('Y-m-d');
+                                if ($today < $misi['tanggal_mulai']) {
+                                    $status_badge = '<span class="badge badge-warning">UPCOMING</span>';
+                                } elseif ($today > $misi['tanggal_akhir']) {
+                                    $status_badge = '<span class="badge" style="background:#b2bec3; color:#2d3436;">ENDED</span>';
+                                } else {
+                                    $status_badge = '<span class="badge badge-success">ACTIVE</span>';
+                                }
+                            ?>
+                            <tr>
+                                <td><b><?= htmlspecialchars($misi['judul']) ?></b></td>
+                                <td><?= htmlspecialchars(substr($misi['deskripsi'], 0, 50)) ?>...</td>
+                                <td>
+                                    <small>
+                                        <?= date('d M', strtotime($misi['tanggal_mulai'])) ?> - 
+                                        <?= date('d M Y', strtotime($misi['tanggal_akhir'])) ?>
+                                    </small>
+                                </td>
+                                <td><?= $misi['target_jumlah_kata'] ?> Words</td>
+                                <td><?= $status_badge ?></td>
+                                <td>
+                                    <div class="aksi-group" style="display:flex; gap:5px;">
+                                        
+                                        <a href="index.php?page=guru/detail_progres_misi&id=<?= $misi['id_misi'] ?>" 
+                                            class="btn-aksi" 
+                                            style="text-decoration:none; background:#6c5ce7; color:white; padding:5px 10px; border-radius:4px; font-size:0.8em;" 
+                                            title="Lihat Siswa">
+                                            👥 Progres
+                                        </a>
 
-                        <tr>
-                            <td>5 Food Idioms</td>
-                            <td>Learn 5 common idioms related to food.</td>
-                            <td>Sep 1 - Sep 30, 2025</td>
-                            <td>5 Idioms</td>
-                            <td class="progress-indicator">
-                                <div class="progress-percentage">98% Complete</div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-bar progress-bar-complete" style="width: 98%;"></div>
-                                </div>
-                                <div class="progress-text">49 out of 50 Students Passed</div>
-                            </td>
-                            <td><span class="badge badge-expired">COMPLETED</span></td>
-                            <td>
-                                <div class="aksi-group">
-                                    <button class="btn-aksi" style="background-color: var(--color-secondary);">Report</button>
-                                    <button class="btn-delete">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
+                                        <a href="index.php?page=guru/edit_misi&id=<?= $misi['id_misi'] ?>" 
+                                            class="btn-aksi" 
+                                            style="text-decoration:none; background:#0984e3; color:white; padding:5px 10px; border-radius:4px; font-size:0.8em;">
+                                            Edit
+                                        </a>
 
-                        <tr>
-                            <td>November Mission: Transitive Verbs</td>
-                            <td>A preparation mission that will start next month.</td>
-                            <td>Nov 1 - Nov 30, 2025</td>
-                            <td>15 Words</td>
-                            <td class="progress-indicator">
-                                <div class="progress-percentage">0% Complete</div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-bar" style="width: 0%; background-color: #adb5bd;"></div>
-                                </div>
-                                <div class="progress-text">0 out of 50 Students Passed</div>
-                            </td>
-                            <td><span class="badge badge-upcoming">UPCOMING</span></td>
-                            <td>
-                                <div class="aksi-group">
-                                    <button class="btn-aksi">Edit</button>
-                                    <button class="btn-delete">Cancel</button>
-                                </div>
-                            </td>
-                        </tr>
-                        
+                                        <a href="index.php?page=guru/hapus_misi&id=<?= $misi['id_misi'] ?>" 
+                                            onclick="return confirm('Yakin ingin menghapus misi ini?')" 
+                                            class="btn-delete" 
+                                            style="text-decoration:none; background:#d63031; color:white; padding:5px 10px; border-radius:4px; font-size:0.8em;">
+                                            Del
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="6" style="text-align:center; padding:20px;">Belum ada misi yang dibuat.</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
-            </div>
-            
-            <div class="footer-link">
-                <a href="#">View Global Missions</a>
             </div>
 
         </div>

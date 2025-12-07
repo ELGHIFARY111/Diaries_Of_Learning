@@ -96,10 +96,6 @@ switch ($page) {
         laporan_progres_page($koneksi);
         break;
 
-    case 'guru/misi_kosakata':
-        misi_kosakata_page($koneksi);
-        break;
-
     case 'guru/monitoring':
         monitoring_page($koneksi);
         break;
@@ -110,6 +106,53 @@ switch ($page) {
 
     case 'guru/review_catatan':
         review_catatan_page($koneksi);
+        break;
+    case 'guru/tambah_sekolah':
+        form_tambah_sekolah_page($koneksi);
+        break;
+        
+    case 'guru/proses_tambah_sekolah':
+        proses_tambah_sekolah($koneksi);
+        break;
+
+    case 'guru/detail_sekolah':
+        detail_sekolah_page($koneksi);
+        break;
+
+    case 'guru/edit_sekolah':
+        edit_sekolah_page($koneksi);
+        break;
+
+    case 'guru/proses_edit_sekolah':
+        proses_edit_sekolah($koneksi);
+        break;
+
+    case 'guru/misi_kosakata':
+        misi_kosakata_page($koneksi);
+        break;
+
+    case 'guru/tambah_misi':
+        form_tambah_misi_page($koneksi);
+        break;
+
+    case 'guru/proses_tambah_misi':
+        proses_tambah_misi($koneksi);
+        break;
+
+    case 'guru/edit_misi':
+        form_edit_misi_page($koneksi);
+        break;
+
+    case 'guru/proses_edit_misi':
+        proses_edit_misi($koneksi);
+        break;
+
+    case 'guru/hapus_misi':
+        hapus_misi_process($koneksi);
+        break;
+
+    case 'guru/detail_progres_misi':
+        detail_progres_misi_page($koneksi);
         break;
 // murid
     case 'murid':
