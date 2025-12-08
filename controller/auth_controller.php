@@ -92,6 +92,7 @@ function auth_authenticate($koneksi) {
                     if($user['role'] == 'superadmin' || $user['role'] == '1'){
                         header("Location: index.php?page=admin");
                     } elseif($user['role'] == 'guru' || $user['role'] == '2'){
+                        // $_SESSION['id_sekolah'] = $user['id_sekolah'];
                         header("Location: index.php?page=guru");
                     } else {
                         header("Location: index.php?page=murid");

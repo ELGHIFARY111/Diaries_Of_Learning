@@ -9,7 +9,7 @@
 
          <a href="index.php?page=guru/monitoring&active=siswa&aktif=true" 
             class="<?= ($active == 'siswa') ? 'aktif' : '' ?>">
-            Student List
+            School
          </a>
 
          <a href="index.php?page=guru/misi_kosakata&active=misi&aktif=true" 
@@ -30,6 +30,10 @@
          <a href="index.php?page=guru/profil&active=profil&aktif=true" 
             class="<?= ($active == 'profil') ? 'aktif' : '' ?>">
             Teacher Profile
+         </a>
+         <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true" 
+            class="<?= ($active == 'leaderboard') ? 'aktif' : '' ?>">
+            Leaderboard
          </a>
 
          <a href="index.php?page=logout">Logout</a>
