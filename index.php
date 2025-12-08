@@ -128,6 +128,10 @@ switch ($page) {
         misi_murid_page($koneksi);
         break;
 
+    case 'murid/kerjakanMisiMurid':
+        kerjakan_misi_murid_page($koneksi);
+        break;
+
 
 // eror
     default:
