@@ -18,57 +18,12 @@ body {
     min-height: 100vh;
 }
 
-/* Sidebar */
-.sidebar {
-    width: 280px;
-    background: linear-gradient(to bottom, #8e44ad, #3498db);
-    color: white;
-    padding: 20px;
-    flex-shrink: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    overflow-y: auto;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-}
-
-.logo {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 30px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #555;
-}
-
-.menu a {
-    display: block;
-    color: #ccc;
-    text-decoration: none;
-    padding: 12px;
-    margin-bottom: 5px;
-    border-radius: 4px;
-}
-
-.menu a:hover, .menu a.aktif {
-    background-color: #34495e;
-    color: white;
-}
-
-.user-info {
-    margin-top: 30px;
-    font-size: 14px;
-    color: #ccc;
-    border-top: 1px solid #555;
-    padding-top: 15px;
-}
-
 /* Content Area */
 .content {
     flex-grow: 1;
     padding: 30px;
     margin-left: 280px;
+    margin-top: -12px;
 }
 
 .header {

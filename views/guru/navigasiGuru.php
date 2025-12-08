@@ -35,8 +35,7 @@
             class="<?= ($active == 'leaderboard') ? 'aktif' : '' ?>">
             Leaderboard
          </a>
-
-         <a href="index.php?page=logout">Logout</a>
+         
       </div>
 
       <div class="user-info">
