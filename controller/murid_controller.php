@@ -1,6 +1,7 @@
 <?php
 
 function navigasi_murid() {
+    $active = $_GET['active'] ?? 'aktif';
     include "./views/murid/navigasiMurid.php";
 }
 function murid_dashboard_page($koneksi) {
@@ -18,6 +19,14 @@ function kosakata_murid_page($koneksi) {
 function misi_murid_page($koneksi) {
     $active = $_GET['active'] ?? 'aktif';
     include "./views/murid/misiMurid.php";
+}
+function kerjakan_misi_murid_page($koneksi) {
+    $active = $_GET['active'] ?? 'aktif';
+    include "./views/murid/kerjakanMisiMurid.php";
+}
+function profil_murid_page($koneksi) {
+    $active = $_GET['active'] ?? 'aktif';
+    include "./views/murid/profilMurid.php";
 }
 
 

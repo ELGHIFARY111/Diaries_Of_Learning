@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Siswa - Simple</title>
+    <title>Student Dashboard - Simple</title>
     <link rel="stylesheet" href="./views/css/homeMuridStyle.css">
 </head>
 
@@ -15,53 +15,52 @@
         <div class="content">
 
             <div class="header">
-                <h2>Selamat Datang, Dian!</h2>
-                <p>Hari ini: Kamis, 27 November 2025</p>
+                <h2>Welcome, Dian!</h2>
             </div>
 
             <div class="stats-box">
                 <div class="card">
-                    <p>Total Catatan</p>
+                    <p>Total Notes</p>
                     <h3>12</h3>
                 </div>
                 <div class="card">
-                    <p>Kosakata Baru</p>
+                    <p>New Vocabulary</p>
                     <h3>50</h3>
                 </div>
                 <div class="card">
-                    <p>Total Poin</p>
+                    <p>Total Points</p>
                     <h3>850</h3>
                 </div>
             </div>
 
-            <h3 style="margin-bottom: 10px;">Mau Ngapain?</h3>
+            <h3 style="margin-bottom: 10px;">What Do You Want To Do?</h3>
             <div class="action-area">
-                <div class="btn">✏️ Tulis Teks</div>
+                <div class="btn">✏️ Write Text</div>
             </div>
 
             <div class="bottom-section">
 
                 <div class="box">
-                    <h3>🎯 Misi Aktif</h3>
+                    <h3>🎯 Active Mission</h3>
                     <div class="list-item">
-                        <b>Cari 5 Kata Sifat</b>
-                        <p>Cari kata sifat tentang sekolah.</p>
+                        <b>Find 5 Adjectives</b>
+                        <p>Find adjectives related to school.</p>
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 70%;"></div>
                         </div>
-                        <small>Sudah 70%</small>
+                        <small>Already 70%</small>
                     </div>
                 </div>
 
                 <div class="box">
-                    <h3>🕒 Aktivitas Terakhir</h3>
+                    <h3>🕒 Recent Activity</h3>
                     <div class="list-item">
-                        <b>Review Pelajaran</b> <br>
-                        <span style="color: grey;">Kemarin - Teks</span>
+                        <b>Lesson Review</b> <br>
+                        <span style="color: grey;">Yesterday - Text</span>
                     </div>
                     <div class="list-item">
-                        <b>Latihan Speaking</b> <br>
-                        <span style="color: grey;">25 Nov - Audio</span>
+                        <b>Speaking Practice</b> <br>
+                        <span style="color: grey;">Nov 25 - Audio</span>
                     </div>
                 </div>
 

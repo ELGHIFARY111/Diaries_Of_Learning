@@ -1,33 +1,38 @@
 <link rel="stylesheet" href="./views/css/navigasi_murid.css">
+
 <div class="sidebar">
-    <div class="logo">📘 Diary Sekolah</div>
+    <div class="logo">Diary of Learning</div>
     
     <div class="menu">
         <a href="index.php?page=murid&active=dashboard&aktif=true" 
         class="<?= ($active == 'dashboard') ? 'aktif' : '' ?>">
-        🏠 Dashboard
+        Dashboard
         </a>
 
         <a href="index.php?page=murid/catatanMurid&active=catatan&aktif=true" 
         class="<?= ($active == 'catatan') ? 'aktif' : '' ?>">
-        📝 Catatan Harian
+        Daily Notes
         </a>
 
         <a href="index.php?page=murid/kosakataMurid&active=kosakata&aktif=true" 
         class="<?= ($active == 'kosakata') ? 'aktif' : '' ?>">
-        📖 Kosakata
+        Vocabulary
         </a>
 
         <a href="index.php?page=murid/misiMurid&active=misi&aktif=true" 
         class="<?= ($active == 'misi') ? 'aktif' : '' ?>">
-        🎯 Misi Saya
+        My Missions
         </a>
 
-        <a href="index.php?page=logout">🚪 Logout</a>
+        <a href="index.php?page=murid/profilMurid&active=profil&aktif=true" 
+        class="<?= ($active == 'profil') ? 'aktif' : '' ?>">
+        Profil Saya
+        </a>
+
     </div>
 
     <div class="user-info">
-        Login sebagai:<br>
-        <b>Dian Anggraini (Siswa)</b>
+        Logged in as:<br>
+        <b>Dian Anggraini (Student)</b>
     </div>
 </div>
