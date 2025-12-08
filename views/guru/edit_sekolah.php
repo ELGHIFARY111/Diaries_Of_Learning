@@ -16,9 +16,6 @@
 </head>
 <body>
     <div class="container">
-        
-        <?php include "./views/guru/navigasiGuru.php"; ?>
-
         <div class="content">
             <div class="header" style="text-align: center;">
                 <h2>Edit Data Sekolah</h2>

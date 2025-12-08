@@ -11,9 +11,6 @@
 </head>
 <body>
     <div class="container">
-        
-        <?php include "./views/guru/navigasiGuru.php"; ?>
-
         <div class="content">
             
             <a href="index.php?page=guru/misi_kosakata" style="display:inline-block; margin-bottom:20px; text-decoration:none; color:var(--color-text-secondary);">

@@ -175,4 +175,139 @@ function ambil_progres_siswa_per_misi($koneksi, $id_sekolah, $id_misi) {
         'target' => $target
     ];
 }
+function ambil_catatan_siswa_sekolah($koneksi, $id_sekolah, $filter_status = 'all', $filter_tipe = 'all') {
+    $query = "SELECT c.*, u.nama_lengkap
+            FROM catatan c
+            JOIN user u ON c.id_user = u.id_user
+            WHERE u.id_sekolah = '$id_sekolah'";
+
+    if ($filter_status != 'all') {
+        $query .= " AND c.status_review = '$filter_status'";
+    }
+    if ($filter_tipe != 'all') {
+        $query .= " AND c.tipe = '$filter_tipe'";
+    }
+
+    $query .= " ORDER BY c.tanggal_catatan DESC, c.status_review ASC";
+    
+    return mysqli_query($koneksi, $query);
+}
+
+function tandai_sudah_review($koneksi, $id_catatan) {
+    $query = "UPDATE catatan SET status_review = 'reviewed' WHERE id_catatan = '$id_catatan'";
+    return mysqli_query($koneksi, $query);
+}
+
+function ambil_statistik_laporan_sekolah($koneksi, $id_sekolah) {
+    // Total Siswa
+    $q_siswa = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM user WHERE id_sekolah = '$id_sekolah' AND role = '3'");
+    $total_siswa = mysqli_fetch_assoc($q_siswa)['total'];
+    if ($total_siswa == 0) $total_siswa = 1;
+
+    // Rata-rata Entri Jurnal
+    $q_catatan_bulan = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM catatan c JOIN user u ON c.id_user = u.id_user WHERE u.id_sekolah = '$id_sekolah' AND MONTH(c.tanggal_catatan) = MONTH(CURRENT_DATE())");
+    $total_catatan_bulan = mysqli_fetch_assoc($q_catatan_bulan)['total'];
+    $avg_mingguan = number_format($total_catatan_bulan / 4, 1);
+
+    // Total Kosakata
+    $q_kosakata = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM kosakata k JOIN user u ON k.id_user = u.id_user WHERE u.id_sekolah = '$id_sekolah'");
+    $total_words = number_format(mysqli_fetch_assoc($q_kosakata)['total']);
+
+    // Feedback Ratio
+    $q_all_notes = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM catatan c JOIN user u ON c.id_user = u.id_user WHERE u.id_sekolah = '$id_sekolah'");
+    $total_notes = mysqli_fetch_assoc($q_all_notes)['total'];
+    
+    $q_reviewed = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM catatan c JOIN user u ON c.id_user = u.id_user WHERE u.id_sekolah = '$id_sekolah' AND c.status_review = 'reviewed'");
+    $reviewed_notes = mysqli_fetch_assoc($q_reviewed)['total'];
+
+    $feedback_ratio = ($total_notes > 0) ? round(($reviewed_notes / $total_notes) * 100) : 0;
+
+    // Grafik Aktivitas Harian
+    $chart1_labels = [];
+    $chart1_data = [];
+    for ($i = 6; $i >= 0; $i--) {
+        $date = date('Y-m-d', strtotime("-$i days"));
+        $q_day = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM catatan c JOIN user u ON c.id_user = u.id_user WHERE u.id_sekolah = '$id_sekolah' AND c.tanggal_catatan = '$date'");
+        $chart1_labels[] = date('d M', strtotime($date));
+        $chart1_data[] = mysqli_fetch_assoc($q_day)['total'];
+    }
+
+    // Grafik Kosakata 
+    $chart2_labels = [];
+    $chart2_data = [];
+    
+    // Ambil total saat ini saja
+    $q_voc_total = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM kosakata k JOIN user u ON k.id_user = u.id_user WHERE u.id_sekolah = '$id_sekolah'");
+    $total_saat_ini = mysqli_fetch_assoc($q_voc_total)['total'];
+
+    for ($i = 4; $i >= 0; $i--) {
+        $month_label = date('M Y', strtotime("-$i months"));
+        $chart2_labels[] = $month_label;
+        $chart2_data[] = $total_saat_ini; 
+    }
+
+    return [
+        'avg_mingguan'   => $avg_mingguan,
+        'total_words'    => $total_words,
+        'feedback_ratio' => $feedback_ratio,
+        'chart1_labels'  => json_encode($chart1_labels),
+        'chart1_data'    => json_encode($chart1_data),
+        'chart2_labels'  => json_encode($chart2_labels),
+        'chart2_data'    => json_encode($chart2_data)
+    ];
+}
+
+function update_profil_guru($koneksi, $id_user, $nama, $username, $email, $password_baru = "") {
+    $nama = mysqli_real_escape_string($koneksi, $nama);
+    $username = mysqli_real_escape_string($koneksi, $username);
+    $email = mysqli_real_escape_string($koneksi, $email);
+
+    if (!empty($password_baru)) {
+        $password_hash = hash('sha256', $password_baru);
+        $query = "UPDATE user SET nama_lengkap='$nama', username='$username', email='$email', password='$password_hash' WHERE id_user='$id_user'";
+    } else {
+        $query = "UPDATE user SET nama_lengkap='$nama', username='$username', email='$email' WHERE id_user='$id_user'";
+    }
+
+    return mysqli_query($koneksi, $query);
+}
+function ambil_leaderboard($koneksi, $id_sekolah_guru, $scope = 'school', $time = 'all', $search = '') {
+    
+    $filter_catatan = "";
+    $filter_kosakata = "";
+    
+    if ($time == 'month') {
+        $filter_catatan = "AND MONTH(c.tanggal_catatan) = MONTH(CURRENT_DATE()) AND YEAR(c.tanggal_catatan) = YEAR(CURRENT_DATE())";
+        $filter_kosakata = "AND MONTH(k.created_at) = MONTH(CURRENT_DATE()) AND YEAR(k.created_at) = YEAR(CURRENT_DATE())";
+    } elseif ($time == 'week') {
+        $filter_catatan = "AND YEARWEEK(c.tanggal_catatan, 1) = YEARWEEK(CURRENT_DATE(), 1)";
+        $filter_kosakata = "AND YEARWEEK(k.created_at, 1) = YEARWEEK(CURRENT_DATE(), 1)";
+    }
+
+    $filter_sekolah = "";
+    if ($scope == 'school') {
+        $filter_sekolah = "AND u.id_sekolah = '$id_sekolah_guru'";
+    }
+    $filter_search = "";
+    if (!empty($search)) {
+        $search = mysqli_real_escape_string($koneksi, $search);
+        $filter_search = "AND u.nama_lengkap LIKE '%$search%'";
+    }
+    $query = "SELECT 
+                u.nama_lengkap, 
+                s.nama_sekolah,
+                (
+                    (SELECT COUNT(*) FROM catatan c WHERE c.id_user = u.id_user $filter_catatan) * 10 
+                    + 
+                    (SELECT COUNT(*) FROM kosakata k WHERE k.id_user = u.id_user) * 2
+                ) as total_poin
+            FROM user u
+            LEFT JOIN sekolah s ON u.id_sekolah = s.id_sekolah
+            WHERE u.role = '3' 
+            $filter_sekolah
+            $filter_search
+            ORDER BY total_poin DESC, u.nama_lengkap ASC";
+
+    return mysqli_query($koneksi, $query);
+}
 ?>

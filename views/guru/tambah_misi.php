@@ -6,16 +6,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./views/css/guru.css">
     <style>
-        .form-container { max-width: 700px; margin: 30px auto; padding: 30px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <?php include "./views/guru/navigasiGuru.php"; ?>
         <div class="content">
             <div class="header"><h2>Buat Misi Hafalan Baru</h2></div>
             

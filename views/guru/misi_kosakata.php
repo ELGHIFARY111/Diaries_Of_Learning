@@ -67,7 +67,7 @@
                                             class="btn-aksi" 
                                             style="text-decoration:none; background:#6c5ce7; color:white; padding:5px 10px; border-radius:4px; font-size:0.8em;" 
                                             title="Lihat Siswa">
-                                            👥 Progres
+                                            Detail
                                         </a>
 
                                         <a href="index.php?page=guru/edit_misi&id=<?= $misi['id_misi'] ?>" 

@@ -15,7 +15,6 @@
 </head>
 <body>
     <div class="container">
-        <?php include "./views/guru/navigasiGuru.php"; ?>
         <div class="content">
             <div class="header"><h2>Edit Misi</h2></div>
             

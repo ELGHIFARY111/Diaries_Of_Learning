@@ -41,7 +41,7 @@
 
       <div class="user-info">
          Logged in as:<br>
-         <b>Mr. Arik</b>
-         <br>Bintang Timur High School
+         <b><?= $nama_guru ?></b>
+         <br><?=$nama_sekolah ?>
       </div>
 </div>

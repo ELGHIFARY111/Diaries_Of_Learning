@@ -3,8 +3,13 @@ require_once "./model/role.php";
 require_once "./model/guru_model.php";
 
 
-function navigasi_guru() {
+function navigasi_guru($koneksi) {
     $active = $_GET['active'] ?? 'aktif';
+    $id_guru = $_SESSION['user_id'] ?? 0; 
+    $data_guru      = cari_data_guru($koneksi, $id_guru);
+    $id_sekolah     = $data_guru['id_sekolah'] ?? 0;
+    $nama_guru      = $data_guru['nama_lengkap'] ?? 'Guest';
+    $nama_sekolah   = $data_guru['nama_sekolah'] ?? 'Belum ada sekolah';
     include "./views/guru/navigasiGuru.php";
 }
 
@@ -27,7 +32,18 @@ function guru_dashboard_page($koneksi) {
     include "./views/guru/dashboard_guru.php";
 }
 function laporan_progres_page($koneksi) {
-    $active = $_GET['active'] ?? 'aktif';
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: index.php?page=login");
+        exit;
+    }
+
+    $id_guru = $_SESSION['user_id'];
+    
+    $data_guru = cari_data_guru($koneksi, $id_guru);
+    $id_sekolah = $data_guru['id_sekolah'];
+
+    $stats = ambil_statistik_laporan_sekolah($koneksi, $id_sekolah);
+
     include "./views/guru/laporan_progres.php";
 }
 
@@ -75,7 +91,7 @@ function proses_tambah_sekolah($koneksi) {
             $data_terbaru = cari_data_guru($koneksi, $id_guru);
             $_SESSION['id_sekolah'] = $data_terbaru['id_sekolah'];
 
-                header('Location=index.php?page=guru/monitoring');
+                header('Location: index.php?page=guru/monitoring');
         } else {
             echo "<script>
                     alert('Gagal membuat sekolah atau update akun guru.'); 
@@ -138,13 +154,94 @@ function proses_edit_sekolah($koneksi) {
         }
     }
 }
-function profil_page($koneksi) {
+function detail_siswa_page($koneksi) {
+    $id_guru = $_SESSION['user_id'];
+    $id_siswa = $_GET['id'] ?? 0;
     $active = $_GET['active'] ?? 'aktif';
+
+    $data_guru = cari_data_guru($koneksi, $id_guru);
+    $id_sekolah = $data_guru['id_sekolah'];
+
+    $query_siswa = "SELECT * FROM user WHERE id_user = '$id_siswa' AND id_sekolah = '$id_sekolah' AND role = '3'";
+    $result_siswa = mysqli_query($koneksi, $query_siswa);
+
+    if (mysqli_num_rows($result_siswa) == 0) {
+        echo "<script>alert('Siswa tidak ditemukan atau bukan dari sekolah Anda.'); window.location='index.php?page=guru/monitoring';</script>";
+        exit;
+    }
+    $siswa = mysqli_fetch_assoc($result_siswa);
+
+
+    $q_catatan = "SELECT COUNT(*) as total FROM catatan WHERE id_user = '$id_siswa'";
+    $r_catatan = mysqli_query($koneksi, $q_catatan);
+    $total_catatan = mysqli_fetch_assoc($r_catatan)['total'];
+
+    $q_kosakata = "SELECT COUNT(*) as total FROM kosakata WHERE id_user = '$id_siswa'";
+    $r_kosakata = mysqli_query($koneksi, $q_kosakata);
+    $total_kosakata = mysqli_fetch_assoc($r_kosakata)['total'];
+
+    $q_nilai = "SELECT nilai FROM progres WHERE id_user = '$id_siswa' AND jenis_progres = 'menulis'";
+    $r_nilai = mysqli_query($koneksi, $q_nilai);
+    $data_nilai = mysqli_fetch_assoc($r_nilai);
+    $nilai_menulis = $data_nilai['nilai'] ?? 0;
+    $q_riwayat = "SELECT * FROM catatan WHERE id_user = '$id_siswa' ORDER BY tanggal_catatan DESC LIMIT 10";
+    $riwayat_catatan = mysqli_query($koneksi, $q_riwayat);
+
+    include "./views/guru/detail_siswa.php";
+}
+function profil_page($koneksi) {
+    $id_guru = $_SESSION['user_id'];
+    
+    $is_edit_mode = isset($_GET['mode']) && $_GET['mode'] == 'edit';
+
+    $data_guru = cari_data_guru($koneksi, $id_guru);
+    
+    $nama_sekolah = $data_guru['nama_sekolah'] ?? 'Belum bergabung sekolah';
+    $kode_sekolah = $data_guru['kode_sekolah'] ?? '-';
+    $id_sekolah   = $data_guru['id_sekolah'] ?? 0;
+
     include "./views/guru/profil.php";
 }
+
+function proses_update_profil($koneksi) {
+    $id_guru  = $_SESSION['user_id'];
+    $nama     = $_POST['nama_lengkap'];
+    $username = $_POST['username'];
+    $email    = $_POST['email'];
+    $password = $_POST['password'];
+
+    if (update_profil_guru($koneksi, $id_guru, $nama, $username, $email, $password)) {
+        header("Location: index.php?page=guru/profil&status=sukses");
+    } else {
+        header("Location: index.php?page=guru/profil&status=gagal");
+    }
+}
 function review_catatan_page($koneksi) {
-    $active = $_GET['active'] ?? 'aktif';
+    $id_guru = $_SESSION['user_id'];
+    
+    $data_guru = cari_data_guru($koneksi, $id_guru);
+    $id_sekolah = $data_guru['id_sekolah'];
+
+    $filter_status = $_GET['status'] ?? 'pending';
+    $filter_tipe = $_GET['tipe'] ?? 'all';
+
+    $daftar_catatan = ambil_catatan_siswa_sekolah($koneksi, $id_sekolah, $filter_status, $filter_tipe);
+    $total_data = mysqli_num_rows($daftar_catatan);
+
     include "./views/guru/review_catatan.php";
+}
+
+function proses_tandai_review($koneksi) {
+    $id_catatan = $_GET['id'];
+    
+    if (tandai_sudah_review($koneksi, $id_catatan)) {
+        echo "<script>
+            alert('Catatan berhasil ditandai sudah dibaca!');
+            window.location='index.php?page=guru/review_catatan&status=pending'; 
+        </script>";
+    } else {
+        echo "<script>alert('Gagal memproses data.'); window.history.back();</script>";
+    }
 }
 // misi kosakata
 function misi_kosakata_page($koneksi) {
@@ -238,8 +335,17 @@ function detail_progres_misi_page($koneksi) {
 
     include "./views/guru/detail_progres_misi.php";
 }
-function leaderboard_guru_page() {
-    $active = $_GET['active'] ?? 'aktif';
+function leaderboard_guru_page($koneksi) {
+    $id_guru = $_SESSION['user_id'];
+    $data_guru = cari_data_guru($koneksi, $id_guru);
+    $id_sekolah = $data_guru['id_sekolah'];
+
+    $scope  = $_GET['scope'] ?? 'school';
+    $time   = $_GET['time'] ?? 'all';
+    $search = $_GET['search'] ?? '';
+
+    $leaderboard_data = ambil_leaderboard($koneksi, $id_sekolah, $scope, $time, $search);
+
     include "./views/guru/leaderboard.php";
 }
 ?>

@@ -23,7 +23,7 @@ if ($page !== 'login' && $page !== 'regist' && $page !== 'regist_process' && $pa
         top_navigasi_superadmin();
     } 
     elseif ($role == '2' || $role == 'guru') {
-        navigasi_guru();
+        navigasi_guru($koneksi);
     } 
     elseif ($role == '3' || $role == 'siswa' || $role == 'murid') {
         navigasi_murid();
@@ -104,9 +104,18 @@ switch ($page) {
         profil_page($koneksi);
         break;
 
+    case 'guru/proses_edit_profil':
+        proses_update_profil($koneksi);
+        break;
+
     case 'guru/review_catatan':
         review_catatan_page($koneksi);
         break;
+
+    case 'guru/proses_review':
+        proses_tandai_review($koneksi);
+        break;
+
     case 'guru/tambah_sekolah':
         form_tambah_sekolah_page($koneksi);
         break;
@@ -147,7 +156,11 @@ switch ($page) {
         proses_edit_misi($koneksi);
         break;
 
-    case 'guru/hapus_misi':
+    case 'guru/detail_siswa':
+        detail_siswa_page($koneksi);
+        break;
+
+        case 'guru/hapus_misi':
         hapus_misi_process($koneksi);
         break;
 

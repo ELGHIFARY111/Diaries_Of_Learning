@@ -118,9 +118,9 @@
                                     <?= date('d M Y', strtotime($siswa['created_at'] ?? 'now')) ?>
                                     </td>
                                     <td>
-                                        <button class="btn-detail" onclick="alert('Fitur Detail Profile Siswa (Coming Soon)')">
-                                            Profile
-                                        </button>
+                                        <a href="index.php?page=guru/detail_siswa&id=<?= $siswa['id_user'] ?>&active=siswa" class="btn-action btn-primary" style="text-decoration:none; font-size:12px; padding: 5px 10px;">
+                                            Lihat Profil
+                                        </a>
                                     </td>
                                 </tr>
 

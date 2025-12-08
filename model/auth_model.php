@@ -22,7 +22,7 @@ function auth_regist_user($koneksi, $data){
         return "duplicate";
     }
 
-$password_hash = hash('sha256', $password_raw);
+    $password_hash = hash('sha256', $password_raw);
     
     $id_sekolah_fix = "NULL"; 
     $role_user_db = 3;
