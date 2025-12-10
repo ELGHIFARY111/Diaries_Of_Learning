@@ -1,6 +1,5 @@
 <?php
-require_once "./model/database_admin_user.php"; 
-require_once "./model/database_admin_sekolah.php"; 
+require_once "./model/admin_model.php";
 require_once "./model/role.php"; 
 
 function top_navigasi_superadmin(){
@@ -26,30 +25,107 @@ function institusi_user_index($koneksi) {
     include "./views/superAdmin/institusi/user.php";
 }
 
-function monitoring_catatan_page($koneksi) {
-    include "./views/superAdmin/monitoring/catatan.php";
-}
-
-function monitoring_progres_page($koneksi) {
-    include "./views/superAdmin/monitoring/progres.php";
-}
-
-function monitoring_sekolah_page($koneksi) {
-    include "./views/superAdmin/monitoring/sekolah.php";
-}
 
 
-function pengaturan_profil_page($koneksi) {
-    include "./views/superAdmin/pengaturan/profil.php";
+function update_profil($koneksi) {
+    include "./views/superAdmin/profil.php";
 }
 
-function pengaturan_log_page($koneksi) {
-    include "./views/superAdmin/pengaturan/log.php";
+function manajemen_misi_global($koneksi) {
+    $daftar_misi_global = misi_global_get_all($koneksi);
+    include "./views/superAdmin/manajemen_misi_global.php";
 }
 
-function pengaturan_konfigurasi_page($koneksi) {
-    include "./views/superAdmin/pengaturan/konfigurasi.php";
+function tambah_misi_global_page($koneksi) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $id_pembuat = $_SESSION['user_id'];
+        $judul = $_POST['judul'];
+        $deskripsi = $_POST['deskripsi'];
+        $target = $_POST['target'];
+        $mulai = $_POST['tanggal_mulai'];
+        $akhir = $_POST['tanggal_akhir'];
+
+        misi_global_insert($koneksi, $id_pembuat, $judul, $deskripsi, $target, $mulai, $akhir);
+
+        header("Location: index.php?page=manajemen_misi_global");
+        exit;
+    }
+
+    include "./views/superAdmin/tambah_misi_global.php";
 }
+
+function edit_misi_global_page($koneksi) {
+
+    $id = $_GET['id'];
+    $data = misi_global_get_by_id($koneksi, $id);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        misi_global_update(
+            $koneksi,
+            $id,
+            $_POST['judul'],
+            $_POST['deskripsi'],
+            $_POST['target'],
+            $_POST['tanggal_mulai'],
+            $_POST['tanggal_akhir']
+        );
+
+        header("Location: index.php?page=manajemen_misi_global");
+        exit;
+    }
+
+    include "./views/superAdmin/edit_misi_global.php";
+}
+
+function hapus_misi_global_page($koneksi) {
+    $id = $_GET['id'];
+    misi_global_delete($koneksi, $id);
+    header("Location: index.php?page=manajemen_misi_global");
+    exit;
+}
+
+function profil_user_page($koneksi) {
+
+    if (!isset($_SESSION['user_id'])) {
+        echo "User tidak login!";
+        exit;
+    }
+
+    $id_user = $_SESSION['user_id'];
+    $data_user = user_get_by_id($koneksi, $id_user);
+
+    include "./views/superAdmin/profil.php";
+}
+
+function profil_user_update($koneksi) {
+
+    if (!isset($_SESSION['user_id'])) {
+        echo "User tidak login!";
+        exit;
+    }
+
+    $id_user = $_SESSION['user_id'];
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $nama     = $_POST['nama_lengkap'];
+        $username = $_POST['username'];
+        $email    = $_POST['email'];
+
+        $status = user_update_profile($koneksi, $id_user, $nama, $username, $email);
+
+        if ($status) {
+            echo "<script>alert('Profil berhasil diperbarui!'); 
+                  window.location='index.php?page=profil';</script>";
+        } else {
+            echo "<script>alert('Gagal memperbarui profil!'); 
+                  window.history.back();</script>";
+        }
+    }
+}
+
 
 
 ?>

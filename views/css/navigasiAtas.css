@@ -1,88 +1,49 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f6f9;
-    min-height: 100vh;
-}
-
+/* 3. SIDEBAR (MENU KIRI) */
 .sidebar {
-    width: 240px;
-    background-color: #003366;
-    height: 100vh;
+    width: 250px;
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    flex-shrink: 0;
     position: fixed;
     top: 0;
     left: 0;
+    height: 100vh;
     overflow-y: auto;
-    color: white;
-    padding-top: 15px;
-    z-index: 1000;
 }
 
-.sidebar .brand {
+.logo {
     font-size: 20px;
     font-weight: bold;
-    padding: 15px;
-    text-align: center;
-    background: #00264d;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #555;
 }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar ul li {
-    position: relative;
-}
-
-.sidebar ul li a {
+.menu a {
     display: block;
-    padding: 12px 20px;
-    color: white;
+    color: #ccc;
     text-decoration: none;
-    font-size: 15px;
-    cursor: pointer;
-    transition: 0.3s;
+    padding: 12px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+.menu a:hover {
+    background-color: rgba(108, 92, 231, 0.1); 
+    color: #a29bfe; /* Ungu Muda */
 }
 
-.sidebar ul li a:hover {
-    background: #1a4d80;
-}
-.sidebar .dropdown-btn::after {
-    content: "▼";
-    float: right;
-    font-size: 12px;
-    transition: 0.3s;
+.menu a.aktif {
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(108, 92, 231, 0.4);
 }
 
-.sidebar .dropdown-container {
-    display: none;
-    background-color: #002d5c;
-}
-
-.sidebar ul li:hover .dropdown-container {
-    display: block; 
-}
-
-.sidebar ul li:hover .dropdown-btn::after {
-    transform: rotate(180deg);
-}
-
-.sidebar .dropdown-container a {
-    padding-left: 40px;
+.user-info {
+    margin-top: 30px;
     font-size: 14px;
-    background-color: #00254a;
-    border-left: 3px solid transparent;
+    color: #ccc;
+    border-top: 1px solid #555;
+    padding-top: 15px;
 }
-
-.sidebar .dropdown-container a:hover {
-    background-color: #001a33;
-    border-left: 3px solid #4CAF50;
-}
-.username_admin{
-    text-align:center ;
-    font-weight:bolder;
-}
-

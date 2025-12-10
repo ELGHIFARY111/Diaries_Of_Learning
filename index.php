@@ -64,29 +64,36 @@ switch ($page) {
         institusi_user_index($koneksi);
         break;
 
-    case 'monitoring/catatan':
-        monitoring_catatan_page($koneksi);
-        break;
-
-    case 'monitoring/progres':
-        monitoring_progres_page($koneksi);
-        break;
-
-    case 'monitoring/sekolah':
-        monitoring_sekolah_page($koneksi);
-        break;
         
-    case 'pengaturan/profil':
-        pengaturan_profil_page($koneksi);
-        break;
 
-    case 'pengaturan/log':
-        pengaturan_log_page($koneksi);
-        break;
+case 'manajemen_misi_global':
+    manajemen_misi_global($koneksi);
+    break;
 
-    case 'pengaturan/konfigurasi':
-        pengaturan_konfigurasi_page($koneksi);
-        break;
+
+case 'tambah_misi_global':
+    tambah_misi_global_page($koneksi);
+    break;
+
+case 'edit_misi_global':
+    edit_misi_global_page($koneksi);
+    break;
+
+case 'hapus_misi_global':
+    hapus_misi_global_page($koneksi);
+    break;
+
+    case 'profil':
+    profil_user_page($koneksi);
+    break;
+
+case 'profil_update':
+    profil_user_update($koneksi);
+    break;
+
+
+
+
 // guru
     case 'guru':
         guru_dashboard_page($koneksi);

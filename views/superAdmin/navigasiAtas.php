@@ -1,62 +1,19 @@
-<link rel="stylesheet" href="./views/css/navigasiAtas.css">
+<link rel="stylesheet" href="./views/css/guru.css">
+<link rel="stylesheet" href="./views/css/navigasi_murid.css">
 
 <div class="sidebar">
-
-    <div class="brand">Diary of Learning</div>
-    <div class="username_admin"></div>
-
-    <ul>
-        <!-- username -->
-        <li>
-            <a class="dropdown-btn"><?= $_SESSION['user_nama'] ?></a>
+    <div class="menu">
+    <div class="logo">Diary of Learning</div>
+    <ul class="menu">
             <div class="dropdown-container">
-                <a href="index.php?page=logout">logout</a>
+                <a href="index.php?page=institusi/sekolah"> Database Sekolah</a>
+                <a href="index.php?page=institusi/user">Database User</a>
             </div>
-        </li>
-        <!-- Dashboard -->
-        <li>
-            <a href="index.php?page=dashboard">Dashboard</a>
-
-
-        </li>
-
-        <!-- Manajemen Institusi -->
-        <li>
-            <a class="dropdown-btn">Database</a>
-            <div class="dropdown-container">
-                <a href="index.php?page=institusi/sekolah">Sekolah</a>
-                <a href="index.php?page=institusi/user">user</a>
-            </div>
-        </li>
-
-
-
-        <!-- Monitoring & Analitik -->
-        <li>
-            <a class="dropdown-btn">Monitoring</a>
-            <div class="dropdown-container">
-                <a href="index.php?page=monitoring/catatan">monitoring Catatan</a>
-                <a href="index.php?page=monitoring/progres">monitoring Progres</a>
-                <a href="index.php?page=monitoring/sekolah">monitoring per Sekolah</a>
-            </div>
-        </li>
-
-        <!-- Pengaturan Sistem -->
-        <li>
-            <a class="dropdown-btn">Pengaturan Sistem</a>
-            <div class="dropdown-container">
-                <a href="index.php?page=pengaturan/profil">Profil Superadmin</a>
-                <a href="index.php?page=pengaturan/log">Log Aktivitas</a>
-                <a href="index.php?page=pengaturan/konfigurasi">Konfigurasi Aplikasi</a>
-            </div>
-        </li>
-
-        <!-- Bantuan -->
-        <li>
-            <a href="index.php?page=bantuan">Bantuan</a>
-        </li>
-
-    </ul>
-
+            <a href="index.php?page=profil">profil</a>
+            <a href="index.php?page=manajemen_misi_global">Misi global</a>
+    </div>
+    <div class="user-info">
+        Logged in as:<br>
+        <b><?= $_SESSION['user_nama'] ?></b>
+    </div>
 </div>
-

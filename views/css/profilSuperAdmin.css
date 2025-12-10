@@ -1,0 +1,183 @@
+/* =========================================
+   1. VARIABEL & RESET
+   ========================================= */
+:root {
+    --color-primary: #6c5ce7;      /* Ungu Utama */
+    --color-secondary: #a29bfe;    /* Ungu Muda */
+    --color-danger: #d63031;       /* Merah Logout */
+    --color-text-dark: #2d3436;    /* Teks Utama */
+    --color-text-muted: #636e72;   /* Teks Sekunder */
+    --color-border: #f1f2f6;       /* Garis Pemisah */
+    --color-bg: #f8f9fa;           /* Background Body */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text-dark);
+    min-height: 100vh;
+}
+
+/* =========================================
+   2. CONTAINER & CARD
+   ========================================= */
+.profile-card {
+    background: white;
+    border-radius: 12px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    padding: 0; /* Padding dipindah ke sidebar/details untuk kontrol area */
+    width: 95%;
+    max-width: 1000px;
+    margin: 50px auto; 
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.profile-layout {
+    display: flex; 
+    flex-direction: row; 
+    min-height: 500px;
+}
+
+/* =========================================
+   3. SIDEBAR (KIRI)
+   ========================================= */
+.profile-sidebar {
+    width: 320px; 
+    padding: 40px 20px;
+    text-align: center; 
+    background-color: #fcfcfc; 
+    border-right: 1px solid var(--color-border);
+    flex-shrink: 0;
+}
+
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--color-primary), #3498db); 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto; 
+    border: 5px solid white;
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.profile-name {
+    font-size: 22px;
+    color: var(--color-text-dark);
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.profile-role {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin-bottom: 40px;
+    display: block;
+}
+
+/* Tombol Aksi */
+.action-buttons-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn-action {
+    width: 100%;
+    max-width: 220px;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-edit {
+    background-color: var(--color-primary); 
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: var(--color-secondary);
+    transform: translateY(-2px);
+}
+
+.btn-logout {
+    background-color: transparent;
+    border: 1px solid var(--color-danger);
+    color: var(--color-danger);
+}
+
+.btn-logout:hover {
+    background-color: var(--color-danger); 
+    color: white;
+}
+
+/* =========================================
+   4. AREA DETAIL (KANAN)
+   ========================================= */
+.profile-details-area {
+    flex-grow: 1;
+    padding: 40px;
+}
+
+.info-title {
+    font-size: 20px;
+    color: var(--color-primary);
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 15px;
+    font-weight: 700;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 30px;
+}
+
+.detail-item label {
+    display: block;
+    font-size: 11px; 
+    color: #b2bec3;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.detail-item p {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+/* Responsif Sederhana */
+@media (max-width: 768px) {
+    .profile-layout {
+        flex-direction: column;
+    }
+    .profile-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+    }
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
