@@ -18,14 +18,14 @@
                 <h2>Missions</h2>
             </div>
 
-            <h3 class="section-title">🔥 Ongoing Missions</h3>
+            <h3 class="section-title">Ongoing Missions</h3>
             
             <div class="mission-list">
                 
                 <div class="mission-card active-card">
                     <div class="card-top">
-                        <span class="badge badge-school">🏫 School Mission</span>
-                        <span class="deadline">⏳ 2 Days Left</span>
+                        <span class="badge badge-school">School Mission</span>
+                        <span class="deadline">2 Days Left</span>
                     </div>
                     
                     <div class="mission-title">Adjective Challenge</div>
@@ -48,8 +48,8 @@
 
                 <div class="mission-card active-card">
                     <div class="card-top">
-                        <span class="badge badge-global">🌍 Global Mission</span>
-                        <span class="deadline">⏳ 5 Days Left</span>
+                        <span class="badge badge-global">Global Mission</span>
+                        <span class="deadline">5 Days Left</span>
                     </div>
                     
                     <div class="mission-title">Daily Verbs Mastery</div>

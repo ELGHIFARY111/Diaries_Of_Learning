@@ -157,6 +157,7 @@ a:hover {
     background: linear-gradient(90deg, var(--color-primary), var(--color-accent-blue)); 
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(108, 92, 231, 0.5);
+    color: white;
 }
 
 .btn-primary {
@@ -169,6 +170,7 @@ a:hover {
     background: linear-gradient(90deg, #5d4ce5, var(--color-primary));
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);
+    color: white;
 }
 
 .bottom-section {

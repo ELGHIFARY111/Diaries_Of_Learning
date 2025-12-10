@@ -5,46 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Notes - School Diary</title>
-    <link rel="stylesheet" href="./views/css/catatanMuridStyle.css">
+    <link rel="stylesheet" href="views/css/catatanMuridStyle.css">
 </head>
 
 <body>
 
     <div class="container">
+
         <div class="content">
 
             <div class="header">
                 <h2>Daily Notes</h2>
+                <p>Record your learning journey today.</p>
             </div>
 
-            <div class="form-box">
-                <h3 style="margin-bottom: 15px;">✍️ Write a New Note</h3>
+            <form action="" method="POST" class="note-form">
                 
-                <form action="" method="POST">
-                    <div class="form-group">
-                        <label>Note Title</label>
-                        <input type="text" name="judul" class="input-field" placeholder="Example: Learning Simple Present Tense" required>
-                    </div>
+                <div class="word-sheet">
+                    
+                    <input type="text" name="judul" class="input-title" placeholder="Title: Learning Simple Present Tense..." required autocomplete="off">
+                    
+                    <hr class="separator">
 
-                    <div class="form-group">
-                        <label>Journal Content</label>
-                        <textarea name="isi" class="input-field" rows="6" placeholder="Tell what you learned today..." required></textarea>
-                    </div>
+                    <textarea name="isi" class="input-body" placeholder="Start writing your story here..." required></textarea>
 
+                </div>
+
+                <div class="action-bar">
                     <button type="submit" class="btn-simpan">Save Note</button>
-                </form>
-            </div>
+                </div>
 
-            <h3 style="margin: 30px 0 15px 0;">🕒 Your Note History</h3>
+            </form>
+
+            <h3 style="margin: 40px 0 15px 0; color: #555;">Your Note History</h3>
             
-            <div class="history-card">
-                <div class="card-meta">
-                    <span>📅 Nov 27, 2025</span>
+            <div class="history-list">
+                
+                <div class="history-card">
+                    <div class="card-meta">
+                        <span>Nov 27, 2025</span>
+                    </div>
+                    <div class="card-title">Last Week Lesson Review</div>
+                    <div class="card-body">
+                        Today I reviewed the material about adjectives. I learned that adjectives are usually placed before nouns.
+                    </div>
                 </div>
-                <div class="card-title">Last Week Lesson Review</div>
-                <div class="card-body">
-                    Today I reviewed the material about adjectives. I learned that adjectives are usually placed before nouns.
+
+                 <div class="history-card">
+                    <div class="card-meta">
+                        <span>Nov 26, 2025</span>
+                    </div>
+                    <div class="card-title">Speaking Practice</div>
+                    <div class="card-body">
+                        I tried to speak with my friend using full English sentences today. It was hard but fun.
+                    </div>
                 </div>
+
             </div>
 
         </div>

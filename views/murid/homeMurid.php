@@ -35,17 +35,17 @@
             <h3 style="margin-bottom: 10px;">What Do You Want To Do?</h3>
             <div class="action-area">
                 <a href="index.php?page=murid/catatanMurid&active=catatan&aktif=true" style="text-decoration:none; flex:1;">
-                    <div class="btn">✏️ Write Text / Note</div>
+                    <div class="btn">Write Text / Note</div>
                 </a>
                 <a href="index.php?page=murid/kosakataMurid&active=kosakata&aktif=true" style="text-decoration:none; flex:1;">
-                    <div class="btn">📖 Add Vocabulary</div>
+                    <div class="btn">Add Vocabulary</div>
                 </a>
             </div>
 
             <div class="bottom-section">
 
                 <div class="box">
-                    <h3>🎯 Active Mission</h3>
+                    <h3>Active Mission</h3>
                     <?php if ($misi_aktif): ?>
                         <div class="list-item">
                             <b><?= htmlspecialchars($misi_aktif['nama_misi']) ?></b>
@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="box">
-                    <h3>🕒 Recent Activity</h3>
+                    <h3>Recent Activity</h3>
                     
                     <?php if (count($recent_activities) > 0): ?>
                         <?php foreach($recent_activities as $act): ?>

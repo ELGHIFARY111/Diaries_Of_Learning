@@ -18,7 +18,7 @@
             </div>
 
             <div class="form-box">
-                <h3>➕ Add New Word</h3>
+                <h3>Add New Word</h3>
                 <form action="" method="POST" style="margin-top: 15px;">
                     
                     <div class="form-row">
@@ -43,7 +43,7 @@
 
             <div class="list-section">
                 <div class="list-header">
-                    <h3>📚 Your Collection (5 Words)</h3>
+                    <h3>Your Collection (5 Words)</h3>
                     <input type="text" class="search-box" placeholder="Search word...">
                 </div>
 
