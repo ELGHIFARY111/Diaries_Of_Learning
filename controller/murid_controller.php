@@ -263,7 +263,7 @@ function leaderboard_murid_page($koneksi) {
     $search = $_GET['search'] ?? '';
 
     if (function_exists('ambil_leaderboard')) {
-        $leaderboard_data = ambil_leaderboard_murid($koneksi, $id_sekolah, $scope, $time, $search);
+        $leaderboard_data = ambil_data_leaderboard($koneksi, $id_sekolah, $scope, $time, $search);
     } else {
         $leaderboard_data = []; 
     }

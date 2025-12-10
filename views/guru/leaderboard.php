@@ -139,8 +139,11 @@
                     </table>
                 </div>
 
-                <p style="margin-top: 20px; font-size: 12px; color: #999; text-align: center;">
-                    * 1 Catatan Jurnal = 10 XP | 1 Koleksi Kosakata = 2 XP
+                <p style="margin-top: 20px; font-size: 13px; color: #999; text-align: center; background: #f9f9f9; padding: 10px; border-radius: 8px;">
+                    <strong>Aturan Poin:</strong> 
+                    1 Catatan = 10 XP | 
+                    1 Misi Selesai = 5 XP | 
+                    1 Kosakata = 2 XP
                 </p>
 
             </div>
