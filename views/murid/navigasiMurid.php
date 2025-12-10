@@ -11,7 +11,7 @@
 
         <a href="index.php?page=murid/catatanMurid&active=catatan&aktif=true" 
         class="<?= ($active == 'catatan') ? 'aktif' : '' ?>">
-        Daily Notes
+        Notes
         </a>
 
         <a href="index.php?page=murid/kosakataMurid&active=kosakata&aktif=true" 
@@ -38,6 +38,7 @@
 
     <div class="user-info">
         Logged in as:<br>
-        <b>Dian Anggraini (Student)</b>
+        <b><?= $nama_guru ?></b>
+        <br><?=$nama_sekolah ?>
     </div>
 </div>

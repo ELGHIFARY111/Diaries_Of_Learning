@@ -1,6 +1,7 @@
 <?php
 require_once "./model/role.php";
 require_once "./model/guru_model.php";
+require_once "./model/global_model.php";
 
 
 function navigasi_guru($koneksi) {
@@ -243,7 +244,6 @@ function proses_tandai_review($koneksi) {
         echo "<script>alert('Gagal memproses data.'); window.history.back();</script>";
     }
 }
-// misi kosakata
 function misi_kosakata_page($koneksi) {
     $id_guru = $_SESSION['user_id'];
     $data_guru = cari_data_guru($koneksi, $id_guru);
@@ -268,16 +268,16 @@ function proses_tambah_misi($koneksi) {
         $data_guru = cari_data_guru($koneksi, $id_guru);
 
         $data = [
-            'id_sekolah' => $data_guru['id_sekolah'],
-            'id_pembuat' => $id_guru,
-            'judul'      => mysqli_real_escape_string($koneksi, $_POST['judul']),
-            'deskripsi'  => mysqli_real_escape_string($koneksi, $_POST['deskripsi']),
+            'judul' => $_POST['judul'],
+            'deskripsi' => $_POST['deskripsi'],
             'tanggal_mulai' => $_POST['tanggal_mulai'],
             'tanggal_akhir' => $_POST['tanggal_akhir'],
-            'target_jumlah_kata' => $_POST['target']
+            'kata_target_raw' => $_POST['kata_target'],
+            'id_pembuat' => $id_guru,
+            'id_sekolah' => $data_guru['id_sekolah']
         ];
 
-        if (tambah_misi($koneksi, $data)) {
+        if (tambah_misi_baru($koneksi, $data)) {
             echo "<script>alert('Misi berhasil dibuat!'); window.location='index.php?page=guru/misi_kosakata';</script>";
         } else {
             echo "<script>alert('Gagal membuat misi.'); window.location='index.php?page=guru/tambah_misi';</script>";
@@ -285,26 +285,31 @@ function proses_tambah_misi($koneksi) {
     }
 }
 
+// HALAMAN FORM EDIT
 function form_edit_misi_page($koneksi) {
     $id_misi = $_GET['id'];
     $misi = ambil_detail_misi($koneksi, $id_misi);
+    $kata_kata_string = ambil_kata_misi_string($koneksi, $id_misi);
+
     include "./views/guru/edit_misi.php";
 }
+
+// PROSES EDIT
 function proses_edit_misi($koneksi) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $id_misi = $_POST['id_misi'];
         $data = [
-            'judul'      => mysqli_real_escape_string($koneksi, $_POST['judul']),
-            'deskripsi'  => mysqli_real_escape_string($koneksi, $_POST['deskripsi']),
+            'id_misi' => $_POST['id_misi'],
+            'judul' => $_POST['judul'],
+            'deskripsi' => $_POST['deskripsi'],
             'tanggal_mulai' => $_POST['tanggal_mulai'],
             'tanggal_akhir' => $_POST['tanggal_akhir'],
-            'target_jumlah_kata' => $_POST['target']
+            'kata_target_raw' => $_POST['kata_target']
         ];
 
-        if (update_misi($koneksi, $id_misi, $data)) {
+        if (update_misi($koneksi, $data)) {
             echo "<script>alert('Misi berhasil diperbarui!'); window.location='index.php?page=guru/misi_kosakata';</script>";
         } else {
-            echo "<script>alert('Gagal update misi.'); window.location='index.php?page=guru/misi_kosakata';</script>";
+            echo "<script>alert('Gagal memperbarui misi.');</script>";
         }
     }
 }
@@ -319,19 +324,16 @@ function hapus_misi_process($koneksi) {
 }
 function detail_progres_misi_page($koneksi) {
     $id_guru = $_SESSION['user_id'];
-    $data_guru = cari_data_guru($koneksi, $id_guru);
-    
-    if (empty($_GET['id'])) {
-        header("Location: index.php?page=guru/misi_kosakata");
-        exit;
-    }
-
     $id_misi = $_GET['id'];
-    $id_sekolah = $data_guru['id_sekolah'];
+    
     $misi = ambil_detail_misi($koneksi, $id_misi);
+    
+    $data_guru = cari_data_guru($koneksi, $id_guru);
+    $id_sekolah = $data_guru['id_sekolah'];
     $result_progres = ambil_progres_siswa_per_misi($koneksi, $id_sekolah, $id_misi);
     $daftar_siswa = $result_progres['data'];
     $target_misi  = $result_progres['target'];
+    $list_kata_target = ambil_list_kata_target($koneksi, $id_misi);
 
     include "./views/guru/detail_progres_misi.php";
 }
@@ -347,5 +349,47 @@ function leaderboard_guru_page($koneksi) {
     $leaderboard_data = ambil_leaderboard($koneksi, $id_sekolah, $scope, $time, $search);
 
     include "./views/guru/leaderboard.php";
+}
+function baca_catatan_page($koneksi) {
+    $id_user = $_SESSION['user_id'] ?? $_SESSION['id_user'];
+    $id_catatan = $_GET['id'] ?? 0;
+
+    $catatan = ambil_satu_catatan($koneksi, $id_catatan, $id_user);
+
+    if (!$catatan) {
+        echo "<script>alert('Catatan tidak ditemukan atau bukan milik Anda!'); window.location.href='index.php?page=murid/catatanMurid';</script>";
+        exit;
+    }
+
+    include "./views/murid/bacaCatatan.php";
+}
+
+function proses_hapus_catatan($koneksi) {
+    $id_user = $_SESSION['user_id'] ?? $_SESSION['id_user'];
+    $id_catatan = $_GET['id'] ?? 0;
+
+    if (hapus_catatan_murid($koneksi, $id_catatan, $id_user)) {
+        echo "<script>alert('Catatan berhasil dihapus.'); window.location.href='index.php?page=murid/catatanMurid';</script>";
+    } else {
+        echo "<script>alert('Gagal menghapus catatan.'); window.location.href='index.php?page=murid/catatanMurid';</script>";
+    }
+}
+function baca_catatan_siswa_page($koneksi) {
+    $id_catatan = $_GET['id'] ?? 0;
+    
+    $query = "SELECT c.*, u.nama_lengkap 
+            FROM catatan c 
+            JOIN user u ON c.id_user = u.id_user 
+            WHERE c.id_catatan = '$id_catatan'";
+            
+    $result = mysqli_query($koneksi, $query);
+    $catatan = mysqli_fetch_assoc($result);
+
+    if (!$catatan) {
+        echo "<script>alert('Catatan tidak ditemukan!'); window.location.href='index.php?page=guru/review_catatan';</script>";
+        exit;
+    }
+
+    include "./views/guru/bacaCatatanSiswa.php";
 }
 ?>

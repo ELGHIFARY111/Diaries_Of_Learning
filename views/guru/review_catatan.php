@@ -82,8 +82,7 @@
                                 <tr>
                                     <td><?= date('d M Y', strtotime($row['tanggal_catatan'])) ?></td>
                                     <td>
-                                        <strong><?= htmlspecialchars($row['nama_lengkap']) ?></strong><br>
-                                        <small style="color: #888;">NIS: <?= $row['nis'] ?></small>
+                                        <strong><?= htmlspecialchars($row['nama_lengkap']) ?></strong>
                                     </td>
                                     <td style="max-width: 300px;">
                                         <strong><?= htmlspecialchars($row['judul']) ?></strong><br>
@@ -116,12 +115,15 @@
                                         <?php endif; ?>
                                     </td>
                                     <td>
+                                        <a href="index.php?page=guru/baca_catatan&id=<?= $row['id_catatan'] ?>" class="btn-read">
+                                            Read
+                                        </a>
                                         <div class="aksi-group">
                                             <?php if ($row['status_review'] == 'pending'): ?>
                                                 <a href="index.php?page=guru/proses_review&id=<?= $row['id_catatan'] ?>" 
                                                     class="btn-check" 
                                                     onclick="return confirm('Tandai catatan ini sudah direview?')">
-                                                    ✅ Mark as Checked
+                                                    Checked
                                                 </a>
                                             <?php else: ?>
                                                 <button class="btn-check btn-disabled">

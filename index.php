@@ -26,7 +26,7 @@ if ($page !== 'login' && $page !== 'regist' && $page !== 'regist_process' && $pa
         navigasi_guru($koneksi);
     } 
     elseif ($role == '3' || $role == 'siswa' || $role == 'murid') {
-        navigasi_murid();
+        navigasi_murid($koneksi);
     }
 }
 // page
@@ -116,6 +116,14 @@ switch ($page) {
         proses_tandai_review($koneksi);
         break;
 
+    case 'guru/baca_catatan':
+        baca_catatan_siswa_page($koneksi);
+    break;
+
+    case 'murid/edit_catatan':
+        edit_catatan_page($koneksi);
+        break;
+
     case 'guru/tambah_sekolah':
         form_tambah_sekolah_page($koneksi);
         break;
@@ -194,6 +202,21 @@ switch ($page) {
 
     case 'murid/profilMurid':
         profil_murid_page($koneksi);
+        break;
+
+    case 'murid/proses_edit_profil':
+        proses_update_profil_murid($koneksi)($koneksi);
+        break;
+
+        case 'murid/tambah_catatan':
+        tambah_catatan_page($koneksi);
+        break;
+    case 'murid/baca':
+        baca_catatan_page($koneksi);
+        break;
+
+    case 'murid/hapus':
+        proses_hapus_catatan($koneksi);
         break;
 
     case 'murid/leaderboard_murid':

@@ -1,16 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <title>Edit Misi</title>
     <link rel="stylesheet" href="./views/css/guru.css">
-    <style>
-        .form-container { max-width: 700px; margin: 30px auto; padding: 30px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -42,9 +36,10 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Target Jumlah Kata</label>
-                        <input type="number" name="target" value="<?= $misi['target_jumlah_kata'] ?>" required>
+                    <div class="form-group" style="background: #fff3cd; padding: 15px; border-radius: 8px; border: 1px solid #ffeeba;">
+                        <label style="color: #856404;">📝 Edit Daftar Kata</label>
+                        <p style="font-size: 12px; margin-bottom: 5px;">Pisahkan dengan koma.</p>
+                        <textarea name="kata_target" rows="4" required><?= htmlspecialchars($kata_kata_string ?? '') ?></textarea>
                     </div>
 
                     <div class="action-buttons" style="margin-top:20px; display:flex; justify-content:space-between;">

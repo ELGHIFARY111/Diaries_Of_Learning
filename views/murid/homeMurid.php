@@ -14,7 +14,7 @@
         <div class="content">
 
             <div class="header">
-                <h2>Welcome, <?= htmlspecialchars($nama_lengkap) ?>!</h2>
+                <h2>Welcome, <?= htmlspecialchars($nama_lengkap ?? 'Murid') ?>!</h2>
             </div>
 
             <div class="stats-box">
@@ -37,25 +37,36 @@
                 <a href="index.php?page=murid/catatanMurid&active=catatan&aktif=true" style="text-decoration:none; flex:1;">
                     <div class="btn">Write Text / Note</div>
                 </a>
-                <a href="index.php?page=murid/kosakataMurid&active=kosakata&aktif=true" style="text-decoration:none; flex:1;">
+                <a href="index.php?page=murid/kosakataMurid&active=kosakata" style="text-decoration:none; flex:1;">
                     <div class="btn">Add Vocabulary</div>
                 </a>
             </div>
 
-            <div class="bottom-section">
-
+            <div class="dashboard-grid">
+                
                 <div class="box">
                     <h3>Active Mission</h3>
                     <?php if ($misi_aktif): ?>
-                        <div class="list-item">
-                            <b><?= htmlspecialchars($misi_aktif['nama_misi']) ?></b>
-                            <p><?= htmlspecialchars($misi_aktif['deskripsi']) ?></p>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: <?= $progres_misi ?>%;"></div>
+                        <div class="mission-card">
+                            <h4><?= htmlspecialchars($misi_aktif['judul'] ?? 'Misi Tanpa Judul') ?></h4>
+                            
+                            <p style="font-size: 13px; color: #636e72; margin-bottom: 10px;">
+                                <?= htmlspecialchars($misi_aktif['deskripsi'] ?? '-') ?>
+                            </p>
+                            
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: <?= $progres_misi ?>%;"></div>
                             </div>
-                            <small>Progres: <?= $progres_misi ?>%</small>
+
+                            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #7f8c8d; margin-top: 5px;">
+                                <span>Progress</span>
+                                <span><?= $progres_misi ?>% Completed</span>
+                            </div>
+                            
                             <br>
-                            <a href="index.php?page=murid/misiMurid" style="font-size:12px; color:#2980b9;">View Details</a>
+                            <a href="index.php?page=murid/misiMurid" style="font-size:12px; color:#2980b9; text-decoration: none; font-weight: bold;">
+                                View Details &rarr;
+                            </a>
                         </div>
                     <?php else: ?>
                         <div class="list-item">
@@ -67,12 +78,14 @@
                 <div class="box">
                     <h3>Recent Activity</h3>
                     
-                    <?php if (count($recent_activities) > 0): ?>
+                    <?php if (isset($recent_activities) && mysqli_num_rows($recent_activities) > 0): ?>
                         <?php foreach($recent_activities as $act): ?>
                             <div class="list-item">
-                                <b><?= htmlspecialchars($act['judul']) ?></b> <br>
+                                <b><?= htmlspecialchars($act['judul'] ?? 'Aktivitas Baru') ?></b> <br>
                                 <span style="color: grey;">
-                                    <?= date('d M Y', strtotime($act['tanggal_catatan'])) ?> - <?= ucfirst($act['tipe']) ?>
+                                    <?= date('d M Y', strtotime($act['tanggal_catatan'] ?? 'now')) ?> 
+                                    - 
+                                    <?= ucfirst($act['tipe'] ?? 'General') ?>
                                 </span>
                             </div>
                         <?php endforeach; ?>
@@ -91,5 +104,4 @@
     </div>
 
 </body>
-
 </html>
