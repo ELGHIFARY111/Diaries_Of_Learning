@@ -93,9 +93,9 @@ function auth_authenticate($koneksi) {
                         header("Location: index.php?page=admin");
                     } elseif($user['role'] == 'guru' || $user['role'] == '2'){
                         // $_SESSION['id_sekolah'] = $user['id_sekolah'];
-                        header("Location: index.php?page=guru");
+                        header("Location: index.php?page=guru&active=dashboard&aktif=true");
                     } else {
-                        header("Location: index.php?page=murid");
+                        header("Location: index.php?page=murid&active=dashboard&aktif=true");
                     }
                     exit;
                 } else {

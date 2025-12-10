@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./views/css/guru.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        /* CSS Tambahan agar filter terlihat aktif */
         .filter-link { padding: 5px 10px; text-decoration: none; color: #636e72; border-radius: 20px; font-size: 14px; margin-right: 5px; }
         .filter-link:hover { background: #dfe6e9; }
         .filter-link.active { background: #6c5ce7; color: white; font-weight: bold; }
@@ -35,30 +34,32 @@
                 <div class="leaderboard-controls" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
                     
                     <div class="leaderboard-type-filters" style="background: #f1f2f6; padding: 5px; border-radius: 25px;">
-                        <a href="index.php?page=guru/leaderboard_guru&scope=global&time=<?= $time ?>&search=<?= $search ?>" 
+                        <a href="index.php?page=murid/leaderboard_murid&active=leaderboard&aktif=true&scope=global&time=<?= $time ?>&search=<?= $search ?>" 
                            class="filter-link <?= $scope == 'global' ? 'active' : '' ?>">
                            Global
                         </a>
-                        <a href="index.php?page=guru/leaderboard_guru&scope=school&time=<?= $time ?>&search=<?= $search ?>" 
+                        <a href="index.php?page=murid/leaderboard_murid&active=leaderboard&aktif=true&scope=school&time=<?= $time ?>&search=<?= $search ?>" 
                            class="filter-link <?= $scope == 'school' ? 'active' : '' ?>">
                            Sekolah Saya
                         </a>
                     </div>
                     
                     <div class="time-filters">
-                        <a href="index.php?page=guru/leaderboard_guru&scope=<?= $scope ?>&time=all&search=<?= $search ?>" 
+                        <a href="index.php?page=murid/leaderboard_murid&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=all&search=<?= $search ?>" 
                            class="filter-link <?= $time == 'all' ? 'active' : '' ?>">All time</a>
                         
-                        <a href="index.php?page=guru/leaderboard_guru&scope=<?= $scope ?>&time=month&search=<?= $search ?>" 
+                        <a href="index.php?page=murid/leaderboard_murid&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=month&search=<?= $search ?>" 
                            class="filter-link <?= $time == 'month' ? 'active' : '' ?>">This Month</a>
                         
-                        <a href="index.php?page=guru/leaderboard_guru&scope=<?= $scope ?>&time=week&search=<?= $search ?>" 
+                        <a href="index.php?page=murid/leaderboard_murid&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=week&search=<?= $search ?>" 
                            class="filter-link <?= $time == 'week' ? 'active' : '' ?>">This Week</a>
                     </div>
 
                     <div class="search-area">
                         <form action="index.php" method="GET" style="display: flex; gap: 5px;">
-                            <input type="hidden" name="page" value="guru/leaderboard_guru">
+                            <input type="hidden" name="page" value="murid/leaderboard_murid">
+                            <input type="hidden" name="active" value="leaderboard">
+                            <input type="hidden" name="aktif" value="true">
                             <input type="hidden" name="scope" value="<?= $scope ?>">
                             <input type="hidden" name="time" value="<?= $time ?>">
                             
@@ -84,11 +85,10 @@
                                 <?php 
                                     $rank = 1; 
                                     while ($row = mysqli_fetch_assoc($leaderboard_data)): 
-                                        // Tentukan Style Baris untuk Top 3
                                         $row_class = "";
-                                        if ($rank == 1) $row_class = "background: #fffdf0;"; // Sedikit kuning
-                                        elseif ($rank == 2) $row_class = "background: #f7f9fa;"; // Sedikit abu
-                                        elseif ($rank == 3) $row_class = "background: #fff5eb;"; // Sedikit oranye
+                                        if ($rank == 1) $row_class = "background: #fffdf0;";
+                                        elseif ($rank == 2) $row_class = "background: #f7f9fa;";
+                                        elseif ($rank == 3) $row_class = "background: #fff5eb;";
                                 ?>
                                     <tr style="border-bottom: 1px solid #f1f2f6; <?= $row_class ?>">
                                         <td style="padding: 15px;">

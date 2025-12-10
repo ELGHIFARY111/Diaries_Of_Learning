@@ -29,7 +29,7 @@
         My Profil
         </a>
 
-        <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true" 
+        <a href="index.php?page=murid/leaderboard_murid&active=leaderboard&aktif=true" 
         class="<?= ($active == 'leaderboard') ? 'aktif' : '' ?>">
         Leaderboard
         </a>

@@ -271,6 +271,7 @@ function update_profil_guru($koneksi, $id_user, $nama, $username, $email, $passw
 
     return mysqli_query($koneksi, $query);
 }
+
 function ambil_leaderboard($koneksi, $id_sekolah_guru, $scope = 'school', $time = 'all', $search = '') {
     
     $filter_catatan = "";
@@ -278,21 +279,15 @@ function ambil_leaderboard($koneksi, $id_sekolah_guru, $scope = 'school', $time 
     
     if ($time == 'month') {
         $filter_catatan = "AND MONTH(c.tanggal_catatan) = MONTH(CURRENT_DATE()) AND YEAR(c.tanggal_catatan) = YEAR(CURRENT_DATE())";
-        $filter_kosakata = "AND MONTH(k.created_at) = MONTH(CURRENT_DATE()) AND YEAR(k.created_at) = YEAR(CURRENT_DATE())";
     } elseif ($time == 'week') {
         $filter_catatan = "AND YEARWEEK(c.tanggal_catatan, 1) = YEARWEEK(CURRENT_DATE(), 1)";
-        $filter_kosakata = "AND YEARWEEK(k.created_at, 1) = YEARWEEK(CURRENT_DATE(), 1)";
     }
 
     $filter_sekolah = "";
     if ($scope == 'school') {
         $filter_sekolah = "AND u.id_sekolah = '$id_sekolah_guru'";
     }
-    $filter_search = "";
-    if (!empty($search)) {
-        $search = mysqli_real_escape_string($koneksi, $search);
-        $filter_search = "AND u.nama_lengkap LIKE '%$search%'";
-    }
+
     $query = "SELECT 
                 u.nama_lengkap, 
                 s.nama_sekolah,
@@ -305,7 +300,6 @@ function ambil_leaderboard($koneksi, $id_sekolah_guru, $scope = 'school', $time 
             LEFT JOIN sekolah s ON u.id_sekolah = s.id_sekolah
             WHERE u.role = '3' 
             $filter_sekolah
-            $filter_search
             ORDER BY total_poin DESC, u.nama_lengkap ASC";
 
     return mysqli_query($koneksi, $query);

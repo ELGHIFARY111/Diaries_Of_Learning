@@ -35,30 +35,32 @@
                 <div class="leaderboard-controls" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
                     
                     <div class="leaderboard-type-filters" style="background: #f1f2f6; padding: 5px; border-radius: 25px;">
-                        <a href="index.php?page=guru/leaderboard_guru&scope=global&time=<?= $time ?>&search=<?= $search ?>" 
+                        <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=global&time=<?= $time ?>&search=<?= $search ?>" 
                            class="filter-link <?= $scope == 'global' ? 'active' : '' ?>">
                            Global
                         </a>
-                        <a href="index.php?page=guru/leaderboard_guru&scope=school&time=<?= $time ?>&search=<?= $search ?>" 
+                        <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=school&time=<?= $time ?>&search=<?= $search ?>" 
                            class="filter-link <?= $scope == 'school' ? 'active' : '' ?>">
                            Sekolah Saya
                         </a>
                     </div>
                     
                     <div class="time-filters">
-                        <a href="index.php?page=guru/leaderboard_guru&scope=<?= $scope ?>&time=all&search=<?= $search ?>" 
+                        <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=all&search=<?= $search ?>" 
                            class="filter-link <?= $time == 'all' ? 'active' : '' ?>">All time</a>
                         
-                        <a href="index.php?page=guru/leaderboard_guru&scope=<?= $scope ?>&time=month&search=<?= $search ?>" 
+                        <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=month&search=<?= $search ?>" 
                            class="filter-link <?= $time == 'month' ? 'active' : '' ?>">This Month</a>
                         
-                        <a href="index.php?page=guru/leaderboard_guru&scope=<?= $scope ?>&time=week&search=<?= $search ?>" 
+                        <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=week&search=<?= $search ?>" 
                            class="filter-link <?= $time == 'week' ? 'active' : '' ?>">This Week</a>
                     </div>
 
                     <div class="search-area">
                         <form action="index.php" method="GET" style="display: flex; gap: 5px;">
                             <input type="hidden" name="page" value="guru/leaderboard_guru">
+                            <input type="hidden" name="active" value="leaderboard">
+                            <input type="hidden" name="aktif" value="true">
                             <input type="hidden" name="scope" value="<?= $scope ?>">
                             <input type="hidden" name="time" value="<?= $time ?>">
                             
@@ -80,16 +82,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (mysqli_num_rows($leaderboard_data) > 0): ?>
-                                <?php 
-                                    $rank = 1; 
-                                    while ($row = mysqli_fetch_assoc($leaderboard_data)): 
-                                        // Tentukan Style Baris untuk Top 3
-                                        $row_class = "";
-                                        if ($rank == 1) $row_class = "background: #fffdf0;"; // Sedikit kuning
-                                        elseif ($rank == 2) $row_class = "background: #f7f9fa;"; // Sedikit abu
-                                        elseif ($rank == 3) $row_class = "background: #fff5eb;"; // Sedikit oranye
-                                ?>
+                            <?php 
+                            if (mysqli_num_rows($leaderboard_data) > 0): 
+                                $rank = 1;
+                                $found_data = false;
+
+                                while ($row = mysqli_fetch_assoc($leaderboard_data)): 
+                                    if (!empty($search) && stripos($row['nama_lengkap'], $search) === false) {
+                                        $rank++; 
+                                        continue; 
+                                    }
+                                    
+                                    $found_data = true;
+                                    $row_class = "";
+                                    if ($rank == 1) $row_class = "background: #fffdf0;"; 
+                                    elseif ($rank == 2) $row_class = "background: #f7f9fa;"; 
+                                    elseif ($rank == 3) $row_class = "background: #fff5eb;"; 
+                            ?>
                                     <tr style="border-bottom: 1px solid #f1f2f6; <?= $row_class ?>">
                                         <td style="padding: 15px;">
                                             <?php if ($rank == 1): ?>
@@ -117,15 +126,24 @@
                                             </div>
                                         </td>
                                     </tr>
-                                <?php 
+                            <?php 
                                     $rank++;
-                                    endwhile; 
-                                ?>
+                                endwhile; 
+                                
+                                if (!$found_data):
+                            ?>
+                                <tr>
+                                    <td colspan="4" style="text-align: center; padding: 40px; color: #b2bec3;">
+                                        Tidak ditemukan siswa dengan nama "<b><?= htmlspecialchars($search) ?></b>".
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+
                             <?php else: ?>
                                 <tr>
                                     <td colspan="4" style="text-align: center; padding: 40px; color: #b2bec3;">
                                         <div style="font-size: 40px; margin-bottom: 10px;">🏆</div>
-                                        Belum ada data aktivitas siswa untuk periode ini.
+                                        Belum ada data aktivitas siswa.
                                     </td>
                                 </tr>
                             <?php endif; ?>

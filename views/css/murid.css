@@ -1,0 +1,342 @@
+/* ================================================= */
+/* FILE 2: guru.css (Konten Utama dengan Gradien Ungu-Biru) */
+/* ================================================= */
+
+:root {
+    /* New Color Palette */
+    --color-primary: #6c5ce7; /* Ungu Primer */
+    --color-secondary: #a29bfe; /* Ungu Muda */
+    --color-accent-blue: #0984e3; /* Biru Aksentuasi */
+    --color-success: #00b894; /* Teal Green */
+    --color-warning: #ffbe76;
+    --color-danger: #ff7675;
+    --color-info: #636e72;
+    
+    /* Text & Background */
+    --color-text-primary: #2d3436;
+    --color-text-secondary: #636e72;
+    --color-background-light: #f5f6fa;
+    --color-card-background: #ffffff;
+    --color-border: #dfe6e9;
+
+    --font-family: 'Inter', sans-serif;
+    --box-shadow-subtle: 0 8px 15px rgba(108, 92, 231, 0.1); 
+    --box-shadow-hover: 0 12px 20px rgba(108, 92, 231, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    /* Soft Gradient Background */
+    background: linear-gradient(135deg, #f5f6fa 0%, #e8e8f2 100%); 
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.content {
+    /* KUNCI TATA LETAK: Menggeser konten utama selebar sidebar 250px */
+    margin-left: 250px; 
+    width: calc(100% - 250px);
+    max-width: none;
+    
+    flex-grow: 1;
+    padding: 40px;
+}
+
+.header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-text {
+    flex-grow: 1;
+}
+
+.header h2 {
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 5px;
+    padding-bottom: 0;
+}
+
+.header p {
+    color: var(--color-text-secondary);
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-primary);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-accent-blue);
+}
+/* ================================================= */
+/* LEADERBOARD STYLES (REVISI) */
+/* ================================================= */
+
+/* --- Pengaturan Lebar Kolom Tabel (Disesuaikan) --- */
+.leaderboard-table .col-rank {
+    width: 5%; }
+.leaderboard-table .col-name {
+    width: 30%; }
+.leaderboard-table .col-school {
+
+    width: 35%; /* Kolom baru untuk Nama Sekolah */
+}
+.leaderboard-table .col-point {
+    width: 20%;
+    text-align: center; 
+}
+.leaderboard-table .col-action {
+    width: 10%; } 
+.leaderboard-table .stat-cell {
+    text-align: center;
+    color: var(--color-text-primary);
+    font-weight: 500;
+    font-size: 1em;
+}
+
+/* Penyesuaian untuk tampilan baris */
+.leaderboard-table td {
+    vertical-align: middle;
+}
+
+/* ----------------------------------------------------------------- */
+
+
+.leaderboard-section h3 {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 20px;
+}
+
+.leaderboard-controls {
+    display: flex;
+    justify-content: flex-start; /* Ubah ke flex-start */
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 20px; /* Jarak antar grup kontrol */
+}
+
+/* Gaya untuk Filter Tipe Leaderboard (Global/Sekolah) */
+.leaderboard-type-filters {
+    display: flex;
+    gap: 10px;
+    background-color: var(--color-background-light);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.leaderboard-type-filters .filter-link {
+    /* Menggunakan gaya yang sama dengan filter waktu */
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.leaderboard-type-filters .filter-link.active {
+    background-color: var(--color-card-background);
+    color: var(--color-primary);
+    box-shadow: var(--box-shadow-subtle);
+}
+
+/* Kustomisasi Search Input di Leaderboard */
+.leaderboard-search-input {
+    padding: 10px 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-size: 1em;
+    color: var(--color-text-primary);
+    width: 250px;
+    transition: border-color 0.3s ease;
+}
+
+.leaderboard-search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+}
+
+/* Gaya Filter Waktu */
+.time-filters {
+    display: flex;
+    gap: 10px;
+    background-color: var(--color-background-light);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.filter-link {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.filter-link:hover {
+    color: var(--color-primary);
+}
+
+.filter-link.active {
+    background-color: var(--color-card-background);
+    color: var(--color-primary);
+    box-shadow: var(--box-shadow-subtle);
+}
+
+/* Gaya Sel Nama Pengguna (Dengan Avatar) */
+.user-cell {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    border: 2px solid var(--color-primary);
+}
+
+/* Gaya untuk kolom Poin */
+.leaderboard-table .point-cell {
+    color: var(--color-text-secondary);
+    font-weight: 800; 
+    font-size: 1.2em;
+}
+.leaderboard-table .point-cell i {
+    margin-right: 5px;
+    font-size: 0.9em;
+}
+
+/* Hapus style i general pada td karena sudah tidak relevan */
+.leaderboard-table td i {
+    margin-right: 5px;
+    color: var(--color-secondary);
+    font-size: 0.9em;
+    /* Dihapus: agar ikon clock tidak muncul di kolom yang tidak ada */
+}
+
+/* Gaya Badge Peringkat (1, 2, 3) */
+.rank-badge {
+    /* ... (Tetap Sama) ... */
+    display: inline-block;
+    min-width: 25px;
+    text-align: center;
+    font-weight: 800;
+    padding: 4px 6px;
+    border-radius: 6px;
+    color: white;
+    font-size: 0.9em;
+}
+
+.rank-one .rank-badge {
+    background: linear-gradient(45deg, #FFD700, #DAA520);
+    box-shadow: 0 2px 5px rgba(255, 215, 0, 0.5);
+}
+
+.rank-two .rank-badge {
+    background: linear-gradient(45deg, #C0C0C0, #A9A9A9);
+}
+
+.rank-three .rank-badge {
+    background: linear-gradient(45deg, #CD7F32, #8B4513);
+}
+/* detail_siswa */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+.avatar-large {
+    width: 80px;
+    height: 80px;
+    background: #6c5ce7;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+.stat-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #eee;
+}
+.stat-card h3 {
+
+    color: #6c5ce7;
+    font-size: 24px;
+    margin: 10px 0;
+}
+.stat-card p {
+
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.badge-teks {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+.badge-audio {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+.badge-gambar {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
