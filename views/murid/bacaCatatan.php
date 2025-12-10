@@ -32,7 +32,36 @@
             <div class="read-content">
                 <?= htmlspecialchars($catatan['konten_path']) ?>
             </div>
+            <div class="media-gallery" style="margin-top: 30px;">
 
+            <?php if (!empty($catatan['file_foto'])): ?>
+                <div style="margin-bottom: 20px;">
+                    <h4>Attached Photo:</h4>
+                    <img src="uploads/<?= $catatan['file_foto'] ?>" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($catatan['file_audio'])): ?>
+                <div style="margin-bottom: 20px;">
+                    <h4>Voice Note:</h4>
+                    <audio controls style="width: 100%;">
+                        <source src="uploads/<?= $catatan['file_audio'] ?>">
+                        Browser Anda tidak mendukung audio player.
+                    </audio>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($catatan['file_video'])): ?>
+                <div style="margin-bottom: 20px;">
+                    <h4>Video:</h4>
+                    <video controls style="max-width: 100%; border-radius: 10px;">
+                        <source src="uploads/<?= $catatan['file_video'] ?>">
+                        Browser Anda tidak mendukung video player.
+                    </video>
+                </div>
+            <?php endif; ?>
+
+        </div>
             <div style="margin-top: 30px; text-align: right;">
                 <a href="index.php?page=murid/hapus&id=<?= $catatan['id_catatan'] ?>" 
                    onclick="return confirm('Delete this note?')"

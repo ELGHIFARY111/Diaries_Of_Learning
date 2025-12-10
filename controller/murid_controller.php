@@ -52,31 +52,63 @@ function catatan_murid_page($koneksi) {
 }
 
 function tambah_catatan_page($koneksi) {
-    $id_user = $_SESSION['user_id'] ?? $_SESSION['id_user'];
+    $id_user = $_SESSION['user_id'];
     $id_sekolah = ambil_id_sekolah_murid($koneksi, $id_user);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['simpan_catatan'])) {
         $judul = $_POST['judul'];
         $isi   = $_POST['isi'];
 
-        if (!empty($judul) && !empty($isi)) {
-            if (simpan_catatan_murid($koneksi, $id_user, $judul, $isi)) {
+
+        $foto = proses_upload_file($_FILES['foto'], ['jpg', 'jpeg', 'png']);
+        
+        $audio = proses_upload_file($_FILES['audio'], ['mp3', 'wav', 'm4a']);
+        
+        $video = proses_upload_file($_FILES['video'], ['mp4', 'webm']);
+
+        if ($foto === false || $audio === false || $video === false) {
+            echo "<script>alert('Format file tidak didukung!');</script>";
+        } else {
+            if (simpan_catatan_murid($koneksi, $id_user, $judul, $isi, $foto, $audio, $video)) {
+                
                 hitung_progres_misi_spesifik($koneksi, $id_user, $id_sekolah);
 
                 echo "<script>
-                        alert('Catatan berhasil disimpan!'); 
+                        alert('Catatan multimedia berhasil disimpan!'); 
                         window.location.href='index.php?page=murid/catatanMurid';
-                      </script>";
+                    </script>";
                 exit;
             } else {
-                echo "<script>alert('Gagal menyimpan.');</script>";
+                echo "<script>alert('Gagal menyimpan database.');</script>";
             }
         }
     }
 
     include "./views/murid/tambahCatatan.php";
 }
+function proses_upload_file($file, $tipe_yang_diizinkan) {
+    $nama_file = $file['name'];
+    $tmp_name  = $file['tmp_name'];
+    $error     = $file['error'];
 
+    if ($error === 4) {
+        return null;
+    }
+
+    $ekstensi_valid = $tipe_yang_diizinkan;
+    $ekstensi_file  = explode('.', $nama_file);
+    $ekstensi_file  = strtolower(end($ekstensi_file));
+
+    if (!in_array($ekstensi_file, $ekstensi_valid)) {
+        return false; 
+    }
+
+    $nama_baru = uniqid() . '.' . $ekstensi_file;
+    
+    move_uploaded_file($tmp_name, 'uploads/' . $nama_baru);
+
+    return $nama_baru;
+}
 function kosakata_murid_page($koneksi) {
     $active = $_GET['active'] ?? 'aktif';
     $id_user = $_SESSION['user_id'] ?? $_SESSION['id_user']; 
@@ -240,34 +272,74 @@ function leaderboard_murid_page($koneksi) {
 }
 
 function edit_catatan_page($koneksi) {
-    $id_user = $_SESSION['user_id'] ?? $_SESSION['id_user'];
+    $id_user = $_SESSION['user_id'];
     $id_catatan = $_GET['id'] ?? 0;
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_catatan'])) {
-        $judul = $_POST['judul'];
-        $isi   = $_POST['isi'];
+    $catatan_lama = ambil_satu_catatan($koneksi, $id_catatan, $id_user);
 
-        if (update_catatan_murid($koneksi, $id_catatan, $id_user, $judul, $isi)) {
-            $id_sekolah = ambil_id_sekolah_murid($koneksi, $id_user);
-            hitung_progres_misi_spesifik($koneksi, $id_user, $id_sekolah);
-
-            echo "<script>
-                    alert('Catatan berhasil diperbarui!'); 
-                    window.location.href='index.php?page=murid/catatanMurid';
-                  </script>";
-            exit;
-        } else {
-            echo "<script>alert('Gagal mengupdate catatan.');</script>";
-        }
-    }
-
-    $catatan = ambil_satu_catatan($koneksi, $id_catatan, $id_user);
-
-    if (!$catatan) {
+    if (!$catatan_lama) {
         echo "<script>alert('Catatan tidak ditemukan!'); window.location.href='index.php?page=murid/catatanMurid';</script>";
         exit;
     }
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_catatan'])) {
+        $judul = $_POST['judul'];
+        $isi   = $_POST['isi'];
+        if ($_FILES['foto']['error'] === 4) {
+            $foto_final = $catatan_lama['file_foto'];
+        } else {
+            $upload = proses_upload_file($_FILES['foto'], ['jpg', 'jpeg', 'png']);
+            if ($upload) {
+                $foto_final = $upload;
+                if (!empty($catatan_lama['file_foto']) && file_exists('uploads/'.$catatan_lama['file_foto'])) {
+                    unlink('uploads/'.$catatan_lama['file_foto']);
+                }
+            } else {
+                $foto_final = $catatan_lama['file_foto'];
+            }
+        }
+
+        if ($_FILES['audio']['error'] === 4) {
+            $audio_final = $catatan_lama['file_audio'];
+        } else {
+            $upload = proses_upload_file($_FILES['audio'], ['mp3', 'wav', 'm4a']);
+            if ($upload) {
+                $audio_final = $upload;
+                if (!empty($catatan_lama['file_audio']) && file_exists('uploads/'.$catatan_lama['file_audio'])) {
+                    unlink('uploads/'.$catatan_lama['file_audio']);
+                }
+            } else {
+                $audio_final = $catatan_lama['file_audio'];
+            }
+        }
+
+        if ($_FILES['video']['error'] === 4) {
+            $video_final = $catatan_lama['file_video'];
+        } else {
+            $upload = proses_upload_file($_FILES['video'], ['mp4', 'webm']);
+            if ($upload) {
+                $video_final = $upload;
+                if (!empty($catatan_lama['file_video']) && file_exists('uploads/'.$catatan_lama['file_video'])) {
+                    unlink('uploads/'.$catatan_lama['file_video']);
+                }
+            } else {
+                $video_final = $catatan_lama['file_video'];
+            }
+        }
+
+        if (update_catatan_murid($koneksi, $id_catatan, $id_user, $judul, $isi, $foto_final, $audio_final, $video_final)) {
+            
+            $id_sekolah = ambil_id_sekolah_murid($koneksi, $id_user);
+            hitung_progres_misi_spesifik($koneksi, $id_user, $id_sekolah);
+
+            echo "<script>alert('Catatan berhasil diupdate!'); window.location.href='index.php?page=murid/catatanMurid';</script>";
+            exit;
+        } else {
+            echo "<script>alert('Gagal update database.');</script>";
+        }
+    }
+
+    $catatan = $catatan_lama; 
     include "./views/murid/editCatatan.php";
 }
 ?>

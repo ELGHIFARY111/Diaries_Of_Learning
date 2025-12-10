@@ -59,17 +59,16 @@ function ambil_list_kata_target_murid($koneksi, $id_misi) {
     }
     return $hasil;
 }
-function simpan_catatan_murid($koneksi, $id_user, $judul, $isi) {
-    $id_user = mysqli_real_escape_string($koneksi, $id_user);
-    $judul   = mysqli_real_escape_string($koneksi, $judul);
-    $isi     = mysqli_real_escape_string($koneksi, $isi);
+function simpan_catatan_murid($koneksi, $id_user, $judul, $isi, $foto, $audio, $video) {
+    $judul = mysqli_real_escape_string($koneksi, $judul);
+    $isi   = mysqli_real_escape_string($koneksi, $isi);
     $tanggal = date('Y-m-d H:i:s');
-    $query = "INSERT INTO catatan (id_user, judul, konten_path, tanggal_catatan) 
-              VALUES ('$id_user', '$judul', '$isi', '$tanggal')";
+    
+    $query = "INSERT INTO catatan (id_user, judul, konten_path, tanggal_catatan, file_foto, file_audio, file_video) 
+              VALUES ('$id_user', '$judul', '$isi', '$tanggal', '$foto', '$audio', '$video')";
     
     return mysqli_query($koneksi, $query);
 }
-
 function ambil_semua_catatan($koneksi, $id_user) {
     $id_user = mysqli_real_escape_string($koneksi, $id_user);
     $query = "SELECT * FROM catatan WHERE id_user = '$id_user' ORDER BY tanggal_catatan DESC";
@@ -271,7 +270,6 @@ function update_profil_murid($koneksi, $data) {
     return mysqli_query($koneksi, $query);
 }
 
-// === KOSAKATA (Masih dipakai untuk fitur kamus) ===
 function tambah_kosakata_murid($koneksi, $data) {
     $id_user = $data['id_user'];
     $inggris = mysqli_real_escape_string($koneksi, $data['kata_inggris']);

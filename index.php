@@ -214,6 +214,9 @@ switch ($page) {
     case 'murid/baca':
         baca_catatan_page($koneksi);
         break;
+    case 'murid/edit':
+        edit_catatan_page($koneksi);
+        break;
 
     case 'murid/hapus':
         proses_hapus_catatan($koneksi);
