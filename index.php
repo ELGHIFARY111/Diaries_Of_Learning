@@ -88,6 +88,12 @@ case 'tambah_misi_global':
     tambah_misi_global_page($koneksi);
     break;
 
+case 'proses_tambah_misi_global':
+    proses_tambah_misi_global($koneksi);
+    break;
+
+
+
 case 'edit_misi_global':
     edit_misi_global_page($koneksi);
     break;
@@ -96,13 +102,17 @@ case 'hapus_misi_global':
     hapus_misi_global_page($koneksi);
     break;
 
-    case 'profil':
-    profil_user_page($koneksi);
-    break;
+case 'profil':
+        controller_tampil_profil($koneksi);
+        break;
 
-case 'profil_update':
-    profil_user_update($koneksi);
-    break;
+    case 'edit_profil':
+        controller_tampil_edit($koneksi);
+        break;
+
+    case 'proses_edit_profil':
+        controller_proses_update($koneksi);
+        break;
 
 
 

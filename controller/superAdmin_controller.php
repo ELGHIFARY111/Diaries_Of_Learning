@@ -30,23 +30,48 @@ function manajemen_misi_global($koneksi) {
 }
 
 function tambah_misi_global_page($koneksi) {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    include "./views/superAdmin/tambah_misi_global.php";
+}
 
-        $id_pembuat = $_SESSION['user_id'];
-        $judul = $_POST['judul'];
-        $deskripsi = $_POST['deskripsi'];
-        $target = $_POST['target'];
-        $mulai = $_POST['tanggal_mulai'];
-        $akhir = $_POST['tanggal_akhir'];
+function proses_tambah_misi_global($koneksi) {
 
-        misi_global_insert($koneksi, $id_pembuat, $judul, $deskripsi, $target, $mulai, $akhir);
-
-        header("Location: index.php?page=manajemen_misi_global");
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header("Location: index.php?page=tambah_misi_global");
         exit;
     }
 
-    include "./views/superAdmin/tambah_misi_global.php";
+    $id_pembuat  = $_SESSION['user_id'];
+    $judul       = trim($_POST['judul']);
+    $deskripsi   = trim($_POST['deskripsi']);
+    $mulai       = $_POST['tanggal_mulai'];
+    $akhir       = $_POST['tanggal_akhir'];
+    $kata_target = trim($_POST['kata_target']);
+
+    if ($judul === "" || $mulai === "" || $akhir === "" || $kata_target === "") {
+        echo "<script>alert('Semua field wajib diisi'); history.back();</script>";
+        exit;
+    }
+
+    $insert = misi_global_insert(
+        $koneksi,
+        $id_pembuat,
+        $judul,
+        $deskripsi,
+        $mulai,
+        $akhir,
+        $kata_target
+    );
+
+    if (!$insert) {
+        echo "<h3>Query gagal:</h3><pre>" . mysqli_error($koneksi) . "</pre>";
+        exit;
+    }
+
+    header("Location: index.php?page=manajemen_misi_global&success=1");
+    exit;
 }
+
+
 
 function edit_misi_global_page($koneksi) {
 
@@ -182,5 +207,54 @@ function edit_sekolah($koneksi) {
 
 
 
+// controllers/admin_controller.php
+
+// Controller tampil profil
+function controller_tampil_profil($koneksi) {
+    $id_user = $_SESSION['user_id'];
+    
+    // Panggil Model
+    $data_user = profil_ambil_data($koneksi, $id_user);
+
+    // Kirim ke View
+    include "./views/superAdmin/profil.php";
+}
+
+// Controller tampil form edit
+function controller_tampil_edit($koneksi) {
+    $id_user = $_SESSION['user_id'];
+    
+    // Panggil Model
+    $data_user = profil_ambil_data($koneksi, $id_user);
+
+    // Kirim ke View Form
+    include "./views/superAdmin/edit_profil.php";
+}
+
+// Controller proses simpan
+function controller_proses_update($koneksi) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $id_user = $_SESSION['user_id'];
+        
+        // Data dari form
+        $data_form = [
+            'nama_lengkap' => $_POST['nama_lengkap'],
+            'username' => $_POST['username'],
+            'email' => $_POST['email']
+        ];
+        $password_baru = $_POST['password_baru'];
+
+        // Panggil Model untuk Update
+        $simpan = profil_eksekusi_update($koneksi, $id_user, $data_form, $password_baru);
+
+        if ($simpan) {
+            $_SESSION['user_nama'] = $_POST['nama_lengkap']; // Update nama di sidebar
+            header("Location: index.php?page=profil&status=sukses");
+            exit();
+        } else {
+            die("Error update database.");
+        }
+    }
+}
 
 ?>
