@@ -14,7 +14,7 @@
         <div class="content">
             <div class="header">
                 <div class="header-text">
-                    <h2>Leaderboard Siswa</h2>
+                    <h2>Student Leaderboard</h2>
                 </div>
             </div>
             
@@ -29,7 +29,7 @@
                         </a>
                         <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=school&time=<?= $time ?>&search=<?= $search ?>" 
                            class="filter-link <?= $scope == 'school' ? 'active' : '' ?>">
-                           Sekolah Saya
+                            My School
                         </a>
                     </div>
                     
@@ -52,8 +52,8 @@
                             <input type="hidden" name="scope" value="<?= $scope ?>">
                             <input type="hidden" name="time" value="<?= $time ?>">
                             
-                            <input type="text" name="search" placeholder="Cari nama siswa..." value="<?= htmlspecialchars($search) ?>" 
-                                   style="padding: 8px 15px; border-radius: 20px; border: 1px solid #dfe6e9; outline: none;">
+                            <input type="text" name="search" placeholder="Search student name..." value="<?= htmlspecialchars($search) ?>" 
+                                        style="padding: 8px 15px; border-radius: 20px; border: 1px solid #dfe6e9; outline: none;">
                             <button type="submit" class="btn-action btn-primary" style="padding: 8px 15px; border-radius: 20px;">🔍</button>
                         </form>
                     </div>
@@ -64,9 +64,9 @@
                         <thead>
                             <tr style="text-align: left; color: #b2bec3; font-size: 12px; text-transform: uppercase;">
                                 <th style="padding: 15px;">Rank</th>
-                                <th style="padding: 15px;">Siswa</th>
-                                <th style="padding: 15px;">Asal Sekolah</th>
-                                <th style="padding: 15px;">Total Poin XP</th>
+                                <th style="padding: 15px;">Student</th>
+                                <th style="padding: 15px;">School</th>
+                                <th style="padding: 15px;">Total XP Points</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,33 +87,33 @@
                                     elseif ($rank == 2) $row_class = "background: #f7f9fa;"; 
                                     elseif ($rank == 3) $row_class = "background: #fff5eb;"; 
                             ?>
-                                    <tr style="border-bottom: 1px solid #f1f2f6; <?= $row_class ?>">
-                                        <td style="padding: 15px;">
-                                            <?php if ($rank == 1): ?>
-                                                <span class="rank-badge gold">1</span> 👑
-                                            <?php elseif ($rank == 2): ?>
-                                                <span class="rank-badge silver">2</span>
-                                            <?php elseif ($rank == 3): ?>
-                                                <span class="rank-badge bronze">3</span>
-                                            <?php else: ?>
-                                                <span class="default-rank"><?= $rank ?></span>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td style="padding: 15px;">
-                                            <div style="font-weight: bold; color: #2d3436; font-size: 15px;">
-                                                <?= htmlspecialchars($row['nama_lengkap']) ?>
-                                            </div>
-                                        </td>
-                                        <td style="padding: 15px; color: #636e72;">
-                                            <?= htmlspecialchars($row['nama_sekolah'] ?? 'Tanpa Sekolah') ?>
-                                        </td>
-                                        <td style="padding: 15px;">
-                                            <div style="font-weight: bold; color: #6c5ce7; display: flex; align-items: center; gap: 5px;">
-                                                <i class="fas fa-bolt" style="color: #f1c40f;"></i> 
-                                                <?= number_format($row['total_poin']) ?> XP
-                                            </div>
-                                        </td>
-                                    </tr>
+                                        <tr style="border-bottom: 1px solid #f1f2f6; <?= $row_class ?>">
+                                            <td style="padding: 15px;">
+                                                <?php if ($rank == 1): ?>
+                                                    <span class="rank-badge gold">1</span> 👑
+                                                <?php elseif ($rank == 2): ?>
+                                                    <span class="rank-badge silver">2</span>
+                                                <?php elseif ($rank == 3): ?>
+                                                    <span class="rank-badge bronze">3</span>
+                                                <?php else: ?>
+                                                    <span class="default-rank"><?= $rank ?></span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td style="padding: 15px;">
+                                                <div style="font-weight: bold; color: #2d3436; font-size: 15px;">
+                                                    <?= htmlspecialchars($row['nama_lengkap']) ?>
+                                                </div>
+                                            </td>
+                                            <td style="padding: 15px; color: #636e72;">
+                                                <?= htmlspecialchars($row['nama_sekolah'] ?? 'No School') ?>
+                                            </td>
+                                            <td style="padding: 15px;">
+                                                <div style="font-weight: bold; color: #6c5ce7; display: flex; align-items: center; gap: 5px;">
+                                                    <i class="fas fa-bolt" style="color: #f1c40f;"></i> 
+                                                    <?= number_format($row['total_poin']) ?> XP
+                                                </div>
+                                            </td>
+                                        </tr>
                             <?php 
                                     $rank++;
                                 endwhile; 
@@ -122,7 +122,7 @@
                             ?>
                                 <tr>
                                     <td colspan="4" style="text-align: center; padding: 40px; color: #b2bec3;">
-                                        Tidak ditemukan siswa dengan nama "<b><?= htmlspecialchars($search) ?></b>".
+                                        No student found with the name "<b><?= htmlspecialchars($search) ?></b>".
                                     </td>
                                 </tr>
                             <?php endif; ?>
@@ -131,7 +131,7 @@
                                 <tr>
                                     <td colspan="4" style="text-align: center; padding: 40px; color: #b2bec3;">
                                         <div style="font-size: 40px; margin-bottom: 10px;">🏆</div>
-                                        Belum ada data aktivitas siswa.
+                                        No student activity data yet.
                                     </td>
                                 </tr>
                             <?php endif; ?>
@@ -140,10 +140,10 @@
                 </div>
 
                 <p style="margin-top: 20px; font-size: 13px; color: #999; text-align: center; background: #f9f9f9; padding: 10px; border-radius: 8px;">
-                    <strong>Aturan Poin:</strong> 
-                    1 Catatan = 10 XP | 
-                    1 Misi Selesai = 5 XP | 
-                    1 Kosakata = 2 XP
+                    <strong>Point Rules:</strong> 
+                    1 Journal Entry = 10 XP | 
+                    1 Mission Completed = 5 XP | 
+                    1 Vocabulary Word = 2 XP
                 </p>
 
             </div>

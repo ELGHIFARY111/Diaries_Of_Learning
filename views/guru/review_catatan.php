@@ -6,23 +6,6 @@
     <title>Student Note Review</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./views/css/guru.css">
-    <style>
-        .badge-review-pending { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
-        .badge-review-reviewed { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        
-        .btn-check {
-            background: #27ae60; color: white; border: none; padding: 6px 12px;
-            border-radius: 6px; cursor: pointer; text-decoration: none; font-size: 12px;
-            display: inline-flex; align-items: center; gap: 5px;
-        }
-        .btn-check:hover { background: #2ecc71; }
-        
-        .btn-disabled {
-            background: #dfe6e9; color: #b2bec3; cursor: not-allowed; pointer-events: none;
-        }
-
-        .filter-form { display: flex; gap: 15px; align-items: flex-end; }
-    </style>
 </head>
 
 <body>

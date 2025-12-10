@@ -43,7 +43,7 @@
                     </div>
                     <div style="margin-top:30px;">
                         <a href="index.php?page=guru/edit_sekolah&active=siswa&aktif=true" class="btn-action btn-primary" style="text-decoration:none; display:inline-block;">
-                            ✏️ Edit School Data
+                             Edit School Data
                         </a>
                     </div>
                 </div>

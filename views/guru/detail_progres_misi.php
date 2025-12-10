@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mission Progress - <?= htmlspecialchars($misi['judul']) ?></title>
+    <title>Mission Progress<?= htmlspecialchars($misi['judul']) ?></title>
     <link rel="stylesheet" href="./views/css/guru.css">
 
 </head>
