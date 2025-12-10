@@ -5,6 +5,7 @@
     <div class="menu">
     <div class="logo">Diary of Learning</div>
     <ul class="menu">
+        <a href="index.php?page=dashboard">Dashboard</a>
             <div class="dropdown-container">
                 <a href="index.php?page=institusi/sekolah"> Database Sekolah</a>
                 <a href="index.php?page=institusi/user">Database User</a>

@@ -22,6 +22,7 @@
             <?php endif; ?>
         </form>
     </div>
+
     <div class="container-user">
         <table border="1" cellpadding="8" cellspacing="0"> 
             <thead>
@@ -39,36 +40,35 @@
                 <?php if (empty($data_user)): ?>
                     <tr><td colspan="7" style="text-align:center;">Data tidak ditemukan</td></tr>
                 <?php else: ?>
-                    <?php 
-                    $no = 1;
-                    foreach ($data_user as $row): 
-                    ?>
+                    <?php $no = 1; foreach ($data_user as $row): ?>
                         <tr>
                             <td><?= $no++ ?></td>
                             <td><?= $row['id_user'] ?></td>
-                            <td><?= $row['nama_sekolah'] ? $row['nama_sekolah'] : '-' ?></td>
+                            <td><?= $row['nama_sekolah'] ?: '-' ?></td>
                             <td><?= $row['username'] ?></td>
                             <td>
-                                <?php
-                                if($row['role']==1){
-                                    echo 'Admin';
-                                }elseif($row['role']==2){
-                                    echo 'Guru';
-                                }else{
-                                    echo 'Siswa';
-                                }
-                                ?>
+                                <?= $row['role']==1 ? "Admin" : ($row['role']==2 ? "Guru" : "Siswa") ?>
                             </td>
                             <td><?= $row['email'] ?></td>
                             <td class="form_action">
-                                <form class="detail" action="detail_transaksi.php" method="get" style="display:inline;">
-                                    <input type="hidden" name="id" value="<?= $row['id_user'] ?>">
-                                    <button class="edit" type="submit">Detail</button>
-                                </form>|
-                                <form action="hapus.php" method="get" onsubmit="return confirm('Hapus?')" style="display:inline;">
-                                    <input type="hidden" name="id" value="<?= $row['id_user'] ?>">
-                                    <button class="hapus" type="submit">Hapus</button>
-                                </form>
+
+                                <!-- DETAIL -->
+                                <a class="edit" 
+                                   href="index.php?page=institusi/user/detail&id=<?= $row['id_user'] ?>"
+                                   style="text-decoration:none;">
+                                   Detail
+                                </a>
+
+                                |
+
+                                <!-- HAPUS -->
+                                <a class="hapus" 
+                                   href="index.php?page=institusi/user/hapus&id=<?= $row['id_user'] ?>"
+                                   onclick="return confirm('Hapus user ini?')"
+                                   style="text-decoration:none;">
+                                   Hapus
+                                </a>
+
                             </td>
                         </tr>
                     <?php endforeach; ?>

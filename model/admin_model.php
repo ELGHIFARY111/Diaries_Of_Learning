@@ -33,6 +33,25 @@ function user_get_all($koneksi, $filter_role = null) {
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
+function user_get_by_id($koneksi, $id_user) {
+    $id_user = (int)$id_user;
+
+    $sql = "SELECT user.*, sekolah.nama_sekolah
+            FROM user
+            LEFT JOIN sekolah ON user.id_sekolah = sekolah.id_sekolah
+            WHERE id_user = $id_user";
+
+    $result = mysqli_query($koneksi, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+function user_delete($koneksi, $id) {
+    $id = (int)$id;
+    $query = "DELETE FROM user WHERE id_user = $id";
+    return mysqli_query($koneksi, $query);
+}
+
+
 /* =========================================
    3. DATA MASTER: MISI GLOBAL
    ========================================= */
@@ -85,17 +104,7 @@ function misi_global_delete($koneksi, $id_misi) {
     return mysqli_query($koneksi, "DELETE FROM misi WHERE id_misi=$id");
 }
 
-function user_get_by_id($koneksi, $id_user) {
-    $id_user = (int)$id_user;
 
-    $sql = "SELECT user.*, sekolah.nama_sekolah
-            FROM user
-            LEFT JOIN sekolah ON user.id_sekolah = sekolah.id_sekolah
-            WHERE id_user = $id_user";
-
-    $result = mysqli_query($koneksi, $sql);
-    return mysqli_fetch_assoc($result);
-}
 
 function user_update_profile($koneksi, $id_user, $nama, $username, $email) {
     $id_user = (int)$id_user;
@@ -112,5 +121,93 @@ function user_update_profile($koneksi, $id_user, $nama, $username, $email) {
 
     return mysqli_query($koneksi, $sql);
 }
+
+function dashboard_total_user($koneksi) {
+    $sql = "SELECT COUNT(*) AS total FROM user";
+    $result = mysqli_query($koneksi, $sql);
+    return mysqli_fetch_assoc($result)['total'];
+}
+
+function dashboard_total_catatan($koneksi) {
+    $sql = "SELECT COUNT(*) AS total FROM catatan"; 
+    $result = mysqli_query($koneksi, $sql);
+    return mysqli_fetch_assoc($result)['total'];
+}
+
+function dashboard_event_global($koneksi) {
+    $sql = "SELECT * FROM misi 
+            WHERE kategori='global' 
+            AND tanggal_akhir >= CURDATE()
+            ORDER BY id_misi DESC";
+
+    $result = mysqli_query($koneksi, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+function dashboard_user_baru($koneksi) {
+
+    // cek apakah kolom created_at ada di tabel user
+    $check = mysqli_query($koneksi, "SHOW COLUMNS FROM user LIKE 'created_at'");
+    $has_created_at = mysqli_num_rows($check) > 0;
+
+    // kalau ada → pakai created_at
+    if ($has_created_at) {
+        $sql = "SELECT * FROM user ORDER BY created_at DESC LIMIT 5";
+    } else {
+        // fallback: ambil berdasarkan id terbaru
+        $sql = "SELECT * FROM user ORDER BY id_user DESC LIMIT 5";
+    }
+
+    $result = mysqli_query($koneksi, $sql);
+
+    if (!$result) return [];
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+function user_get_all_filtered($koneksi, $filter_role = '') {
+    if ($filter_role != '') {
+        $query = "SELECT u.*, s.nama_sekolah 
+                  FROM users u
+                  LEFT JOIN sekolah s ON u.id_sekolah = s.id_sekolah
+                  WHERE role = '$filter_role'
+                  ORDER BY id_user DESC";
+    } else {
+        $query = "SELECT u.*, s.nama_sekolah 
+                  FROM users u
+                  LEFT JOIN sekolah s ON u.id_sekolah = s.id_sekolah
+                  ORDER BY id_user DESC";
+    }
+
+    $result = mysqli_query($koneksi, $query);
+
+    if (!$result) return [];
+
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+function proses_edit_sekolah_page($koneksi) {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
+
+    $id     = $_POST['id_sekolah'];
+    $nama   = $_POST['nama_sekolah'];
+    $alamat = $_POST['alamat'];
+    $guru   = $_POST['id_guru'];
+    $kode   = $_POST['kode_sekolah'];
+
+    $sql = "UPDATE sekolah SET 
+            nama_sekolah='$nama',
+            alamat='$alamat',
+            id_guru='$guru',
+            kode_sekolah='$kode'
+            WHERE id_sekolah=$id";
+
+    mysqli_query($koneksi, $sql);
+
+    header("Location: index.php?page=institusi/sekolah&status=updated");
+    exit;
+}
+
+
+
 
 ?>

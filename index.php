@@ -52,17 +52,41 @@ switch ($page) {
         auth_logout();
         break;
 // admin
-    case 'dashboard':
-        dashboard_admin_page($koneksi);
-        break;
+case 'dashboard':
+    dashboard_admin_page($koneksi);
+    break;
+
 
     case 'institusi/sekolah':
         institusi_sekolah_index($koneksi);
         break;
 
-    case 'institusi/user':
-        institusi_user_index($koneksi);
-        break;
+case 'institusi/user':
+    institusi_user_index($koneksi);
+    break;
+
+case 'institusi/user/detail':
+    institusi_user_detail($koneksi);
+    break;
+
+case 'institusi/user/hapus':
+    institusi_user_hapus($koneksi);
+    break;
+
+case 'institusi/sekolah/edit':
+    edit_sekolah($koneksi);
+    break;
+
+case 'institusi/sekolah/proses_edit':
+    proses_edit_sekolah($koneksi);
+    break;
+
+
+
+
+        
+
+
 
         
 
