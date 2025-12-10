@@ -69,18 +69,24 @@ function misi_global_get_by_id($koneksi, $id_misi) {
     return mysqli_fetch_assoc($q);
 }
 
-function misi_global_insert($koneksi, $id_pembuat, $judul, $deskripsi, $target, $mulai, $akhir) {
-    $judul      = mysqli_real_escape_string($koneksi, $judul);
-    $deskripsi  = mysqli_real_escape_string($koneksi, $deskripsi);
-    $target     = (int)$target;
+
+
+function misi_global_insert($koneksi, $id_pembuat, $judul, $deskripsi, $mulai, $akhir, $kata_target) {
+
+    $judul       = mysqli_real_escape_string($koneksi, $judul);
+    $deskripsi   = mysqli_real_escape_string($koneksi, $deskripsi);
+    $kata_target = mysqli_real_escape_string($koneksi, $kata_target);
 
     $sql = "INSERT INTO misi
-            (id_pembuat, id_sekolah, judul, kategori, deskripsi, tanggal_mulai, tanggal_akhir, target_jumlah_kata)
+            (id_pembuat, kategori, judul, deskripsi, tanggal_mulai, tanggal_akhir, kata_target)
             VALUES
-            ($id_pembuat, NULL, '$judul', 'global', '$deskripsi', '$mulai', '$akhir', $target)";
+            ($id_pembuat, 'global', '$judul', '$deskripsi', '$mulai', '$akhir', '$kata_target')";
 
     return mysqli_query($koneksi, $sql);
 }
+
+
+
 
 function misi_global_update($koneksi, $id_misi, $judul, $deskripsi, $target, $mulai, $akhir) {
     $id         = (int)$id_misi;
@@ -208,6 +214,34 @@ function proses_edit_sekolah_page($koneksi) {
 }
 
 
+// models/admin_model.php
+
+// Ambil data profil berdasarkan ID
+function profil_ambil_data($koneksi, $id_user) {
+    $id = mysqli_real_escape_string($koneksi, $id_user);
+    $sql = "SELECT * FROM user WHERE id_user = '$id'";
+    $result = mysqli_query($koneksi, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+// Jalankan query update data
+function profil_eksekusi_update($koneksi, $id_user, $data, $password_baru = null) {
+    $id = mysqli_real_escape_string($koneksi, $id_user);
+    $nama = mysqli_real_escape_string($koneksi, $data['nama_lengkap']);
+    $user = mysqli_real_escape_string($koneksi, $data['username']);
+    $mail = mysqli_real_escape_string($koneksi, $data['email']);
+
+    if (!empty($password_baru)) {
+        // Jika ganti password
+        $pass_fix = password_hash($password_baru, PASSWORD_DEFAULT);
+        $sql = "UPDATE user SET nama_lengkap='$nama', username='$user', email='$mail', password='$pass_fix' WHERE id_user='$id'";
+    } else {
+        // Jika tidak ganti password
+        $sql = "UPDATE user SET nama_lengkap='$nama', username='$user', email='$mail' WHERE id_user='$id'";
+    }
+
+    return mysqli_query($koneksi, $sql);
+}
 
 
 ?>

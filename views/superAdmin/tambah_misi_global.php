@@ -1,29 +1,55 @@
-<link rel="stylesheet" href="./views/css/navigasiAtas.css">
-<link rel="stylesheet" href="./views/css/misi_global.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Mission</title>
+    <link rel="stylesheet" href="./views/css/guru.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="header"><h2>Create New Vocabulary Mission</h2></div>
+            
+            <div class="box form-container">
+                <form action="index.php?page=proses_tambah_misi_global" method="POST">
 
+                    
+                    <div class="form-group">
+                        <label>Mission Title</label>
+                        <input type="text" name="judul" placeholder="Example: Vocabulary Animals" required>
+                    </div>
 
+                    <div class="form-group">
+                        <label>Short Description</label>
+                        <textarea name="deskripsi" rows="3" placeholder="Explain the goal of this mission..."></textarea>
+                    </div>
 
-<div class="container">
-    <div class="content">
-    <h2>Tambah Misi Global</h2>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input type="date" name="tanggal_mulai" required>
+                        </div>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="date" name="tanggal_akhir" required>
+                        </div>
+                    </div>
 
-    <form method="POST">
-        Judul: <br>
-        <input type="text" name="judul" required><br><br>
+                    <div class="form-group" style="background: #f0f8ff; padding: 15px; border-radius: 8px; border: 1px solid #bde0fe;">
+                        <label style="color: #0056b3;">📝 Target Vocabulary List (Required)</label>
+                        <p style="font-size: 12px; margin-bottom: 5px; color: #666;">
+                            Enter the English words that students must record/memorize. Separate them with commas (<b>,</b>).
+                        </p>
+                        <textarea name="kata_target" rows="4" placeholder="Example: Apple, Banana, Orange, Grape" required></textarea>
+                    </div>
 
-        Deskripsi: <br>
-        <textarea name="deskripsi" required></textarea><br><br>
-
-        Target Jumlah Kata: <br>
-        <input type="number" name="target" required><br><br>
-
-        Tanggal Mulai: <br>
-        <input type="date" name="mulai" required><br><br>
-
-        Tanggal Akhir: <br>
-        <input type="date" name="akhir" required><br><br>
-
-        <button type="submit">Simpan</button>
-    </form>
+                    <div class="action-buttons" style="margin-top:20px; display:flex; justify-content:space-between;">
+                        <a href="index.php?page=guru/misi_kosakata&active=misi&aktif=true" class="btn-action" style="background:#ddd; color:#333; text-decoration:none;">Cancel</a>
+                        <button type="submit" class="btn-action btn-success">Save Mission</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
+</body>
+</html>
