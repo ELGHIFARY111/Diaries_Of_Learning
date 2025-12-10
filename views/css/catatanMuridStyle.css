@@ -1,18 +1,13 @@
-/* =========================================
-   1. RESET & LAYOUT DASAR
-   ========================================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: Arial, sans-serif; /* Font standar komputer */
 }
 
 body {
-    background-color: #f4f7f9; /* Background abu-abu lembut */
+    background-color: #f4f4f4; /* Abu-abu muda */
     color: #333;
-    height: 100vh;
-    overflow: hidden; /* Body tidak scroll */
 }
 
 .container {
