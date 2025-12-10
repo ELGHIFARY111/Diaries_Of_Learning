@@ -196,6 +196,10 @@ switch ($page) {
         profil_murid_page($koneksi);
         break;
 
+    case 'murid/leaderboard_murid':
+        leaderboard_murid_page($koneksi);
+        break;
+
 
 // eror
     default:

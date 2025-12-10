@@ -26,7 +26,12 @@
 
         <a href="index.php?page=murid/profilMurid&active=profil&aktif=true" 
         class="<?= ($active == 'profil') ? 'aktif' : '' ?>">
-        Profil Saya
+        My Profil
+        </a>
+
+        <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true" 
+        class="<?= ($active == 'leaderboard') ? 'aktif' : '' ?>">
+        Leaderboard
         </a>
 
     </div>

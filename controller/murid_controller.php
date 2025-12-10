@@ -28,6 +28,9 @@ function profil_murid_page($koneksi) {
     $active = $_GET['active'] ?? 'aktif';
     include "./views/murid/profilMurid.php";
 }
-
+function leaderboard_murid_page($koneksi) {
+    $active = $_GET['active'] ?? 'aktif';
+    include "./views/murid/leaderboard.php";
+}
 
 ?>
