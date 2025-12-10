@@ -11,8 +11,8 @@
     <div class="container">
         <div class="content">
             
-            <a href="index.php?page=guru/monitoring" style="display:inline-block; margin-bottom:20px; text-decoration:none; color:var(--color-text-secondary);">
-                &larr; Back to Monitoring
+            <a href="index.php?page=guru/monitoring&active=siswa&aktif=true" style="display:inline-block; margin-bottom:20px; text-decoration:none; color:var(--color-text-secondary);">
+                &larr; Back to School
             </a>
 
             <div class="detail-header">

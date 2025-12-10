@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="action-buttons" style="display:flex; justify-content:space-between; margin-top:30px;">
-                        <a href="index.php?page=guru/detail_sekolah" class="btn-action" style="background:#ddd; color:#333; text-decoration:none;">
+                        <a href="index.php?page=guru/detail_sekolah&active=siswa&aktif=true" class="btn-action" style="background:#ddd; color:#333; text-decoration:none;">
                             Cancel
                         </a>
                         <button type="submit" class="btn-action btn-primary">Save Changes</button>

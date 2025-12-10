@@ -10,7 +10,7 @@
 <body>
 
     <div class="container-baca">
-        <a href="index.php?page=guru/review_catatan" class="btn-back">← Back to Review List</a>
+        <a href="index.php?page=guru/review_catatan&active=review&aktif=true" class="btn-back">← Back to Review List</a>
 
         <div class="header-note">
             <div class="note-title"><?= htmlspecialchars($catatan['judul']) ?></div>
@@ -62,7 +62,7 @@
         <div class="action-area">
             <?php if ($catatan['status_review'] == 'pending'): ?>
                 <span style="margin-right: 15px; color: #e67e22;">This note has not been reviewed yet.</span>
-                <a href="index.php?page=guru/proses_review&id=<?= $catatan['id_catatan'] ?>" 
+                <a href="index.php?page=guru/proses_review&active=review&aktif=true&id=<?= $catatan['id_catatan'] ?>" 
                    class="btn-approve" onclick="return confirm('Mark as read?')">
                     Mark as Reviewed
                 </a>

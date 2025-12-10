@@ -343,4 +343,23 @@ function ambil_leaderboard($koneksi, $id_sekolah_guru, $scope = 'school', $time 
 
     return mysqli_query($koneksi, $query);
 }
+function cek_sekolah_by_kode($koneksi, $kode) {
+    $kode = mysqli_real_escape_string($koneksi, $kode);
+    $query = "SELECT * FROM sekolah WHERE kode_sekolah = '$kode'";
+    $result = mysqli_query($koneksi, $query);
+    return mysqli_fetch_assoc($result);
+}
+function cek_sekolah_by_nama($koneksi, $nama) {
+    $nama = mysqli_real_escape_string($koneksi, $nama);
+    $query = "SELECT * FROM sekolah WHERE nama_sekolah = '$nama'"; 
+    $result = mysqli_query($koneksi, $query);
+    return mysqli_fetch_assoc($result);
+}
+function update_sekolah_guru($koneksi, $id_user, $id_sekolah) {
+    $id_user = mysqli_real_escape_string($koneksi, $id_user);
+    $id_sekolah = mysqli_real_escape_string($koneksi, $id_sekolah);
+    
+    $query = "UPDATE user SET id_sekolah = '$id_sekolah' WHERE id_user = '$id_user'";
+    return mysqli_query($koneksi, $query);
+}
 ?>

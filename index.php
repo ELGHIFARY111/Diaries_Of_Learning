@@ -17,18 +17,7 @@ if(!isset($_SESSION['login']) && !in_array($page,$page_exception)) {
 }
 
 
-$role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : ''; 
-if ($page !== 'login' && $page !== 'regist' && $page !== 'regist_process' && $page !== 'login_process') {
-    if ($role == '1' || $role == 'superadmin') {
-        top_navigasi_superadmin();
-    } 
-    elseif ($role == '2' || $role == 'guru') {
-        navigasi_guru($koneksi);
-    } 
-    elseif ($role == '3' || $role == 'siswa' || $role == 'murid') {
-        navigasi_murid($koneksi);
-    }
-}
+
 // page
 switch ($page) {
 // auth 
@@ -123,6 +112,14 @@ switch ($page) {
     case 'murid/edit_catatan':
         edit_catatan_page($koneksi);
         break;
+
+    case 'guru/join_sekolah':
+        join_sekolah_page($koneksi);
+    break;
+
+    case 'guru/proses_join_sekolah':
+        proses_join_sekolah($koneksi);
+    break;
 
     case 'guru/tambah_sekolah':
         form_tambah_sekolah_page($koneksi);
@@ -231,4 +228,38 @@ switch ($page) {
     default:
         echo "Halaman tidak ditemukan";
         break;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : ''; 
+if ($page !== 'login' && $page !== 'regist' && $page !== 'regist_process' && $page !== 'login_process') {
+    if ($role == '1' || $role == 'superadmin') {
+        top_navigasi_superadmin();
+    } 
+    elseif ($role == '2' || $role == 'guru') {
+        navigasi_guru($koneksi);
+    } 
+    elseif ($role == '3' || $role == 'siswa' || $role == 'murid') {
+        navigasi_murid($koneksi);
+    }
 }

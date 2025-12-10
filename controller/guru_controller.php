@@ -15,7 +15,7 @@ function navigasi_guru($koneksi) {
 }
 
 function guru_dashboard_page($koneksi) {
-    $active = $_GET['active'] ?? 'aktif';
+    $active = 'dashboard';
     $id_guru = $_SESSION['user_id'] ?? 0; 
 
     $data_guru      = cari_data_guru($koneksi, $id_guru);
@@ -33,6 +33,7 @@ function guru_dashboard_page($koneksi) {
     include "./views/guru/dashboard_guru.php";
 }
 function laporan_progres_page($koneksi) {
+    $active = 'laporan';
     if (!isset($_SESSION['user_id'])) {
         header("Location: index.php?page=login");
         exit;
@@ -120,7 +121,6 @@ function detail_sekolah_page($koneksi) {
 }
 function edit_sekolah_page($koneksi) {
     $id_guru = $_SESSION['user_id'];
-    $active = $_GET['active'] ?? 'aktif';
 
     $data_guru = cari_data_guru($koneksi, $id_guru);
     if (empty($data_guru['id_sekolah']) || $data_guru['id_sekolah'] == '0') {
@@ -145,12 +145,12 @@ function proses_edit_sekolah($koneksi) {
         if ($berhasil) {
             echo "<script>
                     alert('Data sekolah berhasil diperbarui!'); 
-                    window.location='index.php?page=guru/detail_sekolah';
+                    window.location='index.php?page=guru/detail_sekolah&active=siswa&aktif=true';
                     </script>";
         } else {
             echo "<script>
                     alert('Gagal mengupdate data.'); 
-                    window.location='index.php?page=guru/edit_sekolah';
+                    window.location='index.php?page=guru/edit_sekolah&active=siswa&aktif=true';
                     </script>";
         }
     }
@@ -212,13 +212,14 @@ function proses_update_profil($koneksi) {
     $password = $_POST['password'];
 
     if (update_profil_guru($koneksi, $id_guru, $nama, $username, $email, $password)) {
-        header("Location: index.php?page=guru/profil&status=sukses");
+        header("Location: index.php?page=guru/profil&status=sukses&active=profil&aktif=true");
     } else {
-        header("Location: index.php?page=guru/profil&status=gagal");
+        header("Location: index.php?page=guru/profil&status=gagal&active=profil&aktif=true");
     }
 }
 function review_catatan_page($koneksi) {
     $id_guru = $_SESSION['user_id'];
+    $active = 'review';
     
     $data_guru = cari_data_guru($koneksi, $id_guru);
     $id_sekolah = $data_guru['id_sekolah'];
@@ -238,7 +239,7 @@ function proses_tandai_review($koneksi) {
     if (tandai_sudah_review($koneksi, $id_catatan)) {
         echo "<script>
             alert('Catatan berhasil ditandai sudah dibaca!');
-            window.location='index.php?page=guru/review_catatan&status=pending'; 
+            window.location='index.php?page=guru/review_catatan&status=pending&active=review&aktif=true'; 
         </script>";
     } else {
         echo "<script>alert('Gagal memproses data.'); window.history.back();</script>";
@@ -278,9 +279,9 @@ function proses_tambah_misi($koneksi) {
         ];
 
         if (tambah_misi_baru($koneksi, $data)) {
-            echo "<script>alert('Misi berhasil dibuat!'); window.location='index.php?page=guru/misi_kosakata';</script>";
+            echo "<script>alert('Misi berhasil dibuat!'); window.location='index.php?page=guru/misi_kosakata&active=misi&aktif=true';</script>";
         } else {
-            echo "<script>alert('Gagal membuat misi.'); window.location='index.php?page=guru/tambah_misi';</script>";
+            echo "<script>alert('Gagal membuat misi.'); window.location='index.php?page=guru/tambah_misi&active=misi&aktif=true';</script>";
         }
     }
 }
@@ -317,9 +318,9 @@ function proses_edit_misi($koneksi) {
 function hapus_misi_process($koneksi) {
     $id_misi = $_GET['id'];
     if (hapus_misi($koneksi, $id_misi)) {
-        echo "<script>alert('Misi berhasil dihapus!'); window.location='index.php?page=guru/misi_kosakata';</script>";
+        echo "<script>alert('Misi berhasil dihapus!'); window.location='index.php?page=guru/misi_kosakata&active=misi&aktif=true';</script>";
     } else {
-        echo "<script>alert('Gagal menghapus misi.'); window.location='index.php?page=guru/misi_kosakata';</script>";
+        echo "<script>alert('Gagal menghapus misi.'); window.location='index.php?page=guru/misi_kosakata&active=misi&aktif=true';</script>";
     }
 }
 function detail_progres_misi_page($koneksi) {
@@ -391,5 +392,44 @@ function baca_catatan_siswa_page($koneksi) {
     }
 
     include "./views/guru/bacaCatatanSiswa.php";
+}
+function proses_join_sekolah($koneksi) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id_user = $_SESSION['user_id'];
+        
+        $kode_sekolah = $_POST['kode_sekolah'] ?? '';
+        $nama_sekolah = $_POST['nama_sekolah'] ?? '';
+
+        $sekolah = null;
+
+        if (!empty($kode_sekolah)) {
+            $sekolah = cek_sekolah_by_kode($koneksi, $kode_sekolah);
+        
+        } elseif (!empty($nama_sekolah)) {
+            $sekolah = cek_sekolah_by_nama($koneksi, $nama_sekolah);
+        }
+
+        if ($sekolah) {
+            $id_sekolah = $sekolah['id_sekolah'];
+            
+            if (update_sekolah_guru($koneksi, $id_user, $id_sekolah)) {
+                echo "<script>
+                        alert('Berhasil bergabung ke sekolah: " . $sekolah['nama_sekolah'] . "'); 
+                        window.location.href='index.php?page=guru&active=dashboard&aktif=true';
+                    </script>";
+            } else {
+                echo "<script>alert('Gagal update database.'); window.history.back();</script>";
+            }
+
+        } else {
+            echo "<script>
+                    alert('Sekolah tidak ditemukan! Periksa kembali Kode atau Nama Sekolah anda.'); 
+                    window.history.back();
+                </script>";
+    }
+    }
+}
+function join_sekolah_page($koneksi) {
+    include "./views/guru/join_sekolah.php";
 }
 ?>

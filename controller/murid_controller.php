@@ -163,6 +163,8 @@ function misi_murid_page($koneksi) {
             $persen = $data_progres['nilai'];
         }
         $misi['persentase_saya'] = $persen; 
+
+        $misi['sisa_hari'] = hitung_sisa_hari($misi['tanggal_akhir']);
         
         $daftar_misi[] = $misi;
     }

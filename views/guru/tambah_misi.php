@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="action-buttons" style="margin-top:20px; display:flex; justify-content:space-between;">
-                        <a href="index.php?page=guru/misi_kosakata" class="btn-action" style="background:#ddd; color:#333; text-decoration:none;">Cancel</a>
+                        <a href="index.php?page=guru/misi_kosakata&active=misi&aktif=true" class="btn-action" style="background:#ddd; color:#333; text-decoration:none;">Cancel</a>
                         <button type="submit" class="btn-action btn-success">Save Mission</button>
                     </div>
                 </form>

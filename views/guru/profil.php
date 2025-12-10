@@ -47,11 +47,11 @@
 
                         <div class="action-buttons-sidebar">
                             <?php if (!$is_edit_mode): ?>
-                                <a href="index.php?page=guru/profil&mode=edit" class="btn-action btn-edit" style="width: 100%; text-decoration: none; display: block; text-align: center; margin-bottom: 10px; background-color: #0984e3; color: white; padding: 12px; border-radius: 8px;">
+                                <a href="index.php?page=guru/profil&mode=edit&active=profil&aktif=true" class="btn-action btn-edit" style="width: 100%; text-decoration: none; display: block; text-align: center; margin-bottom: 10px; background-color: #0984e3; color: white; padding: 12px; border-radius: 8px;">
                                     Edit Profile
                                 </a>
                                 
-                                <a href="index.php?page=logout" onclick="return confirm('Are you sure you want to log out?')" class="btn-action btn-logout" style="width: 100%; text-decoration: none; display: block; text-align: center; background-color: #d63031; color: white; padding: 12px; border-radius: 8px;">
+                                <a href="index.php?page=logout&active=profil&aktif=true" onclick="return confirm('Are you sure you want to log out?')" class="btn-action btn-logout" style="width: 100%; text-decoration: none; display: block; text-align: center; background-color: #d63031; color: white; padding: 12px; border-radius: 8px;">
                                     Logout
                                 </a>
                             <?php else: ?>
@@ -69,7 +69,7 @@
                                 Edit Personal Data
                             </h3>
                             
-                            <form action="index.php?page=guru/proses_edit_profil" method="POST" class="form-edit-wrapper" style="margin-top: 25px;">
+                            <form action="index.php?page=guru/proses_edit_profil&active=profil&aktif=true" method="POST" class="form-edit-wrapper" style="margin-top: 25px;">
                                 
                                 <label class="label-edit">Full Name</label>
                                 <input type="text" name="nama_lengkap" class="edit-input" value="<?= htmlspecialchars($data_guru['nama_lengkap']) ?>" required>
@@ -88,7 +88,7 @@
                                         Save Changes
                                     </button>
                                     
-                                    <a href="index.php?page=guru/profil" class="btn-cancel">
+                                    <a href="index.php?page=guru/profil&active=profil&aktif=true" class="btn-cancel">
                                         Cancel
                                     </a>
                                 </div>

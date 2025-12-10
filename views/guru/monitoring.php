@@ -22,6 +22,9 @@
                             <a href="index.php?page=guru/tambah_sekolah&active=siswa&aktif=true" class="btn-action btn-success">
                                 + Create New School
                             </a>
+                            <a href="index.php?page=guru/join_sekolah" class="btn-action btn-success" style="background: #3498db; color: white; text-decoration: none; margin-top:5px;">
+                                ↳ Join Existing School
+                            </a>
                         </div>
                     </div>
                 <?php else: ?>

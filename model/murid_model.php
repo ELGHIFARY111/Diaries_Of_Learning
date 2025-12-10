@@ -226,16 +226,34 @@ function hitung_progres_misi_spesifik($koneksi, $id_user, $id_sekolah) {
         }
     }
 }
+function hitung_sisa_hari($tanggal_akhir) {
+    if (empty($tanggal_akhir) || $tanggal_akhir == '0000-00-00') {
+        return null;
+    }
+
+    $tgl_deadline = new DateTime($tanggal_akhir);
+    $tgl_sekarang = new DateTime(); 
+
+    $tgl_deadline->setTime(0, 0, 0);
+    $tgl_sekarang->setTime(0, 0, 0);
+
+    if ($tgl_sekarang > $tgl_deadline) {
+        return 0; 
+    }
+
+    $jarak = $tgl_sekarang->diff($tgl_deadline);
+    return $jarak->days;
+}
 function ambil_aktivitas_terbaru($koneksi, $id_user) {
     $id_user = mysqli_real_escape_string($koneksi, $id_user);
     $query = "SELECT judul, tanggal_dibuat as tanggal_catatan, 'catatan' as tipe 
-              FROM catatan 
-              WHERE id_user = '$id_user' 
-              UNION 
-              SELECT kata_inggris as judul, tanggal_dibuat as tanggal_catatan, 'kosakata' as tipe 
-              FROM kosakata 
-              WHERE id_user = '$id_user' 
-              ORDER BY tanggal_catatan DESC LIMIT 5";
+            FROM catatan 
+            WHERE id_user = '$id_user' 
+            UNION 
+            SELECT kata_inggris as judul, tanggal_dibuat as tanggal_catatan, 'kosakata' as tipe 
+            FROM kosakata 
+            WHERE id_user = '$id_user' 
+            ORDER BY tanggal_catatan DESC LIMIT 5";
     return mysqli_query($koneksi, $query);
 }
 

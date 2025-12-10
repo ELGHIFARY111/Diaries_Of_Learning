@@ -35,8 +35,8 @@
 
             <h3 style="margin-bottom: 15px; font-size: 1.5em; color: #2c3e50;">Supervisor Quick Actions</h3>
             <div class="action-area">
-                <a href="index.php?page=guru/misi_kosakata" class="btn-action btn-success"> Create New Institution Mission</a>
-                <a href="index.php?page=guru/review_catatan" class="btn-action btn-primary"> Review Incoming Notes (<?= $total_pending ?>)</a>
+                <a href="index.php?page=guru/misi_kosakata&active=misi&aktif=true" class="btn-action btn-success"> Create New Institution Mission</a>
+                <a href="index.php?page=guru/review_catatan&active=review&aktif=true" class="btn-action btn-primary"> Review Incoming Notes (<?= $total_pending ?>)</a>
             </div>
 
             <div class="bottom-section">

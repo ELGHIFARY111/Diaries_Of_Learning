@@ -10,7 +10,7 @@
     <div class="container">
         <div class="content">
             
-            <a href="index.php?page=guru/misi_kosakata" style="display:inline-block; margin-bottom:20px; text-decoration:none; color:#555;">
+            <a href="index.php?page=guru/misi_kosakata&active=misi&aktif=true" style="display:inline-block; margin-bottom:20px; text-decoration:none; color:#555;">
                 &larr; Back to Mission List
             </a>
 

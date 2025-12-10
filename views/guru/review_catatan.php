@@ -40,6 +40,8 @@
             <div class="filter-area" style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
                 <form method="GET" action="index.php" class="filter-form">
                     <input type="hidden" name="page" value="guru/review_catatan">
+                    <input type="hidden" name="active" value="review">
+                    <input type="hidden" name="aktif" value="true">
                     
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label for="filterStatus" style="font-size: 12px; font-weight: bold; color: #666;">Review Status:</label>
@@ -115,12 +117,12 @@
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <a href="index.php?page=guru/baca_catatan&id=<?= $row['id_catatan'] ?>" class="btn-read">
+                                        <a href="index.php?page=guru/baca_catatan&active=review&aktif=true&id=<?= $row['id_catatan'] ?>" class="btn-read">
                                             Read
                                         </a>
                                         <div class="aksi-group">
                                             <?php if ($row['status_review'] == 'pending'): ?>
-                                                <a href="index.php?page=guru/proses_review&id=<?= $row['id_catatan'] ?>" 
+                                                <a href="index.php?page=guru/proses_review&active=review&aktif=true&id=<?= $row['id_catatan'] ?>" 
                                                     class="btn-check" 
                                                     onclick="return confirm('Mark this note as reviewed?')">
                                                     Checked
