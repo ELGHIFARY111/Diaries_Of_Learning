@@ -117,11 +117,60 @@ body {
     margin-bottom: 15px;
 }
 
+/* =========================================
+   SEARCH BOX (REVISI)
+   ========================================= */
+
+/* Container Form Pencarian */
 .search-box {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 200px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 2px solid var(--color-border);
+    border-radius: 50px; /* Bentuk kapsul */
+    padding: 5px 15px;
+    width: 250px; /* Lebar tetap agar rapi */
+    transition: all 0.3s ease;
+}
+
+/* Efek saat input diklik (Focus) */
+.search-box:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(108, 92, 231, 0.2);
+}
+
+/* Input Text di dalam Search Box */
+.search-box input[type="text"] {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex-grow: 1; /* Mengisi ruang kosong */
+    padding: 8px 5px;
+    font-size: 14px;
+    color: var(--color-text-primary);
+}
+
+.search-box input[type="text"]::placeholder {
+    color: #b2bec3;
+}
+
+/* Tombol Kaca Pembesar */
+.search-box button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.search-box button:hover {
+    transform: scale(1.1) rotate(10deg); /* Efek animasi kecil saat hover */
+    background-color: #f0f0f0;
 }
 
 /* Grid Pembungkus Kartu */

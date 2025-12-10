@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Write New Note</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Note</title>
     <link rel="stylesheet" href="views/css/catatanMuridStyle.css">
 </head>
 <body>
@@ -12,43 +13,48 @@
 
             <div style="margin-bottom: 20px;">
                 <a href="index.php?page=murid/catatanMurid" style="text-decoration: none; color: #555; font-weight: bold;">
-                    ← Back to My Notes
+                    ← Cancel Add
                 </a>
             </div>
 
             <div class="header">
-                <h2>Write New Note</h2>
-                <p>Record your learning journey today.</p>
+                <h2>Add Note</h2>
+                <p>Update your story.</p>
             </div>
 
             <form action="" method="POST" class="note-form" enctype="multipart/form-data">
                 
                 <div class="word-sheet">
-                    <input type="text" name="judul" class="input-title" placeholder="Title..." required>
-                    <hr class="separator">
-                    <textarea name="isi" class="input-body" placeholder="Start writing..." required></textarea>
-                </div>
-
-                <div style="margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px;">
-                    <h4 style="margin-bottom: 10px; color: #555;">Attach Media (Optional)</h4>
+                    <input type="text" name="judul" class="input-title" required placeholder="Enter Title Here...">
                     
-                    <div style="margin-bottom: 10px;">
-                        <label>📸 Photo:</label><br>
-                        <input type="file" name="foto" accept="image/*">
-                    </div>
+                    <hr class="separator">
+                    
+                    <textarea name="isi" class="input-body" required placeholder="Start typing here"></textarea>
+                </div>
 
-                    <div style="margin-bottom: 10px;">
-                        <label>🎤 Voice Note:</label><br>
-                        <input type="file" name="audio" accept="audio/*">
-                    </div>
+                <div class="attachment-sheet">
+                    <h4 class="attachment-title">Media Attachments</h4>
+                    
+                    <div class="media-grid">
+                        <div class="media-item">
+                            <label class="media-label">Photo</label>
+                            <input type="file" name="foto" accept="image/*" class="input-file">
+                        </div>
 
-                    <div style="margin-bottom: 10px;">
-                        <label>🎥 Video:</label><br>
-                        <input type="file" name="video" accept="video/*">
+                        <div class="media-item">
+                            <label class="media-label">Voice Note</label>
+                            <input type="file" name="audio" accept="audio/*" class="input-file">
+                        </div>
+
+                        <div class="media-item">
+                            <label class="media-label">Video</label>
+                            <input type="file" name="video" accept="video/*" class="input-file">
+                        </div>
                     </div>
                 </div>
+
                 <div class="action-bar">
-                    <button type="submit" name="simpan_catatan" class="btn-simpan">Save Note</button>
+                    <button type="submit" name="update_catatan" class="btn-simpan">Add Notes</button>
                 </div>
 
             </form>

@@ -182,3 +182,109 @@ body {
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
 }
+
+/* =========================================
+   6. ATTACHMENT / MEDIA SECTION
+   ========================================= */
+
+.attachment-sheet {
+    background: white;
+    border-radius: 2px;
+    padding: 30px 50px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* Shadow sama dengan kertas utama */
+    border: 1px solid #e1e1e1;
+    margin-top: 20px; /* Jarak dari kertas utama */
+    
+    /* Menyamakan posisi dengan .word-sheet */
+    max-width: 1200px;
+    margin-left: -210px; 
+}
+
+.attachment-title {
+    font-size: 16px;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #f4f4f4;
+    padding-bottom: 10px;
+}
+
+/* Mengatur layout menjadi 3 kolom jika layar cukup lebar */
+.media-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+/* Jika layar kecil, kembali ke 1 kolom */
+@media (max-width: 768px) {
+    .media-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.media-item {
+    background: #fafafa;
+    border: 1px dashed #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.media-item:hover {
+    background: #fff;
+    border-color: #27ae60;
+}
+
+.media-label {
+    display: block;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+/* Styling Preview Gambar */
+.media-preview {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.media-preview img {
+    height: 60px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: block;
+    margin: 0 auto 5px auto;
+}
+
+.media-preview span, 
+.media-preview-text span, 
+.media-preview-audio span {
+    font-size: 11px;
+    color: #e67e22; /* Warna oranye untuk status file ada */
+    font-weight: 600;
+}
+
+/* Styling Audio & Text Preview */
+.media-preview-audio audio {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.media-preview-text {
+    background: #eaf2f8;
+    padding: 5px;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Input File dipercantik sedikit */
+.input-file {
+    font-size: 12px;
+    width: 100%;
+    color: #555;
+}

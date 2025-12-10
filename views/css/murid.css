@@ -83,7 +83,7 @@ a {
 }
 
 a:hover {
-    color: var(--color-accent-blue);
+    color: white;
 }
 /* ================================================= */
 /* LEADERBOARD STYLES (REVISI) */
@@ -599,11 +599,6 @@ a:hover {
 .profile-layout {
     display: flex;
     gap: 30px;
-}
-@media (max-width: 768px) {
-    .profile-layout {
-        flex-direction: column;
-    }
 }
 .header-actions {
     display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;
