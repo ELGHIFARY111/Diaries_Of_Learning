@@ -6,18 +6,7 @@
     <title>Teacher Leaderboard</title>
     <link rel="stylesheet" href="./views/css/guru.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        /* CSS Tambahan agar filter terlihat aktif */
-        .filter-link { padding: 5px 10px; text-decoration: none; color: #636e72; border-radius: 20px; font-size: 14px; margin-right: 5px; }
-        .filter-link:hover { background: #dfe6e9; }
-        .filter-link.active { background: #6c5ce7; color: white; font-weight: bold; }
-        
-        .rank-badge { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; color: white; }
-        .gold { background: #f1c40f; box-shadow: 0 2px 5px rgba(241, 196, 15, 0.4); }
-        .silver { background: #bdc3c7; box-shadow: 0 2px 5px rgba(189, 195, 199, 0.4); }
-        .bronze { background: #e67e22; box-shadow: 0 2px 5px rgba(230, 126, 34, 0.4); }
-        .default-rank { color: #636e72; font-weight: bold; padding-left: 10px; }
-    </style>
+
 </head>
 <body>
     
@@ -26,7 +15,6 @@
             <div class="header">
                 <div class="header-text">
                     <h2>Leaderboard Siswa</h2>
-                    <p>Peringkat siswa berdasarkan keaktifan menulis jurnal dan kosakata.</p>
                 </div>
             </div>
             

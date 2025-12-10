@@ -796,9 +796,43 @@ a:hover {
     color: var(--color-primary);
 }
 
+.btn-read,
 .btn-check {
-    background-color: var(--color-success);
-    color: white;
+    padding: 6px 12px;
+    width: 80px; 
+    text-align: center;
+    border: none;
+    border-radius: 6px; 
+    cursor: pointer;
+    text-decoration: none; 
+    font-size: 12px;
+    font-weight: 600; /* Dibuat lebih tebal */
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; /* Teks di tengah */
+    gap: 5px;   
+    margin-right: 5px; 
+    transition: all 0.3s ease;
+    color: white !important; /* KUNCI: Pastikan warna teks selalu putih */
+}
+
+.btn-read {
+    background: var(--color-accent-blue); 
+}
+.btn-read:hover { 
+    background: #0771bf; 
+    transform: translateY(-1px);
+}
+
+
+
+.btn-check {
+    background-color: var(--color-success); 
+}
+
+.btn-check:hover {
+    background-color: #008f72;
+    transform: translateY(-1px);
 }
 
 .btn-disabled {
@@ -960,6 +994,19 @@ a:hover {
 }
 
 /* ----------------------------------------------------------------- */
+
+
+/*Tambahan agar filter terlihat aktif */
+.filter-link { padding: 5px 10px; text-decoration: none; color: #636e72; border-radius: 20px; font-size: 14px; margin-right: 5px; }
+.filter-link:hover { background: #dfe6e9; }
+.filter-link.active { background: #6c5ce7; color: white; font-weight: bold; }
+
+.rank-badge { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; color: white; }
+.gold { background: #f1c40f; box-shadow: 0 2px 5px rgba(241, 196, 15, 0.4); }
+.silver { background: #bdc3c7; box-shadow: 0 2px 5px rgba(189, 195, 199, 0.4); }
+.bronze { background: #e67e22; box-shadow: 0 2px 5px rgba(230, 126, 34, 0.4); }
+.default-rank { color: #636e72; font-weight: bold; padding-left: 10px; }
+
 
 
 .leaderboard-section h3 {
@@ -1333,3 +1380,83 @@ canvas {
 .action-area { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; text-align: right; }
 .btn-approve { background: #27ae60; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
 .btn-approve:hover { background: #219150; }
+
+
+/* progress misi  */
+.kata-container {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+}
+.kata-badge {
+    display: inline-block;
+    background-color: #e3f2fd;
+    color: #1565c0;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #90caf9;
+    font-weight: bold;
+}
+.kata-title {
+    font-size: 14px; 
+    font-weight: bold; 
+    color: #ffffffff; 
+    margin-bottom: 10px; 
+    display: block;
+}
+
+
+/* DETAIL SEKOLAH STYLES */
+
+.detail-header {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow-subtle);
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.school-avatar {
+    width: 80px; height: 80px;
+    background: var(--color-background-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+}
+.detail-info h2 { margin: 0 0 5px 0; color: var(--color-text-primary); }
+.detail-info p { margin: 0; color: var(--color-text-secondary); }
+
+.code-badge {
+    background: #e1f5fe; color: #0288d1;
+    padding: 5px 12px; border-radius: 6px;
+    font-weight: bold; font-family: monospace; font-size: 1.1em;
+    cursor: pointer; display: inline-block; margin-top: 10px;
+}
+
+.grid-2 {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 25px;
+}
+
+.info-card {
+    background: #fff; padding: 25px;
+    border-radius: 12px; box-shadow: var(--box-shadow-subtle);
+}
+.rekan-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid #eee;
+}
+.rekan-item:last-child { border-bottom: none; }
+
+/* EDIT SEKOLAH STYLES  */
+
+.form-container { max-width: 600px; margin: 40px auto; padding: 30px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+.form-group input, .form-group textarea { 
+    width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; 
+}

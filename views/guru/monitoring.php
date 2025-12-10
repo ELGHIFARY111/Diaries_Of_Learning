@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,12 +16,11 @@
             <div class="stats-box">
                 <?php if ($id_sekolah == 0 || empty($nama_sekolah) || $nama_sekolah == 'Belum ada sekolah'): ?>
                     <div class="card school-card empty-state">
-                        <!-- <div class="card-icon">🏫</div> -->
-                        <h3>Belum Ada Sekolah</h3>
-                        <p>Anda belum terhubung dengan sekolah manapun.</p>
+                        <h3>No School Yet</h3>
+                        <p>You are not yet connected to any school.</p>
                         <div class="mt-15">
                             <a href="index.php?page=guru/tambah_sekolah&active=siswa&aktif=true" class="btn-action btn-success">
-                                + Buat Sekolah Baru
+                                + Create New School
                             </a>
                         </div>
                     </div>
@@ -30,25 +28,25 @@
                     <div class="card school-card active-state">
                         <div class="card-header-flex">
                             <div>
-                                <p>Sekolah Anda</p>
+                                <p>Your School</p>
                                 <h3><?= $nama_sekolah ?></h3>
-                                <p class="school-id">Status: Terverifikasi</p>
+                                <p class="school-id">Status: Verified</p>
                             </div>
                             <div class="school-icon-bg">🎓</div>
                         </div>
                         <div class="mt-15">
                             <a href="index.php?page=guru/detail_sekolah&active=siswa&aktif=true" class="btn-action btn-primary">
-                                Lihat Detail Sekolah
+                                View School Details
                             </a>
                         </div>
                     </div>
                 <?php endif; ?>
                 <div class="card">
-                    <p>Total Siswa</p>
+                    <p>Total Students</p>
                     <h3><?= $total_siswa ?></h3>
                 </div>
                 <div class="card">
-                    <p>Catatan Pending</p>
+                    <p>Pending Notes</p>
                     <h3><?= $total_pending ?></h3>
                 </div>
             </div>
@@ -64,12 +62,12 @@
                     <input type="hidden" name="active" value="siswa">
 
                     <input type="text" name="cari" 
-                        placeholder="Cari Nama Siswa atau Email..." 
+                        placeholder="Search Student Name or Email..." 
                         value="<?= isset($keyword) ? htmlspecialchars($keyword) : '' ?>"
                         style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
                     
                     <button type="submit" class="btn-action btn-primary" style="padding: 0 20px;">
-                        🔍 Cari
+                        🔍 Search
                     </button>
                     
                     <?php if(!empty($keyword)): ?>
@@ -118,7 +116,7 @@
                                     </td>
                                     <td>
                                         <a href="index.php?page=guru/detail_siswa&id=<?= $siswa['id_user'] ?>&active=siswa" class="btn-action btn-primary" style="text-decoration:none; font-size:12px; padding: 5px 10px;">
-                                            Lihat Profil
+                                            View Profile
                                         </a>
                                     </td>
                                 </tr>
@@ -130,8 +128,8 @@
                                 <tr>
                                     <td colspan="5" style="text-align:center; padding: 40px; color: #888;">
                                         <div style="font-size: 3em; margin-bottom: 10px;">📭</div>
-                                        <p>Belum ada siswa yang terdaftar di sekolah ini.</p>
-                                        <small>Minta siswa untuk mendaftar menggunakan Kode Sekolah: <b><?= $kode_sekolah ?></b></small>
+                                        <p>No students are registered in this school yet.</p>
+                                        <small>Ask students to register using School Code: <b><?= $kode_sekolah ?></b></small>
                                     </td>
                                 </tr>
 
