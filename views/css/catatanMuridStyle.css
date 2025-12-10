@@ -127,8 +127,8 @@ body {
    5. RIWAYAT CATATAN
    ========================================= */
 .history-list {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width:1400px;
+    margin: 10 auto;
 }
 
 .history-card {

@@ -12,7 +12,7 @@
         <div class="content">
 
             <div style="margin-bottom: 20px;">
-                <a href="index.php?page=murid/catatanMurid" style="text-decoration: none; color: #555; font-weight: bold;">
+                <a href="index.php?page=murid/catatanMurid&active=catatan&aktif=true" style="text-decoration: none; color: #555; font-weight: bold;">
                     ← Cancel Add
                 </a>
             </div>

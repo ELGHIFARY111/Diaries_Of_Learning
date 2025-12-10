@@ -12,7 +12,7 @@
     <div class="container">
         <div class="content">
 
-            <a href="index.php?page=murid/misiMurid" class="btn-back" style="text-decoration:none; color:#666;">&larr; Back to Mission List</a>
+            <a href="index.php?page=murid/misiMurid&active=misi&aktif=true" class="btn-back" style="text-decoration:none; color:#666;">&larr; Back to Mission List</a>
 
             <div class="header-misi" style="margin-top: 20px;">
                 <span class="badge badge-school" style="background:#e3f2fd; color:#0984e3; padding:5px 10px; border-radius:5px;">School Mission</span>
@@ -56,8 +56,8 @@
                         <br>
                         (The words can be in the Title or the Content of your note)
                     </p>
-                    <a href="index.php?page=murid/catatanMurid" class="btn-add-vocab">
-                        📝 Write a Note Now
+                    <a href="index.php?page=murid/catatanMurid&active=catatan&aktif=true" class="btn-add-vocab">
+                        Write a Note Now
                     </a>
                 </div>
             <?php else: ?>

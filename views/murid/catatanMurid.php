@@ -17,7 +17,7 @@
                     <p style="color: #7f8c8d;">Your learning history gallery.</p>
                 </div>
                 
-                <a href="index.php?page=murid/tambah_catatan" class="btn-add-new">
+                <a href="index.php?page=murid/tambah_catatan&active=catatan&aktif=true" class="btn-add-new">
                     + Write New Note
                 </a>
             </div>
@@ -41,9 +41,9 @@
                             </div>
 
                             <div class="card-actions" style="display: flex; gap: 10px;">
-                                <a href="index.php?page=murid/baca&id=<?= $row['id_catatan'] ?>" style="background: #eccc68; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 13px;">Read</a>
-                                <a href="index.php?page=murid/edit&id=<?= $row['id_catatan'] ?>" style="background: #3498db; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 13px;">Edit</a>
-                                <a href="index.php?page=murid/hapus&id=<?= $row['id_catatan'] ?>" onclick="return confirm('Hapus?')" style="background: #ff6b6b; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 13px;">Delete</a>
+                                <a href="index.php?page=murid/baca&active=catatan&aktif=true&id=<?= $row['id_catatan'] ?>" style="background: #eccc68; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 13px;">Read</a>
+                                <a href="index.php?page=murid/edit&active=catatan&aktif=true&id=<?= $row['id_catatan'] ?>" style="background: #3498db; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 13px;">Edit</a>
+                                <a href="index.php?page=murid/hapu&active=catatan&aktif=trues&id=<?= $row['id_catatan'] ?>" onclick="return confirm('Hapus?')" style="background: #ff6b6b; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 13px;">Delete</a>
                             </div>
 
                         </div>

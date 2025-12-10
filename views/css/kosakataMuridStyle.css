@@ -237,3 +237,135 @@ body {
     background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
     transform: translateY(-2px);
 }
+
+.vocab-card {
+    position: relative; /* Wajib agar tombol absolute posisinya relatif ke kartu */
+    overflow: hidden;   /* Agar tombol yang ngumpet di bawah tidak bocor */
+    padding-bottom: 50px; /* Memberi ruang agar teks tidak tertutup tombol */
+}
+
+/* Container tombol aksi */
+.card-actions {
+    position: absolute;
+    bottom: -60px; /* Sembunyikan di bawah kartu */
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    border-top: 1px solid #eee;
+    transition: bottom 0.3s ease-in-out; /* Animasi slide */
+}
+
+/* Saat kartu di-hover, naikkan tombolnya */
+.vocab-card:hover .card-actions {
+    bottom: 0;
+}
+
+/* Style Tombol Edit & Hapus */
+.btn-mini {
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.btn-edit {
+    background-color: #f1c40f;
+    color: #fff;
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.btn-edit:hover { background-color: #f39c12; }
+.btn-delete:hover { background-color: #c0392b; }
+/* =========================================
+   SEARCH BOX (FIXED)
+   ========================================= */
+
+.search-box {
+    background-color: white;
+    border: 2px solid var(--color-border);
+    border-radius: 50px;
+    padding: 5px 15px;
+    width: 250px; /* Lebar tetap */
+    transition: all 0.3s ease;
+    margin-bottom: 20px; /* Jarak ke bawah */
+}
+
+/* PENTING: Form harus flex agar input & tombol sejajar */
+.search-box form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.search-box:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(108, 92, 231, 0.2);
+}
+
+.search-box input[type="text"] {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex-grow: 1; /* Input mengisi sisa ruang */
+    padding: 8px 5px;
+    font-size: 14px;
+    color: var(--color-text-primary);
+    width: 100%; /* Pastikan input tidak menciut */
+}
+
+.search-box button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary);
+    transition: transform 0.2s;
+}
+
+.search-box button:hover {
+    transform: scale(1.1);
+    color: var(--color-primary);
+}
+/* =========================================
+   BUTTON STYLE (FIXED)
+   ========================================= */
+
+.submit-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, var(--color-secondary), var(--color-primary)); 
+    color: white;
+    border: none; /* Hapus border default */
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer; /* Ubah kursor jadi tangan */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(108, 92, 231, 0.2);
+}
+
+.submit-btn:hover {
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(108, 92, 231, 0.3);
+}
+
+/* Pastikan section list ada jaraknya */
+.vocab-list-section {
+    margin-top: 20px;
+}

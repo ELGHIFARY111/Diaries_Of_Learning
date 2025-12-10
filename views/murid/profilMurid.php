@@ -47,11 +47,11 @@
 
                         <div class="action-buttons-sidebar">
                             <?php if (!$is_edit_mode): ?>
-                                <a href="index.php?page=murid/profilMurid&mode=edit" class="btn-action btn-edit" style="width: 100%; text-decoration: none; display: block; text-align: center; margin-bottom: 10px; background-color: #0984e3; color: white; padding: 12px; border-radius: 8px;">
+                                <a href="index.php?page=murid/profilMurid&mode=edit&active=profil&aktif=true" class="btn-action btn-edit" style="width: 100%; text-decoration: none; display: block; text-align: center; margin-bottom: 10px; background-color: #0984e3; color: white; padding: 12px; border-radius: 8px;">
                                     Edit Profile
                                 </a>
                                 
-                                <a href="index.php?page=logout" onclick="return confirm('Are you sure you want to log out?')" class="btn-action btn-logout" style="width: 100%; text-decoration: none; display: block; text-align: center; background-color: #d63031; color: white; padding: 12px; border-radius: 8px;">
+                                <a href="index.php?page=logout&active=profil&aktif=true" onclick="return confirm('Are you sure you want to log out?')" class="btn-action btn-logout" style="width: 100%; text-decoration: none; display: block; text-align: center; background-color: #d63031; color: white; padding: 12px; border-radius: 8px;">
                                     Logout
                                 </a>
                             <?php else: ?>
@@ -88,7 +88,7 @@
                                         Save Changes
                                     </button>
                                     
-                                    <a href="index.php?page=murid/profilMurid" class="btn-cancel">
+                                    <a href="index.php?page=murid/profilMurid&active=profil&aktif=true" class="btn-cancel">
                                         Cancel
                                     </a>
                                 </div>

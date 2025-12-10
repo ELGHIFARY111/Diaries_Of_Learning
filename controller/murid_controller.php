@@ -73,7 +73,7 @@ function tambah_catatan_page($koneksi) {
 
                 echo "<script>
                         alert('Catatan multimedia berhasil disimpan!'); 
-                        window.location.href='index.php?page=murid/catatanMurid';
+                        window.location.href='index.php?page=murid/catatanMurid&active=catatan&aktif=true';
                     </script>";
                 exit;
             } else {
@@ -108,36 +108,46 @@ function proses_upload_file($file, $tipe_yang_diizinkan) {
     return $nama_baru;
 }
 function kosakata_murid_page($koneksi) {
-    $active = $_GET['active'] ?? 'aktif';
-    $id_user = $_SESSION['user_id'] ?? $_SESSION['id_user']; 
-
-    $q_user = mysqli_query($koneksi, "SELECT id_sekolah FROM user WHERE id_user='$id_user'");
-    $d_user = mysqli_fetch_assoc($q_user);
-    $id_sekolah = $d_user['id_sekolah'] ?? 0;
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['simpan_kata'])) {
-        $data_baru = [
+    $active = 'kosakata'; // Menu aktif
+    $id_user = $_SESSION['user_id'];
+    
+    if (isset($_GET['action']) && $_GET['action'] == 'hapus' && isset($_GET['id'])) {
+        $id_hapus = $_GET['id'];
+        if (hapus_kosakata_murid($koneksi, $id_hapus, $id_user)) {
+            echo "<script>alert('Kosakata dihapus!'); window.location.href='index.php?page=murid/kosakataMurid';</script>";
+        }
+    }
+    $edit_data = null;
+    if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
+        $edit_data = ambil_satu_kosakata($koneksi, $_GET['id'], $id_user);
+    }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $data = [
             'id_user' => $id_user,
             'kata_inggris' => $_POST['kata_inggris'],
             'arti' => $_POST['arti'],
             'contoh' => $_POST['contoh']
         ];
 
-        if (tambah_kosakata_murid($koneksi, $data_baru)) {
-            hitung_progres_misi_spesifik($koneksi, $id_user, $id_sekolah);
-
-            echo "<script>alert('Berhasil menambah kosakata! Progres misi diperbarui.'); window.location.href='index.php?page=murid/kosakataMurid';</script>";
-            exit;
+        if (isset($_POST['id_kosakata']) && !empty($_POST['id_kosakata'])) {
+            $id_k = $_POST['id_kosakata'];
+            if (update_kosakata_murid($koneksi, $id_k, $id_user, $data['kata_inggris'], $data['arti'], $data['contoh'])) {
+                echo "<script>alert('Berhasil diupdate!'); window.location.href='index.php?page=murid/kosakataMurid';</script>";
+            }
         } else {
-            echo "<script>alert('Gagal menambah data.');</script>";
+            if (tambah_kosakata_murid($koneksi, $data)) {
+                echo "<script>alert('Kosakata baru berhasil disimpan!'); window.location.href='index.php?page=murid/kosakataMurid';</script>";
+            } else {
+                echo "<script>alert('Gagal menyimpan.');</script>";
+            }
         }
     }
 
-    $keyword = $_GET['search'] ?? '';
-    $result_kosakata = ambil_kosakata_murid($koneksi, $id_user, $keyword);
+    $search = $_GET['search'] ?? '';
     $daftar_kosakata = [];
-    if ($result_kosakata) {
-        while($row = mysqli_fetch_assoc($result_kosakata)) { $daftar_kosakata[] = $row; }
+    $query_result = ambil_kosakata_murid($koneksi, $id_user, $search);
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $daftar_kosakata[] = $row;
     }
 
     include "./views/murid/kosakataMurid.php";
@@ -235,9 +245,9 @@ function proses_update_profil_murid($koneksi) {
 
         if (update_profil_murid($koneksi, $data)) {
             $_SESSION['nama_lengkap'] = $_POST['nama'];
-            echo "<script>alert('Profil berhasil diperbarui!'); window.location.href='index.php?page=murid/profilMurid&status=sukses';</script>";
+            echo "<script>alert('Profil berhasil diperbarui!'); window.location.href='index.php?page=murid/profilMurid&status=sukses&active=profil&aktif=true';</script>";
         } else {
-            echo "<script>alert('Gagal update. Username/Email mungkin sudah ada.'); window.location.href='index.php?page=murid/profilMurid&mode=edit&status=gagal';</script>";
+            echo "<script>alert('Gagal update. Username/Email mungkin sudah ada.'); window.location.href='index.php?page=murid/profilMurid&mode=edit&status=gagal&active=profil&aktif=true';</script>";
         }
     }
 }

@@ -283,7 +283,6 @@ function update_profil_murid($koneksi, $data) {
     $username= mysqli_real_escape_string($koneksi, $data['username']);
     $email   = mysqli_real_escape_string($koneksi, $data['email']);
     
-    // Cek duplikat username/email selain milik sendiri
     $cek = mysqli_query($koneksi, "SELECT id_user FROM user WHERE (username='$username' OR email='$email') AND id_user != '$id_user'");
     if (mysqli_num_rows($cek) > 0) return false;
 
@@ -302,15 +301,16 @@ function tambah_kosakata_murid($koneksi, $data) {
     $inggris = mysqli_real_escape_string($koneksi, $data['kata_inggris']);
     $arti    = mysqli_real_escape_string($koneksi, $data['arti']);
     $contoh  = mysqli_real_escape_string($koneksi, $data['contoh']);
-    
-    return mysqli_query($koneksi, "INSERT INTO kosakata (id_user, kata_inggris, arti, contoh) VALUES ('$id_user', '$inggris', '$arti', '$contoh')");
+    $query = "INSERT INTO kosakata (id_user, kata_inggris, arti_indonesia, contoh_kalimat, tanggal_dicatat) 
+            VALUES ('$id_user', '$inggris', '$arti', '$contoh', NOW())";
+    return mysqli_query($koneksi, $query);
 }
 
 function ambil_kosakata_murid($koneksi, $id_user, $keyword='') {
     $query = "SELECT * FROM kosakata WHERE id_user='$id_user'";
     if ($keyword) {
         $k = mysqli_real_escape_string($koneksi, $keyword);
-        $query .= " AND (kata_inggris LIKE '%$k%' OR arti LIKE '%$k%')";
+        $query .= " AND (kata_inggris LIKE '%$k%' OR arti_indonesia LIKE '%$k%')";
     }
     $query .= " ORDER BY id_kosakata DESC";
     return mysqli_query($koneksi, $query);
@@ -334,8 +334,36 @@ function update_catatan_murid($koneksi, $id_catatan, $id_user, $judul, $isi, $fo
                 file_foto = '$foto',
                 file_audio = '$audio',
                 file_video = '$video'
-              WHERE id_catatan = '$id_catatan' AND id_user = '$id_user'";
+            WHERE id_catatan = '$id_catatan' AND id_user = '$id_user'";
 
+    return mysqli_query($koneksi, $query);
+}
+function ambil_satu_kosakata($koneksi, $id_kosakata, $id_user) {
+    $id_kosakata = mysqli_real_escape_string($koneksi, $id_kosakata);
+    $id_user     = mysqli_real_escape_string($koneksi, $id_user);
+    $query = "SELECT * FROM kosakata WHERE id_kosakata='$id_kosakata' AND id_user='$id_user'";
+    return mysqli_fetch_assoc(mysqli_query($koneksi, $query));
+}
+
+function update_kosakata_murid($koneksi, $id_kosakata, $id_user, $inggris, $arti, $contoh) {
+    $id_kosakata = mysqli_real_escape_string($koneksi, $id_kosakata);
+    $id_user     = mysqli_real_escape_string($koneksi, $id_user);
+    $inggris     = mysqli_real_escape_string($koneksi, $inggris);
+    $arti        = mysqli_real_escape_string($koneksi, $arti);
+    $contoh      = mysqli_real_escape_string($koneksi, $contoh);
+
+    $query = "UPDATE kosakata SET 
+                kata_inggris='$inggris', 
+                arti_indonesia='$arti', 
+                contoh_kalimat='$contoh' 
+            WHERE id_kosakata='$id_kosakata' AND id_user='$id_user'";
+    return mysqli_query($koneksi, $query);
+}
+
+function hapus_kosakata_murid($koneksi, $id_kosakata, $id_user) {
+    $id_kosakata = mysqli_real_escape_string($koneksi, $id_kosakata);
+    $id_user     = mysqli_real_escape_string($koneksi, $id_user);
+    $query = "DELETE FROM kosakata WHERE id_kosakata='$id_kosakata' AND id_user='$id_user'";
     return mysqli_query($koneksi, $query);
 }
 ?>

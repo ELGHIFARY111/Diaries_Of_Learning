@@ -17,7 +17,7 @@
         <div class="content">
 
             <div style="margin-bottom: 20px;">
-                <a href="index.php?page=murid/catatanMurid" style="text-decoration: none; color: #555; font-weight: bold;">
+                <a href="index.php?page=murid/catatanMurid&active=catatan&aktif=true" style="text-decoration: none; color: #555; font-weight: bold;">
                     ← Back to List
                 </a>
             </div>
@@ -63,7 +63,7 @@
 
         </div>
             <div style="margin-top: 30px; text-align: right;">
-                <a href="index.php?page=murid/hapus&id=<?= $catatan['id_catatan'] ?>" 
+                <a href="index.php?page=murid/hapus&active=catatan&aktif=true&id=<?= $catatan['id_catatan'] ?>" 
                    onclick="return confirm('Delete this note?')"
                    style="background: #ff6b6b; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
                    Delete Note

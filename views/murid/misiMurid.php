@@ -30,7 +30,7 @@
                             $nilai = $misi['progres_nilai'] ?? 0;
                             
                             $id_misi = $misi['id_misi'] ?? 0;
-                            $link_kerjakan = "index.php?page=murid/kerjakanMisiMurid&id=" . $id_misi;
+                            $link_kerjakan = "index.php?page=murid/kerjakanMisiMurid&active=misi&aktif=true&id=" . $id_misi;
                         ?>
 
                         <div class="mission-card active-card">
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
 
-                            <a href="index.php?page=murid/kerjakanMisiMurid&id=<?= $misi['id_misi'] ?>" class="btn-action">
+                            <a href="index.php?page=murid/kerjakanMisiMurid&active=misi&aktif=true&id=<?= $misi['id_misi'] ?>" class="btn-action">
                                 <?= ($misi['persentase_saya'] >= 100) ? 'Review Mission' : 'Continue Mission' ?>
                             </a>
                         </div>
