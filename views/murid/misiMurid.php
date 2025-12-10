@@ -19,6 +19,7 @@
             </div>
 
             <h3 class="section-title">Ongoing Missions</h3>
+            <h3 class="section-title">Ongoing Missions</h3>
             
             <div class="mission-list">
                 

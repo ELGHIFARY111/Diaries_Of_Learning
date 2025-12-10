@@ -1,117 +1,172 @@
 /* =========================================
-   1. LAYOUT DASAR (Sama seperti Home)
+   1. RESET & LAYOUT DASAR
    ========================================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 body {
-    background-color: #f4f4f4;
+    background-color: #f4f7f9; /* Background abu-abu lembut */
     color: #333;
+    height: 100vh;
+    overflow: hidden; /* Body tidak scroll */
 }
 
 .container {
     display: flex;
-    min-height: 100vh;
-}
-
-/* Content Area Basic */
-.content {
-    flex-grow: 1;
-    padding: 30px;
-    margin-left: 280px;
-    margin-top: -12px;
-}
-
-.header {
-    margin-bottom: 25px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
+    height: 100vh;
+    width: 100%;
 }
 
 /* =========================================
-   2. GAYA KHUSUS HALAMAN CATATAN
+   3. KONTEN UTAMA
    ========================================= */
+.content {
+    flex-grow: 1;
+    padding: 40px;
+    overflow-y: auto; /* Scroll hanya di konten */
+    height: 100%;
+    margin-left: 280px;
+}
 
-/* Kotak Formulir */
-.form-box {
+.header {
+    margin-bottom: 30px;
+}
+.header h2 { font-size: 28px; color: #2c3e50; margin-bottom: 5px; }
+.header p { color: #7f8c8d; }
+
+
+/* =========================================
+   4. DESAIN INPUT SEPERTI KERTAS (WORD LOOK)
+   ========================================= */
+.note-form {
+    max-width: 800px; /* Batasi lebar agar mirip kertas A4 */
+    margin: 0 auto; /* Tengah */
+}
+
+/* Lembaran Kertas Putih */
+.word-sheet {
     background: white;
-    padding: 25px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 2px; /* Sudut agak lancip mirip kertas */
+    padding: 40px 50px; /* Padding luas */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* Bayangan mengambang */
+    border: 1px solid #e1e1e1;
+    min-height: 500px; /* Tinggi kertas minimal */
+    display: flex;
+    flex-direction: column;
+    margin-left: -210px;
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-/* Input & Textarea */
-.input-field {
+/* Input Judul (Tanpa Border Kotak) */
+.input-title {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    padding: 10px 0;
+    outline: none;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-.input-field:focus {
-    border-color: #2980b9; /* Biru saat diklik */
+.input-title::placeholder { color: #bdc3c7; }
+
+/* Garis Pemisah */
+.separator {
+    border: 0;
+    height: 1px;
+    background: #eee;
+    margin: 10px 0 20px 0;
+}
+
+/* Input Isi (Textarea Luas & Font Dokumen) */
+.input-body {
+    width: 100%;
+    flex-grow: 1; /* Mengisi sisa kertas */
+    border: none;
+    resize: none; /* Tidak bisa ditarik user */
     outline: none;
+    font-size: 16px;
+    line-height: 1.8; /* Spasi baris nyaman dibaca */
+    color: #34495e;
+    
+    /* Font mirip dokumen ketikan */
+    font-family: 'Georgia', 'Times New Roman', serif; 
+    min-height: 300px;
+}
+
+.input-body::placeholder {
+    color: #bdc3c7;
+    font-style: italic;
 }
 
 /* Tombol Simpan */
+.action-bar {
+    margin-top: 20px;
+    text-align: right;
+}
+
 .btn-simpan {
-    background-color: #27ae60; /* Hijau */
+    background-color: #27ae60;
     color: white;
     border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
+    padding: 12px 30px;
+    border-radius: 30px; /* Bulat kapsul */
     font-weight: bold;
+    font-size: 15px;
     cursor: pointer;
-    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+    transition: 0.2s;
 }
 
 .btn-simpan:hover {
     background-color: #219150;
+    transform: translateY(-2px);
 }
 
-/* Kartu Riwayat (History) */
+
+/* =========================================
+   5. RIWAYAT CATATAN
+   ========================================= */
+.history-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 .history-card {
     background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 20px;
     margin-bottom: 15px;
-    border-left: 6px solid #2980b9; /* Garis biru tebal di kiri */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-left: 5px solid #8e44ad; /* Aksen Ungu */
+    transition: transform 0.2s;
+    margin-left: -210;
 }
 
-.card-meta {
-    display: flex;
-    gap: 15px;
+.history-card:hover {
+    transform: translateX(5px);
+}
+
+.card-meta span {
     font-size: 12px;
-    color: #888;
-    margin-bottom: 8px;
+    color: #95a5a6;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 .card-title {
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin: 5px 0 10px 0;
     color: #2c3e50;
 }
 
 .card-body {
     font-size: 14px;
-    line-height: 1.5;
     color: #555;
+    line-height: 1.5;
 }

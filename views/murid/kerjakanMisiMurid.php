@@ -14,10 +14,10 @@
 
         <div class="content">
 
-            <a href="misi.php" class="btn-back">⬅ Back to Mission List</a>
+            <a href="misi.php" class="btn-back">Back to Mission List</a>
 
             <div class="header-misi">
-                <span class="badge badge-school">🏫 School Mission</span>
+                <span class="badge badge-school">School Mission</span>
                 <h1>Adjective Challenge</h1>
                 <p class="deskripsi">
                     Instruction: Find the meaning of the 5 adjectives below, then create one simple sentence using each word.
