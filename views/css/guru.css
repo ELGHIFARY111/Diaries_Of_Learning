@@ -590,7 +590,7 @@ a:hover {
     border: 1px solid #ddd; 
     padding: 30px; 
     width: 100%;
-    max-width: 1100px; /* Lebarkan sedikit agar 2 kolom nyaman */
+    max-width: 1600px; /* Lebarkan sedikit agar 2 kolom nyaman */
     margin: 30px auto; 
     text-align: left; /* Teks default rata kiri */
     overflow: hidden;
@@ -796,9 +796,43 @@ a:hover {
     color: var(--color-primary);
 }
 
+.btn-read,
 .btn-check {
-    background-color: var(--color-success);
-    color: white;
+    padding: 6px 12px;
+    width: 80px; 
+    text-align: center;
+    border: none;
+    border-radius: 6px; 
+    cursor: pointer;
+    text-decoration: none; 
+    font-size: 12px;
+    font-weight: 600; /* Dibuat lebih tebal */
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; /* Teks di tengah */
+    gap: 5px;   
+    margin-right: 5px; 
+    transition: all 0.3s ease;
+    color: white !important; /* KUNCI: Pastikan warna teks selalu putih */
+}
+
+.btn-read {
+    background: var(--color-accent-blue); 
+}
+.btn-read:hover { 
+    background: #0771bf; 
+    transform: translateY(-1px);
+}
+
+
+
+.btn-check {
+    background-color: var(--color-success); 
+}
+
+.btn-check:hover {
+    background-color: #008f72;
+    transform: translateY(-1px);
 }
 
 .btn-disabled {
@@ -960,6 +994,19 @@ a:hover {
 }
 
 /* ----------------------------------------------------------------- */
+
+
+/*Tambahan agar filter terlihat aktif */
+.filter-link { padding: 5px 10px; text-decoration: none; color: #636e72; border-radius: 20px; font-size: 14px; margin-right: 5px; }
+.filter-link:hover { background: #dfe6e9; }
+.filter-link.active { background: #6c5ce7; color: white; font-weight: bold; }
+
+.rank-badge { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; color: white; }
+.gold { background: #f1c40f; box-shadow: 0 2px 5px rgba(241, 196, 15, 0.4); }
+.silver { background: #bdc3c7; box-shadow: 0 2px 5px rgba(189, 195, 199, 0.4); }
+.bronze { background: #e67e22; box-shadow: 0 2px 5px rgba(230, 126, 34, 0.4); }
+.default-rank { color: #636e72; font-weight: bold; padding-left: 10px; }
+
 
 
 .leaderboard-section h3 {
@@ -1181,6 +1228,8 @@ a:hover {
     color: #2e7d32;
 }
 /* review catatan */
+
+
 .form-container {
     max-width: 700px;
     margin: 30px auto;
@@ -1205,6 +1254,22 @@ a:hover {
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
+
+.badge-review-pending { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+.badge-review-reviewed { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+
+.btn-check {
+    background: #27ae60; color: white; border: none; padding: 6px 12px;
+    border-radius: 6px; cursor: pointer; text-decoration: none; font-size: 12px;
+    display: inline-flex; align-items: center; gap: 5px;
+}
+.btn-check:hover { background: #2ecc71; }
+
+.btn-disabled {
+    background: #dfe6e9; color: #b2bec3; cursor: not-allowed; pointer-events: none;
+}
+
+.filter-form { display: flex; gap: 15px; align-items: flex-end; }
 
 /* laporan guru */
 .report-grid {
@@ -1307,4 +1372,156 @@ canvas {
     background: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
+}
+.btn-read {
+    background: #3498db; /* Warna Biru */
+    color: white; 
+    border: none; 
+    padding: 6px 12px;
+    border-radius: 6px; 
+    cursor: pointer; 
+    text-decoration: none; 
+    font-size: 12px;
+    display: inline-flex; 
+    align-items: center; 
+    gap: 5px;
+    margin-right: 5px; /* Jarak dengan tombol sebelah */
+}
+.btn-read:hover { background: #2980b9; }
+/* baca catatan */
+.container-baca { max-width: 1100px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+.header-note { border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 20px; }
+.note-title { font-size: 24px; font-weight: bold; color: #2c3e50; margin-bottom: 5px; }
+.note-meta { color: #7f8c8d; font-size: 14px; }
+.note-content { font-size: 16px; line-height: 1.8; color: #333; white-space: pre-wrap; min-height: 200px; }
+.btn-back { text-decoration: none; color: #555; font-weight: bold; display: inline-block; margin-bottom: 20px; }
+.action-area { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; text-align: right; }
+.btn-approve { background: #27ae60; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+.btn-approve:hover { background: #219150; }
+
+
+/* progress misi  */
+.kata-container {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+}
+.kata-badge {
+    display: inline-block;
+    background-color: #e3f2fd;
+    color: #1565c0;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #90caf9;
+    font-weight: bold;
+}
+.kata-title {
+    font-size: 14px; 
+    font-weight: bold; 
+    color: #ffffffff; 
+    margin-bottom: 10px; 
+    display: block;
+}
+
+
+/* DETAIL SEKOLAH STYLES */
+
+.detail-header {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow-subtle);
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.school-avatar {
+    width: 80px; height: 80px;
+    background: var(--color-background-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+}
+.detail-info h2 { margin: 0 0 5px 0; color: var(--color-text-primary); }
+.detail-info p { margin: 0; color: var(--color-text-secondary); }
+
+.code-badge {
+    background: #e1f5fe; color: #0288d1;
+    padding: 5px 12px; border-radius: 6px;
+    font-weight: bold; font-family: monospace; font-size: 1.1em;
+    cursor: pointer; display: inline-block; margin-top: 10px;
+}
+
+.grid-2 {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 25px;
+}
+
+.info-card {
+    background: #fff; padding: 25px;
+    border-radius: 12px; box-shadow: var(--box-shadow-subtle);
+}
+.rekan-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid #eee;
+}
+.rekan-item:last-child { border-bottom: none; }
+
+/* EDIT SEKOLAH STYLES  */
+
+.form-container { max-width: 600px; margin: 40px auto; padding: 30px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+.form-group input, .form-group textarea { 
+    width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; 
+}
+.leaderboard-table tbody td {
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f2f6;
+    color: #2d3436;
+    font-size: 0.95rem;
+}
+
+/* Foto Profil Bulat */
+.table-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+    border: 1px solid #dfe6e9;
+}
+
+/* Highlight Baris "Saya" (Ungu Transparan) */
+.leaderboard-table tbody tr.is-me {
+    background-color: rgba(108, 92, 231, 0.08) !important;
+}
+.leaderboard-table tbody tr.is-me td:first-child {
+    border-left: 3px solid #6c5ce7; /* Garis ungu di kiri */
+}
+.leaderboard-table tbody tr.is-me td {
+    font-weight: 600;
+    color: #6c5ce7;
+}
+
+/* Warna Angka Ranking 1, 2, 3 */
+.rank-num { font-weight: bold; font-size: 1.1em; color: #b2bec3; }
+
+tr.rank-1 .rank-num { color: #f1c40f; font-size: 1.3em; text-shadow: 0 1px 2px rgba(0,0,0,0.1); } /* Emas */
+tr.rank-2 .rank-num { color: #95a5a6; font-size: 1.2em; } /* Perak */
+tr.rank-3 .rank-num { color: #e17055; font-size: 1.2em; } /* Perunggu */
+
+/* Badge Poin */
+.poin-badge {
+    background: #f1f2f6;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.9em;
+    color: #6c5ce7;
 }

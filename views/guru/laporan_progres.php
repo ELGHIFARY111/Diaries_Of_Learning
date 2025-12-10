@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Progress Report - Diary of Learning</title>
+    <title>Diary of Learning</title>
     <link rel="stylesheet" href="./views/css/guru.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -16,7 +16,7 @@
 
             <div class="header">
                 <h2>Student Learning Progress Report</h2>
-                <p>Analyze collective and individual student performance during this period.</p>
+
             </div>
             
             <div class="filter-options">

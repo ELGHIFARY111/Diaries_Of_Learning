@@ -19,7 +19,7 @@
                 <div class="header-text">
                     <h2>School Vocabulary Missions</h2>
                 </div>
-                <a href="index.php?page=guru/tambah_misi" class="btn-action btn-success">
+                <a href="index.php?page=guru/tambah_misi&active=misi&aktif=true" class="btn-action btn-success">
                     + Create New Mission
                 </a>
             </div>
@@ -62,20 +62,20 @@
                                 <td>
                                     <div class="aksi-group" style="display:flex; gap:5px;">
                                         
-                                        <a href="index.php?page=guru/detail_progres_misi&id=<?= $misi['id_misi'] ?>" 
+                                        <a href="index.php?page=guru/detail_progres_misi&active=misi&aktif=true&id=<?= $misi['id_misi'] ?>" 
                                             class="btn-aksi" 
                                             style="text-decoration:none; background:#6c5ce7; color:white; padding:5px 10px; border-radius:4px; font-size:0.8em;" 
                                             title="Lihat Siswa">
                                             Detail
                                         </a>
 
-                                        <a href="index.php?page=guru/edit_misi&id=<?= $misi['id_misi'] ?>" 
+                                        <a href="index.php?page=guru/edit_misi&active=misi&aktif=true&id=<?= $misi['id_misi'] ?>" 
                                             class="btn-aksi" 
                                             style="text-decoration:none; background:#0984e3; color:white; padding:5px 10px; border-radius:4px; font-size:0.8em;">
                                             Edit
                                         </a>
 
-                                        <a href="index.php?page=guru/hapus_misi&id=<?= $misi['id_misi'] ?>" 
+                                        <a href="index.php?page=guru/hapus_misi&active=misi&aktif=true&id=<?= $misi['id_misi'] ?>" 
                                             onclick="return confirm('Yakin ingin menghapus misi ini?')" 
                                             class="btn-delete" 
                                             style="text-decoration:none; background:#d63031; color:white; padding:5px 10px; border-radius:4px; font-size:0.8em;">

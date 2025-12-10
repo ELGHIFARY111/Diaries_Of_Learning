@@ -49,7 +49,6 @@ function ambil_catatan_terbaru($koneksi, $id_sekolah) {
                 ORDER BY c.tanggal_catatan DESC LIMIT 3";
     return mysqli_query($koneksi, $query);
 }
-// tambah sekolah
 function tambah_sekolah_baru($koneksi, $id_guru, $nama_sekolah, $alamat) {
     $kode_sekolah = '';
     $is_unique = false;
@@ -104,7 +103,6 @@ function update_data_sekolah($koneksi, $id_sekolah, $nama_sekolah, $alamat) {
                 
     return mysqli_query($koneksi, $query);
 }
-// misi kosakata
 function ambil_daftar_misi($koneksi, $id_sekolah) {
     $query = "SELECT * FROM misi 
                 WHERE id_sekolah = '$id_sekolah' 
@@ -118,62 +116,103 @@ function ambil_detail_misi($koneksi, $id_misi) {
     return mysqli_fetch_assoc($result);
 }
 
-function tambah_misi($koneksi, $data) {
-    $id_sekolah = $data['id_sekolah'];
-    $id_pembuat = $data['id_pembuat'];
-    $judul      = $data['judul'];
-    $deskripsi  = $data['deskripsi'];
+function tambah_misi_baru($koneksi, $data) {
+    $judul      = mysqli_real_escape_string($koneksi, $data['judul']);
+    $deskripsi  = mysqli_real_escape_string($koneksi, $data['deskripsi']);
     $tgl_mulai  = $data['tanggal_mulai'];
     $tgl_akhir  = $data['tanggal_akhir'];
-    $target     = $data['target_jumlah_kata'];
+    $id_pembuat = $data['id_pembuat'];
+    $id_sekolah = $data['id_sekolah'];
+    
+    $array_kata = explode(',', $data['kata_target_raw']);
+    $target_jumlah = count($array_kata);
 
-    $query = "INSERT INTO misi (id_sekolah, id_pembuat, judul, deskripsi, tanggal_mulai, tanggal_akhir, target_jumlah_kata) 
-                VALUES ('$id_sekolah', '$id_pembuat', '$judul', '$deskripsi', '$tgl_mulai', '$tgl_akhir', '$target')";
-                
-    return mysqli_query($koneksi, $query);
+    $query = "INSERT INTO misi (judul, deskripsi, tanggal_mulai, tanggal_akhir, target_jumlah_kata, id_pembuat, id_sekolah) 
+            VALUES ('$judul', '$deskripsi', '$tgl_mulai', '$tgl_akhir', '$target_jumlah', '$id_pembuat', '$id_sekolah')";
+    
+    if (mysqli_query($koneksi, $query)) {
+        $id_misi_baru = mysqli_insert_id($koneksi);
+
+        foreach ($array_kata as $kata) {
+            $kata_bersih = trim(mysqli_real_escape_string($koneksi, $kata));
+            if (!empty($kata_bersih)) {
+                mysqli_query($koneksi, "INSERT INTO kosakata_misi (id_misi, kata_kunci) VALUES ('$id_misi_baru', '$kata_bersih')");
+            }
+        }
+        return true;
+    }
+    return false;
+}
+function ambil_list_kata_target($koneksi, $id_misi) {
+    $id_misi = mysqli_real_escape_string($koneksi, $id_misi);
+    $query = mysqli_query($koneksi, "SELECT kata_kunci FROM kosakata_misi WHERE id_misi = '$id_misi'");
+    
+    $hasil = [];
+    while ($row = mysqli_fetch_assoc($query)) {
+        $hasil[] = $row['kata_kunci'];
+    }
+    return $hasil;
 }
 
-function update_misi($koneksi, $id_misi, $data) {
-    $judul      = $data['judul'];
-    $deskripsi  = $data['deskripsi'];
+function update_misi($koneksi, $data) {
+    $id_misi    = $data['id_misi'];
+    $judul      = mysqli_real_escape_string($koneksi, $data['judul']);
+    $deskripsi  = mysqli_real_escape_string($koneksi, $data['deskripsi']);
     $tgl_mulai  = $data['tanggal_mulai'];
     $tgl_akhir  = $data['tanggal_akhir'];
-    $target     = $data['target_jumlah_kata'];
+    
+    $array_kata = explode(',', $data['kata_target_raw']);
+    $target_jumlah = count($array_kata);
 
     $query = "UPDATE misi SET 
-                judul = '$judul',
-                deskripsi = '$deskripsi',
-                tanggal_mulai = '$tgl_mulai',
-                tanggal_akhir = '$tgl_akhir',
-                target_jumlah_kata = '$target'
-            WHERE id_misi = '$id_misi'";
-            
-    return mysqli_query($koneksi, $query);
+                judul='$judul', 
+                deskripsi='$deskripsi', 
+                tanggal_mulai='$tgl_mulai', 
+                tanggal_akhir='$tgl_akhir',
+                target_jumlah_kata='$target_jumlah' 
+              WHERE id_misi='$id_misi'";
+              
+    if (mysqli_query($koneksi, $query)) {
+        mysqli_query($koneksi, "DELETE FROM kosakata_misi WHERE id_misi='$id_misi'");
+
+        foreach ($array_kata as $kata) {
+            $kata_bersih = trim(mysqli_real_escape_string($koneksi, $kata));
+            if (!empty($kata_bersih)) {
+                mysqli_query($koneksi, "INSERT INTO kosakata_misi (id_misi, kata_kunci) VALUES ('$id_misi', '$kata_bersih')");
+            }
+        }
+        return true;
+    }
+    return false;
 }
 
+function ambil_kata_misi_string($koneksi, $id_misi) {
+    $q = mysqli_query($koneksi, "SELECT kata_kunci FROM kosakata_misi WHERE id_misi = '$id_misi'");
+    $arr = [];
+    while($row = mysqli_fetch_assoc($q)) {
+        $arr[] = $row['kata_kunci'];
+    }
+    return implode(', ', $arr); 
+}
 function hapus_misi($koneksi, $id_misi) {
-    $query = "DELETE FROM misi WHERE id_misi = '$id_misi'";
-    return mysqli_query($koneksi, $query);
+    return mysqli_query($koneksi, "DELETE FROM misi WHERE id_misi='$id_misi'");
 }
 function ambil_progres_siswa_per_misi($koneksi, $id_sekolah, $id_misi) {
-    $q_misi = mysqli_query($koneksi, "SELECT target_jumlah_kata FROM misi WHERE id_misi = '$id_misi'");
-    $d_misi = mysqli_fetch_assoc($q_misi);
-    $target = $d_misi['target_jumlah_kata'];
-    
-    $query = "SELECT u.id_user, u.nama_lengkap, u.email,
-                (
-                    SELECT COUNT(*) FROM progres p 
-                    WHERE p.id_user = u.id_user 
-                ) as kata_dikuasai
-                FROM user u 
-                WHERE u.id_sekolah = '$id_sekolah' AND u.role = '3'
-                ORDER BY kata_dikuasai DESC";
+    $q_target = mysqli_query($koneksi, "SELECT target_jumlah_kata FROM misi WHERE id_misi = '$id_misi'");
+    $d_target = mysqli_fetch_assoc($q_target);
+    $target = $d_target['target_jumlah_kata'] ?? 0;
 
-    $result = mysqli_query($koneksi, $query);
-    return [
-        'data' => $result,
-        'target' => $target
-    ];
+    $query = "SELECT u.id_user, u.nama_lengkap, u.email, 
+                    COALESCE(p.nilai, 0) as progres_nilai
+            FROM user u
+            LEFT JOIN progres p ON u.id_user = p.id_user AND p.id_misi = '$id_misi'
+            WHERE u.id_sekolah = '$id_sekolah' 
+            AND u.role = '3' 
+            ORDER BY u.nama_lengkap ASC";
+            
+    $data = mysqli_query($koneksi, $query);
+
+    return ['data' => $data, 'target' => $target];
 }
 function ambil_catatan_siswa_sekolah($koneksi, $id_sekolah, $filter_status = 'all', $filter_tipe = 'all') {
     $query = "SELECT c.*, u.nama_lengkap
@@ -303,5 +342,76 @@ function ambil_leaderboard($koneksi, $id_sekolah_guru, $scope = 'school', $time 
             ORDER BY total_poin DESC, u.nama_lengkap ASC";
 
     return mysqli_query($koneksi, $query);
+}
+function cek_sekolah_by_kode($koneksi, $kode) {
+    $kode = mysqli_real_escape_string($koneksi, $kode);
+    $query = "SELECT * FROM sekolah WHERE kode_sekolah = '$kode'";
+    $result = mysqli_query($koneksi, $query);
+    return mysqli_fetch_assoc($result);
+}
+function cek_sekolah_by_nama($koneksi, $nama) {
+    $nama = mysqli_real_escape_string($koneksi, $nama);
+    $query = "SELECT * FROM sekolah WHERE nama_sekolah = '$nama'"; 
+    $result = mysqli_query($koneksi, $query);
+    return mysqli_fetch_assoc($result);
+}
+function update_sekolah_guru($koneksi, $id_user, $id_sekolah) {
+    $id_user = mysqli_real_escape_string($koneksi, $id_user);
+    $id_sekolah = mysqli_real_escape_string($koneksi, $id_sekolah);
+    
+    $query = "UPDATE user SET id_sekolah = '$id_sekolah' WHERE id_user = '$id_user'";
+    return mysqli_query($koneksi, $query);
+}
+function ambil_detail_siswa($koneksi, $id_siswa) {
+    $id_siswa = mysqli_real_escape_string($koneksi, $id_siswa);
+    $query = mysqli_query($koneksi, "SELECT * FROM user WHERE id_user = '$id_siswa'");
+    return mysqli_fetch_assoc($query);
+}
+
+function ambil_statistik_siswa($koneksi, $id_siswa) {
+    $id_siswa = mysqli_real_escape_string($koneksi, $id_siswa);
+    
+    $q1 = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM catatan WHERE id_user = '$id_siswa'");
+    $catatan = mysqli_fetch_assoc($q1)['total'];
+
+    $q2 = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM kosakata WHERE id_user = '$id_siswa'");
+    $kosakata = mysqli_fetch_assoc($q2)['total'];
+
+    return ['total_catatan' => $catatan, 'total_kosakata' => $kosakata];
+}
+
+function ambil_catatan_lengkap_dengan_user($koneksi, $id_catatan) {
+    $id_catatan = mysqli_real_escape_string($koneksi, $id_catatan);
+    
+    $query = "SELECT c.*, u.nama_lengkap 
+            FROM catatan c 
+            JOIN user u ON c.id_user = u.id_user 
+            WHERE c.id_catatan = '$id_catatan'";
+            
+    $result = mysqli_query($koneksi, $query);
+    return mysqli_fetch_assoc($result);
+}
+function ambil_riwayat_catatan_siswa($koneksi, $id_siswa) {
+    $id_siswa = mysqli_real_escape_string($koneksi, $id_siswa);
+    $query = "SELECT * FROM catatan WHERE id_user = '$id_siswa' ORDER BY tanggal_catatan DESC LIMIT 10";
+    return mysqli_query($koneksi, $query);
+}
+
+function hitung_skor_total_siswa($koneksi, $id_siswa) {
+    $id_siswa = mysqli_real_escape_string($koneksi, $id_siswa);
+    
+    // Poin Catatan (x10)
+    $q1 = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM catatan WHERE id_user = '$id_siswa'");
+    $poin_catatan = mysqli_fetch_assoc($q1)['total'] * 10;
+
+    // Poin Misi Selesai (x5)
+    $q2 = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM progres WHERE id_user = '$id_siswa' AND nilai = 100");
+    $poin_misi = mysqli_fetch_assoc($q2)['total'] * 5;
+
+    // Poin Kosakata (x2)
+    $q3 = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM kosakata WHERE id_user = '$id_siswa'");
+    $poin_kosakata = mysqli_fetch_assoc($q3)['total'] * 2;
+
+    return $poin_catatan + $poin_misi + $poin_kosakata;
 }
 ?>

@@ -20,7 +20,6 @@
 
             <div class="form-box">
                 <h3>Add New Word</h3>
-                <h3>Add New Word</h3>
                 <form action="" method="POST" style="margin-top: 15px;">
                     
                     <div class="form-row">
@@ -39,7 +38,7 @@
                         <input type="text" name="contoh" class="input-field" placeholder="Ex: He is eager to learn English.">
                     </div>
 
-                    <button type="submit" name="simpan_kata" class="btn-submit">Save into Dictionary</button>
+                    <button type="submit" name="simpan_kata" class="submit-btn">Save into Dictionary</button>
                 </form>
             </div>
 

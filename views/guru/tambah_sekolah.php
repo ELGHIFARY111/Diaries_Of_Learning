@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buat Sekolah Baru</title>
+    <title>Create New School</title>
     <link rel="stylesheet" href="./views/css/guru.css">
     <style>
 
@@ -13,26 +13,26 @@
     <div class="container">
         <div class="content" style="">
             <div class="header" style="text-align: center;">
-                <h2>Registrasi Sekolah</h2>
-                <p>Mulai perjalanan digital sekolah Anda di sini.</p>
+                <h2>School Registration</h2>
+                <p>Start your school's digital journey here.</p>
             </div>
 
             <div class="box form-container">
                 <form action="index.php?page=guru/proses_tambah_sekolah" method="POST">
                     
                     <div class="form-group">
-                        <label>Nama Sekolah</label>
-                        <input type="text" name="nama_sekolah" placeholder="Contoh: SMA Bintang Timur" required>
+                        <label>School Name</label>
+                        <input type="text" name="nama_sekolah" placeholder="Example: East Star High School" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Alamat Lengkap</label>
-                        <textarea name="alamat" rows="4" placeholder="Jalan Raya No..." required></textarea>
+                        <label>Full Address</label>
+                        <textarea name="alamat" rows="4" placeholder="Main Road No..." required></textarea>
                     </div>
 
                     <div class="action-buttons" style="display:flex; justify-content:space-between;">
-                        <a href="index.php?page=guru/monitoring" class="btn-action" style="background:#e0e0e0; color:#333; text-decoration:none; text-align:center;">Batal</a>
-                        <button type="submit" class="btn-action btn-success">Simpan Sekolah</button>
+                        <a href="index.php?page=guru/monitoring" class="btn-action" style="background:#e0e0e0; color:#333; text-decoration:none; text-align:center;">Cancel</a>
+                        <button type="submit" class="btn-action btn-success">Save School</button>
                     </div>
 
                 </form>

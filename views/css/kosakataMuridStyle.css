@@ -1,3 +1,24 @@
+:root {
+    /* New Color Palette */
+    --color-primary: #6c5ce7; /* Ungu Primer */
+    --color-secondary: #a29bfe; /* Ungu Muda */
+    --color-accent-blue: #0984e3; /* Biru Aksentuasi */
+    --color-success: #00b894; /* Teal Green */
+    --color-warning: #ffbe76;
+    --color-danger: #ff7675;
+    --color-info: #636e72;
+    
+    /* Text & Background */
+    --color-text-primary: #2d3436;
+    --color-text-secondary: #636e72;
+    --color-background-light: #f5f6fa;
+    --color-card-background: #ffffff;
+    --color-border: #dfe6e9;
+
+    --font-family: 'Inter', sans-serif;
+    --box-shadow-subtle: 0 8px 15px rgba(108, 92, 231, 0.1); 
+    --box-shadow-hover: 0 12px 20px rgba(108, 92, 231, 0.2);
+}
 /* =========================================
    1. LAYOUT DASAR (Copy dari sebelumnya)
    ========================================= */
@@ -5,11 +26,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* Font standar komputer */
 }
 
 body {
-    background-color: #f4f4f4;
+    background-color: #f4f4f4; /* Abu-abu muda */
     color: #333;
 }
 
@@ -96,11 +117,60 @@ body {
     margin-bottom: 15px;
 }
 
+/* =========================================
+   SEARCH BOX (REVISI)
+   ========================================= */
+
+/* Container Form Pencarian */
 .search-box {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 200px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 2px solid var(--color-border);
+    border-radius: 50px; /* Bentuk kapsul */
+    padding: 5px 15px;
+    width: 250px; /* Lebar tetap agar rapi */
+    transition: all 0.3s ease;
+}
+
+/* Efek saat input diklik (Focus) */
+.search-box:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(108, 92, 231, 0.2);
+}
+
+/* Input Text di dalam Search Box */
+.search-box input[type="text"] {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex-grow: 1; /* Mengisi ruang kosong */
+    padding: 8px 5px;
+    font-size: 14px;
+    color: var(--color-text-primary);
+}
+
+.search-box input[type="text"]::placeholder {
+    color: #b2bec3;
+}
+
+/* Tombol Kaca Pembesar */
+.search-box button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.search-box button:hover {
+    transform: scale(1.1) rotate(10deg); /* Efek animasi kecil saat hover */
+    background-color: #f0f0f0;
 }
 
 /* Grid Pembungkus Kartu */
@@ -114,12 +184,13 @@ body {
 
 /* Kartu Kosakata */
 .vocab-card {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    border-top: 4px solid #f1c40f; /* Garis kuning di atas kartu */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    background-color: var(--color-card-background);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow-subtle);
+    border-left: 5px solid; 
+    border-image: linear-gradient(to bottom, var(--color-primary), var(--color-accent-blue)) 1;
+    border-image-slice: 1;
     transition: transform 0.2s;
 }
 
@@ -150,4 +221,19 @@ body {
     background: #f9f9f9;
     padding: 5px;
     border-radius: 4px;
+}
+.submit-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, var(--color-secondary), var(--color-primary)); 
+    color: white;
+    border-radius: 8px;
+    border-color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+    transform: translateY(-2px);
 }
