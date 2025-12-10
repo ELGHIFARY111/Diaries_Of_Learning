@@ -205,7 +205,7 @@ switch ($page) {
         proses_update_profil_murid($koneksi)($koneksi);
         break;
 
-        case 'murid/tambah_catatan':
+    case 'murid/tambah_catatan':
         tambah_catatan_page($koneksi);
         break;
     case 'murid/baca':

@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Leaderboard</title>
+    <title>Leaderboard</title>
     <link rel="stylesheet" href="./views/css/murid.css">
-    </head>
 <body>
     
     <div class="container">
@@ -52,70 +51,60 @@
                             <input type="hidden" name="time" value="<?= $time ?>">
                             
                             <input type="text" name="search" placeholder="Search student name..." value="<?= htmlspecialchars($search) ?>" 
-                                       style="padding: 8px 15px; border-radius: 20px; border: 1px solid #dfe6e9; outline: none;">
+                                            style="padding: 8px 15px; border-radius: 20px; border: 1px solid #dfe6e9; outline: none;">
                             <button type="submit" class="btn-action btn-primary" style="padding: 8px 15px; border-radius: 20px;">🔍</button>
                         </form>
                     </div>
                 </div>
 
                 <div class="table-container">
-                    <table class="leaderboard-table" style="width: 100%; border-collapse: collapse;">
+                    <table class="leaderboard-table" style="width: 100%; border-collapse: separate; border-spacing: 0;">
                         <thead>
                             <tr style="text-align: left; color: #b2bec3; font-size: 12px; text-transform: uppercase;">
-                                <th style="padding: 15px;">Rank</th>
-                                <th style="padding: 15px;">Student</th>
-                                <th style="padding: 15px;">School</th>
-                                <th style="padding: 15px;">Total XP Points</th>
+                                <th style="padding: 15px; border-bottom: 2px solid #f1f2f6;">Rank</th>
+                                <th style="padding: 15px; border-bottom: 2px solid #f1f2f6;">Student</th>
+                                <th style="padding: 15px; border-bottom: 2px solid #f1f2f6;">School</th>
+                                <th style="padding: 15px; border-bottom: 2px solid #f1f2f6; text-align:right;">Total XP Points</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (mysqli_num_rows($leaderboard_data) > 0): ?>
-                                <?php 
-                                    $rank = 1; 
-                                    while ($row = mysqli_fetch_assoc($leaderboard_data)): 
-                                        $row_class = "";
-                                        if ($rank == 1) $row_class = "background: #fffdf0;";
-                                        elseif ($rank == 2) $row_class = "background: #f7f9fa;";
-                                        elseif ($rank == 3) $row_class = "background: #fff5eb;";
-                                ?>
-                                        <tr style="border-bottom: 1px solid #f1f2f6; <?= $row_class ?>">
-                                            <td style="padding: 15px;">
-                                                <?php if ($rank == 1): ?>
-                                                    <span class="rank-badge gold">1</span> 👑
-                                                <?php elseif ($rank == 2): ?>
-                                                    <span class="rank-badge silver">2</span>
-                                                <?php elseif ($rank == 3): ?>
-                                                    <span class="rank-badge bronze">3</span>
-                                                <?php else: ?>
-                                                    <span class="default-rank"><?= $rank ?></span>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td style="padding: 15px;">
-                                                <div style="font-weight: bold; color: #2d3436; font-size: 15px;">
-                                                    <?= htmlspecialchars($row['nama_lengkap']) ?>
-                                                </div>
-                                            </td>
-                                            <td style="padding: 15px; color: #636e72;">
-                                                <?= htmlspecialchars($row['nama_sekolah'] ?? 'No School') ?>
-                                            </td>
-                                            <td style="padding: 15px;">
-                                                <div style="font-weight: bold; color: #6c5ce7; display: flex; align-items: center; gap: 5px;">
-                                                    <i class="fas fa-bolt" style="color: #f1c40f;"></i> 
-                                                    <?= number_format($row['total_poin']) ?> XP
-                                                </div>
-                                            </td>
-                                        </tr>
-                                <?php 
-                                        $rank++;
-                                    endwhile; 
-                                ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="4" style="text-align: center; padding: 40px; color: #b2bec3;">
-                                        <div style="font-size: 40px; margin-bottom: 10px;">🏆</div>
-                                        No student activity data for this period yet.
-                                    </td>
-                                </tr>
+                            <?php 
+                            foreach ($leaderboard_final as $row) : 
+                                
+                                $id_saya = $_SESSION['user_id'] ?? 0;
+                                $is_me = ($row['id_user'] == $id_saya);
+                                
+                                // Tentukan Class CSS (Bukan Inline Style lagi)
+                                $row_class = $is_me ? 'is-me' : '';
+                                
+                                // Tambah class untuk ranking 1, 2, 3 agar berwarna
+                                if ($row['rank_asli'] == 1) $row_class .= ' rank-1';
+                                elseif ($row['rank_asli'] == 2) $row_class .= ' rank-2';
+                                elseif ($row['rank_asli'] == 3) $row_class .= ' rank-3';
+                            ?>
+
+                            <tr class="<?= $row_class; ?>">
+                                <td>
+                                    <span class="rank-num">#<?= $row['rank_asli']; ?></span>
+                                </td> 
+                                
+                                <td>
+                                    
+                                    <?= htmlspecialchars($row['nama_lengkap']); ?>
+                                    <?php if($is_me) echo '<span style="font-size: 0.8em; opacity: 0.7;"> (Anda)</span>'; ?>
+                                </td>
+                                
+                                <td><?= $row['nama_sekolah']; ?></td>
+                                
+                                <td style="text-align: right;">
+                                    <span class="poin-badge"><?= number_format($row['total_poin']); ?> XP</span>
+                                </td>
+                            </tr>
+
+                            <?php endforeach; ?>
+
+                            <?php if (empty($leaderboard_final)) : ?>
+                                <tr><td colspan="4" class="text-center" style="padding: 30px; color: #999;">Student not found.</td></tr>
                             <?php endif; ?>
                         </tbody>
                     </table>

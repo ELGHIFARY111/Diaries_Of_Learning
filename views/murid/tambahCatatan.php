@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Note</title>
+    <title>Add Note</title>
     <link rel="stylesheet" href="views/css/catatanMuridStyle.css">
 </head>
 <body>
@@ -22,7 +22,7 @@
                 <p>Update your story.</p>
             </div>
 
-            <form action="" method="POST" class="note-form" enctype="multipart/form-data">
+            <form action="index.php?page=murid/tambah_catatan" method="POST" class="note-form" enctype="multipart/form-data">
                 
                 <div class="word-sheet">
                     <input type="text" name="judul" class="input-title" required placeholder="Enter Title Here...">
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="action-bar">
-                    <button type="submit" name="update_catatan" class="btn-simpan">Add Notes</button>
+                    <button type="submit" name="simpan_catatan" class="btn-simpan">Add Notes</button>
                 </div>
 
             </form>

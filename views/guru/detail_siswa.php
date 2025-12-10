@@ -39,7 +39,7 @@
                     <h3><?= $total_kosakata ?></h3>
                 </div>
                 <div class="stat-card">
-                    <p>Writing Score (Avg)</p>
+                    <p>Writing Score (XP)</p>
                     <h3><?= number_format($nilai_menulis, 1) ?></h3>
                 </div>
             </div>

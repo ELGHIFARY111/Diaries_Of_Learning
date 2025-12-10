@@ -15,15 +15,13 @@ function hapus_catatan_murid($koneksi, $id_catatan, $id_user) {
     $query = "DELETE FROM catatan WHERE id_catatan = '$id_catatan' AND id_user = '$id_user'";
     return mysqli_query($koneksi, $query);
 }
-function ambil_data_leaderboard($koneksi, $id_sekolah_guru, $time = 'all', $scope = 'school') {
-    
+function ambil_data_leaderboard($koneksi, $id_sekolah_guru, $scope = 'school', $time = 'all', $search = '') {
     $filter_catatan = "";
     $filter_misi = "";
 
     if ($time == 'month') {
         $filter_catatan = "AND MONTH(c.tanggal_catatan) = MONTH(CURRENT_DATE()) AND YEAR(c.tanggal_catatan) = YEAR(CURRENT_DATE())";
         $filter_misi    = "AND MONTH(p.tanggal_update) = MONTH(CURRENT_DATE()) AND YEAR(p.tanggal_update) = YEAR(CURRENT_DATE())";
-    
     } elseif ($time == 'week') {
         $filter_catatan = "AND YEARWEEK(c.tanggal_catatan, 1) = YEARWEEK(CURRENT_DATE(), 1)";
         $filter_misi    = "AND YEARWEEK(p.tanggal_update, 1) = YEARWEEK(CURRENT_DATE(), 1)";
@@ -33,8 +31,9 @@ function ambil_data_leaderboard($koneksi, $id_sekolah_guru, $time = 'all', $scop
     if ($scope == 'school') {
         $filter_sekolah = "AND u.id_sekolah = '$id_sekolah_guru'";
     }
-
+    
     $query = "SELECT 
+                u.id_user,       
                 u.nama_lengkap, 
                 s.nama_sekolah,
                 (

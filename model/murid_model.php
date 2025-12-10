@@ -1,6 +1,5 @@
 <?php
-
-// === FUNGSI DASHBOARD & STATISTIK ===
+// dashboard
 
 function hitung_total_catatan($koneksi, $id_user) {
     $id_user = mysqli_real_escape_string($koneksi, $id_user);
@@ -18,9 +17,20 @@ function hitung_total_kosakata($koneksi, $id_user) {
 
 function hitung_total_poin($koneksi, $id_user) {
     $id_user = mysqli_real_escape_string($koneksi, $id_user);
-    $query = mysqli_query($koneksi, "SELECT SUM(nilai) as total FROM progres WHERE id_user = '$id_user'");
-    $row = mysqli_fetch_assoc($query);
-    return $row['total'] ?? 0;
+    
+    $q_catatan = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM catatan WHERE id_user = '$id_user'");
+    $catatan = mysqli_fetch_assoc($q_catatan);
+    $poin_catatan = ($catatan['total'] ?? 0) * 10;
+    
+    $q_kosakata = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM kosakata WHERE id_user = '$id_user'");
+    $kosakata = mysqli_fetch_assoc($q_kosakata);
+    $poin_kosakata = ($kosakata['total'] ?? 0) * 2;
+    
+    $q_misi = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM progres WHERE id_user = '$id_user' AND nilai = 100");
+    $misi = mysqli_fetch_assoc($q_misi);
+    $poin_misi = ($misi['total'] ?? 0) * 5;
+
+    return $poin_catatan + $poin_kosakata + $poin_misi;
 }
 
 function ambil_id_sekolah_murid($koneksi, $id_user) {
@@ -30,13 +40,12 @@ function ambil_id_sekolah_murid($koneksi, $id_user) {
     return $row['id_sekolah'] ?? 0;
 }
 
-// === FUNGSI MISI (LOGIKA BARU: CEK DARI CATATAN) ===
 
 function ambil_misi_aktif_terbaru($koneksi, $id_sekolah) {
     $query = "SELECT * FROM misi 
-              WHERE (kategori = 'global') OR (kategori = 'sekolah' AND id_sekolah = '$id_sekolah') 
-              ORDER BY id_misi DESC LIMIT 1";
-              
+            WHERE (kategori = 'global') OR (kategori = 'sekolah' AND id_sekolah = '$id_sekolah') 
+            ORDER BY id_misi DESC LIMIT 1";
+            
     $result = mysqli_query($koneksi, $query);
     return mysqli_fetch_assoc($result);
 }
@@ -65,7 +74,7 @@ function simpan_catatan_murid($koneksi, $id_user, $judul, $isi, $foto, $audio, $
     $tanggal = date('Y-m-d H:i:s');
     
     $query = "INSERT INTO catatan (id_user, judul, konten_path, tanggal_catatan, file_foto, file_audio, file_video) 
-              VALUES ('$id_user', '$judul', '$isi', '$tanggal', '$foto', '$audio', '$video')";
+                VALUES ('$id_user', '$judul', '$isi', '$tanggal', '$foto', '$audio', '$video')";
     
     return mysqli_query($koneksi, $query);
 }
@@ -95,9 +104,9 @@ function ambil_daftar_misi_murid($koneksi, $id_user) {
     $id_sekolah = ambil_id_sekolah_murid($koneksi, $id_user);
 
     $query = "SELECT * FROM misi 
-              WHERE (kategori = 'global') 
-                 OR (kategori = 'sekolah' AND id_sekolah = '$id_sekolah') 
-              ORDER BY id_misi DESC";
+            WHERE (kategori = 'global') 
+                OR (kategori = 'sekolah' AND id_sekolah = '$id_sekolah') 
+            ORDER BY id_misi DESC";
                 
     $result = mysqli_query($koneksi, $query);
     $daftar_misi = [];
@@ -118,7 +127,6 @@ function ambil_daftar_misi_murid($koneksi, $id_user) {
                 if (empty($kata)) continue;
                 $safe_kata = mysqli_real_escape_string($koneksi, $kata);
                 
-                // === PERBAIKAN: Ganti 'isi' menjadi 'konten_path' ===
                 $cek_catatan = mysqli_query($koneksi, "SELECT id_catatan FROM catatan 
                                                     WHERE id_user = '$id_user' 
                                                     AND (LOWER(judul) LIKE '%$safe_kata%' OR LOWER(konten_path) LIKE '%$safe_kata%') 
@@ -179,10 +187,8 @@ function ambil_checklist_misi($koneksi, $id_misi, $id_user) {
     return $checklist;
 }
 function ambil_nilai_progres_misi($koneksi, $id_user, $id_misi) {
-    // Ambil nilai dari tabel progres yang tadi sudah kita perbaiki
     $query = mysqli_query($koneksi, "SELECT nilai FROM progres WHERE id_user = '$id_user' AND id_misi = '$id_misi'");
     
-    // Jika ada datanya, ambil nilainya. Jika tidak ada, kembalikan 0.
     if (mysqli_num_rows($query) > 0) {
         $row = mysqli_fetch_assoc($query);
         return $row['nilai'];
@@ -198,7 +204,10 @@ function hitung_progres_misi_spesifik($koneksi, $id_user, $id_sekolah) {
 
     while ($misi = mysqli_fetch_assoc($query_misi)) {
         $id_misi = $misi['id_misi'];
-        $list_kata = ambil_list_kata_target($koneksi, $id_misi);
+        
+        // --- FIX IS HERE: Added '_murid' to the function name ---
+        $list_kata = ambil_list_kata_target_murid($koneksi, $id_misi); 
+        // -------------------------------------------------------
         
         $total_kata = count($list_kata);
         $kata_ditemukan = 0;
@@ -307,15 +316,26 @@ function ambil_kosakata_murid($koneksi, $id_user, $keyword='') {
     return mysqli_query($koneksi, $query);
 }
 
-function update_catatan_murid($koneksi, $id_catatan, $id_user, $judul, $isi) {
+function update_catatan_murid($koneksi, $id_catatan, $id_user, $judul, $isi, $foto, $audio, $video) {
+
     $id_catatan = mysqli_real_escape_string($koneksi, $id_catatan);
     $id_user    = mysqli_real_escape_string($koneksi, $id_user);
     $judul      = mysqli_real_escape_string($koneksi, $judul);
     $isi        = mysqli_real_escape_string($koneksi, $isi);
 
-    $query = "UPDATE catatan SET judul='$judul', konten_path='$isi' 
-            WHERE id_catatan='$id_catatan' AND id_user='$id_user'";
+    $foto       = ($foto !== null) ? mysqli_real_escape_string($koneksi, $foto) : '';
+    $audio      = ($audio !== null) ? mysqli_real_escape_string($koneksi, $audio) : '';
+    $video      = ($video !== null) ? mysqli_real_escape_string($koneksi, $video) : '';
+
     
+    $query = "UPDATE catatan SET 
+                judul = '$judul', 
+                konten_path = '$isi', 
+                file_foto = '$foto',
+                file_audio = '$audio',
+                file_video = '$video'
+              WHERE id_catatan = '$id_catatan' AND id_user = '$id_user'";
+
     return mysqli_query($koneksi, $query);
 }
 ?>

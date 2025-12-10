@@ -28,7 +28,7 @@
                 </div>
                 <div class="card">
                     <p>Total Points</p>
-                    <h3><?= floatval($total_poin) ?></h3>
+                    <h3><?= number_format($total_poin) ?></h3>
                 </div>
             </div>
 

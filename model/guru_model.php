@@ -362,4 +362,56 @@ function update_sekolah_guru($koneksi, $id_user, $id_sekolah) {
     $query = "UPDATE user SET id_sekolah = '$id_sekolah' WHERE id_user = '$id_user'";
     return mysqli_query($koneksi, $query);
 }
+function ambil_detail_siswa($koneksi, $id_siswa) {
+    $id_siswa = mysqli_real_escape_string($koneksi, $id_siswa);
+    $query = mysqli_query($koneksi, "SELECT * FROM user WHERE id_user = '$id_siswa'");
+    return mysqli_fetch_assoc($query);
+}
+
+function ambil_statistik_siswa($koneksi, $id_siswa) {
+    $id_siswa = mysqli_real_escape_string($koneksi, $id_siswa);
+    
+    $q1 = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM catatan WHERE id_user = '$id_siswa'");
+    $catatan = mysqli_fetch_assoc($q1)['total'];
+
+    $q2 = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM kosakata WHERE id_user = '$id_siswa'");
+    $kosakata = mysqli_fetch_assoc($q2)['total'];
+
+    return ['total_catatan' => $catatan, 'total_kosakata' => $kosakata];
+}
+
+function ambil_catatan_lengkap_dengan_user($koneksi, $id_catatan) {
+    $id_catatan = mysqli_real_escape_string($koneksi, $id_catatan);
+    
+    $query = "SELECT c.*, u.nama_lengkap 
+            FROM catatan c 
+            JOIN user u ON c.id_user = u.id_user 
+            WHERE c.id_catatan = '$id_catatan'";
+            
+    $result = mysqli_query($koneksi, $query);
+    return mysqli_fetch_assoc($result);
+}
+function ambil_riwayat_catatan_siswa($koneksi, $id_siswa) {
+    $id_siswa = mysqli_real_escape_string($koneksi, $id_siswa);
+    $query = "SELECT * FROM catatan WHERE id_user = '$id_siswa' ORDER BY tanggal_catatan DESC LIMIT 10";
+    return mysqli_query($koneksi, $query);
+}
+
+function hitung_skor_total_siswa($koneksi, $id_siswa) {
+    $id_siswa = mysqli_real_escape_string($koneksi, $id_siswa);
+    
+    // Poin Catatan (x10)
+    $q1 = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM catatan WHERE id_user = '$id_siswa'");
+    $poin_catatan = mysqli_fetch_assoc($q1)['total'] * 10;
+
+    // Poin Misi Selesai (x5)
+    $q2 = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM progres WHERE id_user = '$id_siswa' AND nilai = 100");
+    $poin_misi = mysqli_fetch_assoc($q2)['total'] * 5;
+
+    // Poin Kosakata (x2)
+    $q3 = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM kosakata WHERE id_user = '$id_siswa'");
+    $poin_kosakata = mysqli_fetch_assoc($q3)['total'] * 2;
+
+    return $poin_catatan + $poin_misi + $poin_kosakata;
+}
 ?>

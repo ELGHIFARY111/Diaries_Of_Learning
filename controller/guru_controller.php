@@ -156,37 +156,17 @@ function proses_edit_sekolah($koneksi) {
     }
 }
 function detail_siswa_page($koneksi) {
-    $id_guru = $_SESSION['user_id'];
     $id_siswa = $_GET['id'] ?? 0;
-    $active = $_GET['active'] ?? 'aktif';
 
-    $data_guru = cari_data_guru($koneksi, $id_guru);
-    $id_sekolah = $data_guru['id_sekolah'];
+    $siswa = ambil_detail_siswa($koneksi, $id_siswa);
+    $stats = ambil_statistik_siswa($koneksi, $id_siswa);
+    
+    $total_catatan = $stats['total_catatan'];
+    $total_kosakata = $stats['total_kosakata'];
 
-    $query_siswa = "SELECT * FROM user WHERE id_user = '$id_siswa' AND id_sekolah = '$id_sekolah' AND role = '3'";
-    $result_siswa = mysqli_query($koneksi, $query_siswa);
+    $riwayat_catatan = ambil_riwayat_catatan_siswa($koneksi, $id_siswa);
 
-    if (mysqli_num_rows($result_siswa) == 0) {
-        echo "<script>alert('Siswa tidak ditemukan atau bukan dari sekolah Anda.'); window.location='index.php?page=guru/monitoring';</script>";
-        exit;
-    }
-    $siswa = mysqli_fetch_assoc($result_siswa);
-
-
-    $q_catatan = "SELECT COUNT(*) as total FROM catatan WHERE id_user = '$id_siswa'";
-    $r_catatan = mysqli_query($koneksi, $q_catatan);
-    $total_catatan = mysqli_fetch_assoc($r_catatan)['total'];
-
-    $q_kosakata = "SELECT COUNT(*) as total FROM kosakata WHERE id_user = '$id_siswa'";
-    $r_kosakata = mysqli_query($koneksi, $q_kosakata);
-    $total_kosakata = mysqli_fetch_assoc($r_kosakata)['total'];
-
-    $q_nilai = "SELECT nilai FROM progres WHERE id_user = '$id_siswa' AND jenis_progres = 'menulis'";
-    $r_nilai = mysqli_query($koneksi, $q_nilai);
-    $data_nilai = mysqli_fetch_assoc($r_nilai);
-    $nilai_menulis = $data_nilai['nilai'] ?? 0;
-    $q_riwayat = "SELECT * FROM catatan WHERE id_user = '$id_siswa' ORDER BY tanggal_catatan DESC LIMIT 10";
-    $riwayat_catatan = mysqli_query($koneksi, $q_riwayat);
+    $nilai_menulis = hitung_skor_total_siswa($koneksi, $id_siswa);
 
     include "./views/guru/detail_siswa.php";
 }
@@ -351,6 +331,7 @@ function leaderboard_guru_page($koneksi) {
 
     include "./views/guru/leaderboard.php";
 }
+
 function baca_catatan_page($koneksi) {
     $id_user = $_SESSION['user_id'] ?? $_SESSION['id_user'];
     $id_catatan = $_GET['id'] ?? 0;
@@ -377,14 +358,7 @@ function proses_hapus_catatan($koneksi) {
 }
 function baca_catatan_siswa_page($koneksi) {
     $id_catatan = $_GET['id'] ?? 0;
-    
-    $query = "SELECT c.*, u.nama_lengkap 
-            FROM catatan c 
-            JOIN user u ON c.id_user = u.id_user 
-            WHERE c.id_catatan = '$id_catatan'";
-            
-    $result = mysqli_query($koneksi, $query);
-    $catatan = mysqli_fetch_assoc($result);
+    $catatan = ambil_catatan_lengkap_dengan_user($koneksi, $id_catatan);
 
     if (!$catatan) {
         echo "<script>alert('Catatan tidak ditemukan!'); window.location.href='index.php?page=guru/review_catatan';</script>";

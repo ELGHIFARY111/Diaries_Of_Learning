@@ -44,10 +44,8 @@ function murid_dashboard_page($koneksi) {
 function catatan_murid_page($koneksi) {
     $id_user = $_SESSION['user_id'] ?? $_SESSION['id_user'];
 
-    // Ambil semua catatan
     $daftar_catatan = ambil_semua_catatan($koneksi, $id_user);
 
-    // Tampilkan View List
     include "./views/murid/catatanMurid.php";
 }
 
@@ -204,16 +202,12 @@ function kerjakan_misi_murid_page($koneksi) {
     include "./views/murid/kerjakanMisiMurid.php";
 }
 
-// === BAGIAN PERBAIKAN PROFIL ===
-
 function profil_murid_page($koneksi) {
     $active = 'profil'; 
     $id_user = $_SESSION['user_id'] ?? $_SESSION['id_user'];
     
-    // Ambil data murid
     $data_murid = cari_data_murid($koneksi, $id_user);
 
-    // Cek jika data tidak ditemukan (misal session habis), kembalikan ke login
     if (!$data_murid) {
         header("Location: index.php?page=login");
         exit;
@@ -256,19 +250,29 @@ function edit_profil_murid_page($koneksi) {
 
 
 function leaderboard_murid_page($koneksi) {
+    $active = 'leaderboard';
     $id_user = $_SESSION['user_id'];
-    $data_murid = cari_data_murid($koneksi, $id_user);
-    $id_sekolah = $data_murid['id_sekolah'] ?? 0;
-
-    $scope  = $_GET['scope'] ?? 'school';
-    $time   = $_GET['time'] ?? 'all';
+    
+    $time = $_GET['time'] ?? 'all';
+    $scope = $_GET['scope'] ?? 'school';
     $search = $_GET['search'] ?? '';
 
-    if (function_exists('ambil_leaderboard')) {
-        $leaderboard_data = ambil_data_leaderboard($koneksi, $id_sekolah, $scope, $time, $search);
-    } else {
-        $leaderboard_data = []; 
+    $data_murid = cari_data_murid($koneksi, $id_user);
+    $id_sekolah = $data_murid['id_sekolah'] ?? 0;
+    $raw_data = ambil_data_leaderboard($koneksi, $id_sekolah, $scope, $time, '');
+
+    $leaderboard_final = [];
+    $rank_counter = 1;
+
+    while ($row = mysqli_fetch_assoc($raw_data)) {
+        $row['rank_asli'] = $rank_counter;
+        if (empty($search) || stripos($row['nama_lengkap'], $search) !== false) {
+            $leaderboard_final[] = $row;
+        }
+
+        $rank_counter++;
     }
+
 
     include "./views/murid/leaderboard.php";
 }
