@@ -346,7 +346,7 @@ function leaderboard_guru_page($koneksi) {
     $time   = $_GET['time'] ?? 'all';
     $search = $_GET['search'] ?? '';
 
-    $leaderboard_data = ambil_leaderboard($koneksi, $id_sekolah, $scope, $time, $search);
+    $leaderboard_data = ambil_data_leaderboard($koneksi, $id_sekolah, $scope, $time, $search);
 
     include "./views/guru/leaderboard.php";
 }
