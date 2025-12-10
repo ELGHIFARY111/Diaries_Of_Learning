@@ -18,57 +18,57 @@
                 <h2>Missions</h2>
             </div>
 
-            <h3 class="section-title">🔥 Ongoing Missions</h3>
+            <h3 class="section-title">Ongoing Missions</h3>
             
             <div class="mission-list">
                 
-                <div class="mission-card active-card">
-                    <div class="card-top">
-                        <span class="badge badge-school">🏫 School Mission</span>
-                        <span class="deadline">⏳ 2 Days Left</span>
-                    </div>
+                <?php if (!empty($daftar_misi)): ?>
+                    <?php foreach ($daftar_misi as $misi): ?>
+                        <?php 
+                            $sisa = $misi['sisa_hari'];
+                            $deadline_text = ($sisa !== null) ? "$sisa Days Left" : "∞ No Deadline";
+                            $nilai = $misi['progres_nilai'];
+                            
+                            $link_kerjakan = "index.php?page=murid/kerjakanMisiMurid&id=" . $misi['id_misi'];
+                        ?>
+
+                        <div class="mission-card active-card">
+                            <div class="card-top">
+                                <span class="badge badge-school">School Mission</span>
+                                <span class="deadline" style="<?= ($sisa < 3) ? 'color:red;' : '' ?>">
+                                    <?= $deadline_text ?>
+                                </span>
+                            </div>
+                            
+                            <div class="mission-title"><?= htmlspecialchars($misi['nama_misi']) ?></div>
+                            <p class="mission-desc">
+                                <?= htmlspecialchars($misi['deskripsi']) ?>
+                            </p>
+
+                            <div class="progress-area">
+                                <div class="progress-info">
+                                    <span>Your Progress</span>
+                                    <span><?= $nilai ?>% Completed</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: <?= $nilai ?>%;"></div>
+                                </div>
+                            </div>
+
+                            <a href="<?= $link_kerjakan ?>" class="btn-action" style="text-decoration:none; display:inline-block; text-align:center;">
+                                <?= ($nilai >= 100) ? 'Review Mission' : 'Continue Mission' ?>
+                            </a>
+                        </div>
+
+                    <?php endforeach; ?>
+                <?php else: ?>
                     
-                    <div class="mission-title">Adjective Challenge</div>
-                    <p class="mission-desc">
-                        Find 5 unique adjectives to describe your classmates.
-                    </p>
-
-                    <div class="progress-area">
-                        <div class="progress-info">
-                            <span>Your Progress</span>
-                            <span>3/5 Words</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 60%;"></div>
-                        </div>
+                    <div class="mission-card" style="text-align:center; color:grey;">
+                        <h3>🎉 No Active Missions</h3>
+                        <p>You have completed all missions or none are assigned yet.</p>
                     </div>
 
-                    <button class="btn-action" onclick="window.location.href='views/murid/kerjakanMisiMurid.php'">Continue Mission</button>
-                </div>
-
-                <div class="mission-card active-card">
-                    <div class="card-top">
-                        <span class="badge badge-global">🌍 Global Mission</span>
-                        <span class="deadline">⏳ 5 Days Left</span>
-                    </div>
-                    
-                    <div class="mission-title">Daily Verbs Mastery</div>
-                    <p class="mission-desc">
-                        Learn and use 10 daily verbs in sentences (Eat, Drink, Sleep, etc).
-                    </p>
-
-                    <div class="progress-area">
-                        <div class="progress-info">
-                            <span>Your Progress</span>
-                            <span>1/10 Words</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 10%;"></div>
-                        </div>
-                    </div>
-
-                    <button class="btn-action" onclick="window.location.href='index.php?page=murid/kerjakanMisiMurid'">Continue Mission</button>
-                </div>
+                <?php endif; ?>
 
             </div>
 

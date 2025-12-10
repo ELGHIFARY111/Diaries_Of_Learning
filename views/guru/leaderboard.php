@@ -36,8 +36,8 @@
                     
                     <div class="leaderboard-type-filters" style="background: #f1f2f6; padding: 5px; border-radius: 25px;">
                         <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=global&time=<?= $time ?>&search=<?= $search ?>" 
-                           class="filter-link <?= $scope == 'global' ? 'active' : '' ?>">
-                           Global
+                            class="filter-link <?= $scope == 'global' ? 'active' : '' ?>">
+                            Global
                         </a>
                         <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=school&time=<?= $time ?>&search=<?= $search ?>" 
                            class="filter-link <?= $scope == 'school' ? 'active' : '' ?>">
@@ -47,13 +47,13 @@
                     
                     <div class="time-filters">
                         <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=all&search=<?= $search ?>" 
-                           class="filter-link <?= $time == 'all' ? 'active' : '' ?>">All time</a>
+                            class="filter-link <?= $time == 'all' ? 'active' : '' ?>">All time</a>
                         
                         <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=month&search=<?= $search ?>" 
-                           class="filter-link <?= $time == 'month' ? 'active' : '' ?>">This Month</a>
+                            class="filter-link <?= $time == 'month' ? 'active' : '' ?>">This Month</a>
                         
                         <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=week&search=<?= $search ?>" 
-                           class="filter-link <?= $time == 'week' ? 'active' : '' ?>">This Week</a>
+                            class="filter-link <?= $time == 'week' ? 'active' : '' ?>">This Week</a>
                     </div>
 
                     <div class="search-area">

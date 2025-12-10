@@ -1,4 +1,5 @@
 <?php
+require_once "./model/murid_model.php";
 
 function navigasi_murid() {
     $active = $_GET['active'] ?? 'aktif';
@@ -55,8 +56,36 @@ function catatan_murid_page($koneksi) {
     $active = $_GET['active'] ?? 'aktif';
     include "./views/murid/catatanMurid.php";
 }
+
 function kosakata_murid_page($koneksi) {
     $active = $_GET['active'] ?? 'aktif';
+    
+    $id_user = $_SESSION['user_id'] ?? 0; 
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['simpan_kata'])) {
+        $data_baru = [
+            'id_user' => $id_user,
+            'kata_inggris' => $_POST['kata_inggris'],
+            'arti' => $_POST['arti'],
+            'contoh' => $_POST['contoh']
+        ];
+
+        if (tambah_kosakata_murid($koneksi, $data_baru)) {
+            echo "<script>alert('Berhasil menambah kosakata!'); window.location.href='index.php?page=murid/kosakataMurid';</script>";
+            exit;
+        } else {
+            echo "<script>alert('Gagal menambah data.');</script>";
+        }
+    }
+
+    $keyword = $_GET['search'] ?? '';
+    $result_kosakata = ambil_kosakata_murid($koneksi, $id_user, $keyword);
+    
+    $daftar_kosakata = [];
+    while($row = mysqli_fetch_assoc($result_kosakata)) {
+        $daftar_kosakata[] = $row;
+    }
+
     include "./views/murid/kosakataMurid.php";
 }
 function misi_murid_page($koneksi) {

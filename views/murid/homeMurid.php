@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="box">
-                    <h3>🕒 Recent Activity</h3>
+                    <h3>Recent Activity</h3>
                     
                     <?php if (count($recent_activities) > 0): ?>
                         <?php foreach($recent_activities as $act): ?>

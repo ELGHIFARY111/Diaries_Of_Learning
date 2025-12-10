@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Leaderboard</title>
-    <link rel="stylesheet" href="./views/css/guru.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="./views/css/murid.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
     <style>
         .filter-link { padding: 5px 10px; text-decoration: none; color: #636e72; border-radius: 20px; font-size: 14px; margin-right: 5px; }
         .filter-link:hover { background: #dfe6e9; }

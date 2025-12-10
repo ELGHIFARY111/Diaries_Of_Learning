@@ -32,11 +32,9 @@
 
 body {
     font-family: var(--font-family);
-    /* Soft Gradient Background */
     background: linear-gradient(135deg, #f5f6fa 0%, #e8e8f2 100%); 
     color: var(--color-text-primary);
-    line-height: 1.6;
-    min-height: 100vh;
+
 }
 
 .container {
@@ -339,4 +337,18 @@ a:hover {
 .badge-gambar {
     background: #e8f5e9;
     color: #2e7d32;
+}
+.btn-action {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 8px; 
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: none;
+}
+.btn-primary {
+    /* Menggunakan gradien utama */
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    color: white;
 }

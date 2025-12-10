@@ -11,6 +11,7 @@
 <body>
 
     <div class="container">
+
         <div class="content">
 
             <div class="header">
@@ -18,7 +19,7 @@
             </div>
 
             <div class="form-box">
-                <h3>➕ Add New Word</h3>
+                <h3>Add New Word</h3>
                 <form action="" method="POST" style="margin-top: 15px;">
                     
                     <div class="form-row">
@@ -37,47 +38,39 @@
                         <input type="text" name="contoh" class="input-field" placeholder="Ex: He is eager to learn English.">
                     </div>
 
-                    <button type="submit" class="btn-simpan">Save Word</button>
+                    <button type="submit" name="simpan_kata" class="btn-submit">Save into Dictionary</button>
                 </form>
             </div>
 
-            <div class="list-section">
+            <div class="list-box">
                 <div class="list-header">
-                    <h3>📚 Your Collection (5 Words)</h3>
-                    <input type="text" class="search-box" placeholder="Search word...">
+                    <h3>My Dictionary</h3>
+                    
+                    <form action="" method="GET" class="search-box">
+                        <input type="hidden" name="page" value="murid/kosakataMurid"> <input type="text" name="search" placeholder="Search word..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+                        <button type="submit">🔍</button>
+                    </form>
                 </div>
 
                 <div class="vocab-grid">
                     
-                    <div class="vocab-card">
-                        <div class="word-en">Determined</div>
-                        <div class="word-id">Bertekad / Persistent</div>
-                        <div class="word-example">"She is determined to pass the exam."</div>
-                    </div>
-
-                    <div class="vocab-card">
-                        <div class="word-en">Curious</div>
-                        <div class="word-id">Curious</div>
-                        <div class="word-example">"I am curious about the ending of the movie."</div>
-                    </div>
-
-                    <div class="vocab-card">
-                        <div class="word-en">Achieve</div>
-                        <div class="word-id">Achieve</div>
-                        <div class="word-example">"Work hard to achieve your goals."</div>
-                    </div>
-
-                    <div class="vocab-card">
-                        <div class="word-en">Improve</div>
-                        <div class="word-id">Improve</div>
-                        <div class="word-example">"I want to improve my speaking skills."</div>
-                    </div>
-
-                    <div class="vocab-card">
-                        <div class="word-en">Library</div>
-                        <div class="word-id">Library</div>
-                        <div class="word-example">"We study in the library."</div>
-                    </div>
+                    <?php if (!empty($daftar_kosakata)): ?>
+                        <?php foreach ($daftar_kosakata as $vocab): ?>
+                            <div class="vocab-card">
+                                <div class="word-en"><?= htmlspecialchars($vocab['kata_inggris']) ?></div>
+                                <div class="word-id"><?= htmlspecialchars($vocab['arti_indonesia']) ?></div>
+                                <?php if (!empty($vocab['contoh_kalimat'])): ?>
+                                    <div class="word-example">"<?= htmlspecialchars($vocab['contoh_kalimat']) ?>"</div>
+                                <?php else: ?>
+                                    <div class="word-example" style="color:#ccc;">- No example -</div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div style="grid-column: 1/-1; text-align: center; color: grey; padding: 20px;">
+                            No vocabulary found. Start adding new words!
+                        </div>
+                    <?php endif; ?>
 
                 </div>
             </div>
