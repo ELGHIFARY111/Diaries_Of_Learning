@@ -90,9 +90,8 @@ function auth_authenticate($koneksi) {
                     $_SESSION['user_role'] = $user['role'];
                     
                     if($user['role'] == 'superadmin' || $user['role'] == '1'){
-                        header("Location: index.php?page=admin");
+                        header("Location: index.php?page=dashboard");
                     } elseif($user['role'] == 'guru' || $user['role'] == '2'){
-                        // $_SESSION['id_sekolah'] = $user['id_sekolah'];
                         header("Location: index.php?page=guru&active=dashboard&aktif=true");
                     } else {
                         header("Location: index.php?page=murid&active=dashboard&aktif=true");

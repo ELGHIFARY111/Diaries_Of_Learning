@@ -155,27 +155,8 @@ function kosakata_murid_page($koneksi) {
 function misi_murid_page($koneksi) {
     $active = $_GET['active'] ?? 'aktif';
     $id_user = $_SESSION['user_id'] ?? $_SESSION['id_user'];
-    $id_sekolah = ambil_id_sekolah_murid($koneksi, $id_user);
-
-    $query_misi = mysqli_query($koneksi, "SELECT * FROM misi WHERE kategori='global' OR (kategori='sekolah' AND id_sekolah='$id_sekolah') ORDER BY id_misi DESC");
     
-    $daftar_misi = [];
-    while ($misi = mysqli_fetch_assoc($query_misi)) {
-        
-        $id_misi = $misi['id_misi'];
-        $q_progres = mysqli_query($koneksi, "SELECT nilai FROM progres WHERE id_user='$id_user' AND id_misi='$id_misi'");
-        
-        $persen = 0;
-        if (mysqli_num_rows($q_progres) > 0) {
-            $data_progres = mysqli_fetch_assoc($q_progres);
-            $persen = $data_progres['nilai'];
-        }
-        $misi['persentase_saya'] = $persen; 
-
-        $misi['sisa_hari'] = hitung_sisa_hari($misi['tanggal_akhir']);
-        
-        $daftar_misi[] = $misi;
-    }
+    $daftar_misi = ambil_daftar_misi_lengkap_murid($koneksi, $id_user);
 
     include "./views/murid/misiMurid.php";
 }
@@ -190,25 +171,14 @@ function kerjakan_misi_murid_page($koneksi) {
         exit;
     }
 
-    $q_misi = mysqli_query($koneksi, "SELECT * FROM misi WHERE id_misi='$id_misi'");
-    $info_misi = mysqli_fetch_assoc($q_misi);
+    $info_misi = ambil_detail_misi_by_id($koneksi, $id_misi);
 
-    $list_kata_mentah = ambil_list_kata_target_murid($koneksi, $id_misi);
-
-    $checklist = [];
-    foreach ($list_kata_mentah as $kata) {
-        $status = cek_status_kata($koneksi, $id_user, $kata);
-        
-        $checklist[] = [
-            'kata'   => $kata,
-            'status' => $status
-        ];
-    }
-    $total = count($checklist);
-    $sudah = 0;
-    foreach($checklist as $c) { if($c['status']) $sudah++; }
-    $persen = ($total > 0) ? round(($sudah/$total)*100) : 0;
-
+    $data_pengerjaan = proses_checklist_misi($koneksi, $id_user, $id_misi);
+    
+    $checklist = $data_pengerjaan['checklist'];
+    $persen    = $data_pengerjaan['persen'];
+    $total     = $data_pengerjaan['total']; 
+    $sudah     = $data_pengerjaan['sudah'];
     include "./views/murid/kerjakanMisiMurid.php";
 }
 

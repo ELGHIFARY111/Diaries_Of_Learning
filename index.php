@@ -69,15 +69,8 @@ case 'institusi/sekolah/edit':
 case 'institusi/sekolah/proses_edit':
     proses_edit_sekolah($koneksi);
     break;
-
-
-
-
-        
-
-
-
-        
+case 'proses_tambah_misi_global':
+    proses_tambah_misi_global($koneksi);
 
 case 'manajemen_misi_global':
     manajemen_misi_global($koneksi);
@@ -88,14 +81,11 @@ case 'tambah_misi_global':
     tambah_misi_global_page($koneksi);
     break;
 
-case 'proses_tambah_misi_global':
-    proses_tambah_misi_global($koneksi);
-    break;
-
-
-
 case 'edit_misi_global':
     edit_misi_global_page($koneksi);
+    break;
+case 'proses_edit_misi_global':
+    proses_edit_misi_global($koneksi);
     break;
 
 case 'hapus_misi_global':

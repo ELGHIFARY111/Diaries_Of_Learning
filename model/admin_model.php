@@ -88,28 +88,25 @@ function misi_global_insert($koneksi, $id_pembuat, $judul, $deskripsi, $mulai, $
 
 
 
-function misi_global_update($koneksi, $id_misi, $judul, $deskripsi, $target, $mulai, $akhir) {
-    $id         = (int)$id_misi;
-    $judul      = mysqli_real_escape_string($koneksi, $judul);
-    $deskripsi  = mysqli_real_escape_string($koneksi, $deskripsi);
-    $target     = (int)$target;
+function misi_global_update($koneksi, $data) {
+    $id     = mysqli_real_escape_string($koneksi, $data['id_misi']);
+    $judul  = mysqli_real_escape_string($koneksi, $data['judul']);
+    $desk   = mysqli_real_escape_string($koneksi, $data['deskripsi']);
+    $mulai  = mysqli_real_escape_string($koneksi, $data['tanggal_mulai']);
+    $akhir  = mysqli_real_escape_string($koneksi, $data['tanggal_akhir']);
+    
+    $target = (int) $data['target_jumlah']; 
 
-    $sql = "UPDATE misi SET
-            judul='$judul',
-            deskripsi='$deskripsi',
-            tanggal_mulai='$mulai',
-            tanggal_akhir='$akhir',
-            target_jumlah_kata=$target
-            WHERE id_misi=$id";
-
-    return mysqli_query($koneksi, $sql);
+    $query = "UPDATE misi SET 
+                judul='$judul', 
+                deskripsi='$desk', 
+                tanggal_mulai='$mulai', 
+                tanggal_akhir='$akhir',
+                target_jumlah_kata='$target' 
+              WHERE id_misi='$id'";
+    
+    return mysqli_query($koneksi, $query);
 }
-
-function misi_global_delete($koneksi, $id_misi) {
-    $id = (int)$id_misi;
-    return mysqli_query($koneksi, "DELETE FROM misi WHERE id_misi=$id");
-}
-
 
 
 function user_update_profile($koneksi, $id_user, $nama, $username, $email) {
@@ -242,6 +239,88 @@ function profil_eksekusi_update($koneksi, $id_user, $data, $password_baru = null
 
     return mysqli_query($koneksi, $sql);
 }
+function misi_global_tambah($koneksi, $data) {
+    $judul      = mysqli_real_escape_string($koneksi, $data['judul']);
+    $deskripsi  = mysqli_real_escape_string($koneksi, $data['deskripsi']);
+    $tgl_mulai  = mysqli_real_escape_string($koneksi, $data['tanggal_mulai']);
+    $tgl_akhir  = mysqli_real_escape_string($koneksi, $data['tanggal_akhir']);
+    $id_pembuat = mysqli_real_escape_string($koneksi, $data['id_pembuat']);
+    
+    $target     = (int) $data['target_jumlah']; 
 
+    $query = "INSERT INTO misi (judul, deskripsi, tanggal_mulai, tanggal_akhir, target_jumlah_kata, id_pembuat, id_sekolah, kategori, tanggal_dibuat) 
+              VALUES ('$judul', '$deskripsi', '$tgl_mulai', '$tgl_akhir', '$target', '$id_pembuat', NULL, 'global', NOW())";
+    
+    if (mysqli_query($koneksi, $query)) {
+        return mysqli_insert_id($koneksi); 
+    } else {
+        return false;
+    }
+}
+function misi_global_tambah_detail($koneksi, $id_misi, $kata_inggris) {
+    $id_misi = mysqli_real_escape_string($koneksi, $id_misi);
+    $kata    = mysqli_real_escape_string($koneksi, trim($kata_inggris));
+    
+    // Simpan kata target untuk misi ini
+    $query = "INSERT INTO kosakata_misi (id_misi, kata_kunci) VALUES ('$id_misi', '$kata')";
+    return mysqli_query($koneksi, $query);
+}
+function misi_global_ambil_detail($koneksi, $id_misi) {
+    $id = mysqli_real_escape_string($koneksi, $id_misi);
+    $query = "SELECT * FROM misi WHERE id_misi = '$id'";
+    return mysqli_fetch_assoc(mysqli_query($koneksi, $query));
+}
 
+function misi_global_ambil_kosakata_string($koneksi, $id_misi) {
+    $id = mysqli_real_escape_string($koneksi, $id_misi);
+    $query = "SELECT kata_kunci FROM kosakata_misi WHERE id_misi = '$id'";
+    $result = mysqli_query($koneksi, $query);
+    
+    $words = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $words[] = $row['kata_kunci'];
+    }
+    return implode(', ', $words);
+}
+
+function misi_global_update_target_jumlah($koneksi, $id_misi, $target_jumlah) {
+    $id_misi_bersih = mysqli_real_escape_string($koneksi, $id_misi);
+    $target_jumlah_bersih = (int)$target_jumlah;
+    
+    $query = "UPDATE misi SET target_jumlah_kata='$target_jumlah_bersih' 
+              WHERE id_misi='$id_misi_bersih'";
+    return mysqli_query($koneksi, $query);
+}
+function misi_global_reset_kosakata($koneksi, $id_misi) {
+    $id_misi_bersih = mysqli_real_escape_string($koneksi, $id_misi);
+    $query = "DELETE FROM kosakata_misi WHERE id_misi='$id_misi_bersih'";
+    return mysqli_query($koneksi, $query);
+}
+function misi_global_hitung_kosakata($koneksi, $id_misi) {
+    $id_misi_bersih = mysqli_real_escape_string($koneksi, $id_misi);
+    
+    $query = "SELECT COUNT(*) as total_kata FROM kosakata_misi WHERE id_misi = '$id_misi_bersih'";
+    $result = mysqli_query($koneksi, $query);
+    
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        return (int)$row['total_kata'];
+    }
+    return 0;
+}
+function misi_global_delete($koneksi, $id_misi) {
+    $id_misi_bersih = mysqli_real_escape_string($koneksi, $id_misi);
+
+    $query_delete_kosakata = "DELETE FROM kosakata_misi WHERE id_misi='$id_misi_bersih'";
+    $delete_kosakata_ok = mysqli_query($koneksi, $query_delete_kosakata); 
+
+    $query_delete_misi = "DELETE FROM misi WHERE id_misi='$id_misi_bersih' AND kategori='global'";
+    $delete_misi_ok = mysqli_query($koneksi, $query_delete_misi);
+
+    if ($delete_misi_ok) {
+        return true;
+    } else {
+        return false;
+    }
+}
 ?>

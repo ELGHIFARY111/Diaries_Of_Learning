@@ -366,4 +366,70 @@ function hapus_kosakata_murid($koneksi, $id_kosakata, $id_user) {
     $query = "DELETE FROM kosakata WHERE id_kosakata='$id_kosakata' AND id_user='$id_user'";
     return mysqli_query($koneksi, $query);
 }
+function ambil_daftar_misi_lengkap_murid($koneksi, $id_user) {
+    $id_sekolah = ambil_id_sekolah_murid($koneksi, $id_user);
+
+    $query = "SELECT * FROM misi 
+            WHERE kategori='global' 
+            OR (kategori='sekolah' AND id_sekolah='$id_sekolah') 
+            ORDER BY id_misi DESC";
+            
+    $query_misi = mysqli_query($koneksi, $query);
+    
+    $daftar_misi = [];
+    while ($misi = mysqli_fetch_assoc($query_misi)) {
+        
+        $id_misi = $misi['id_misi'];
+        
+        $q_progres = mysqli_query($koneksi, "SELECT nilai FROM progres WHERE id_user='$id_user' AND id_misi='$id_misi'");
+        
+        $persen = 0;
+        if (mysqli_num_rows($q_progres) > 0) {
+            $data_progres = mysqli_fetch_assoc($q_progres);
+            $persen = $data_progres['nilai'];
+        }
+        $misi['persentase_saya'] = $persen; 
+
+        $misi['sisa_hari'] = hitung_sisa_hari($misi['tanggal_akhir']);
+        
+        $daftar_misi[] = $misi;
+    }
+
+    return $daftar_misi;
+}
+
+function ambil_detail_misi_by_id($koneksi, $id_misi) {
+    $id_misi = mysqli_real_escape_string($koneksi, $id_misi);
+    $q_misi = mysqli_query($koneksi, "SELECT * FROM misi WHERE id_misi='$id_misi'");
+    return mysqli_fetch_assoc($q_misi);
+}
+
+function proses_checklist_misi($koneksi, $id_user, $id_misi) {
+    $list_kata_mentah = ambil_list_kata_target_murid($koneksi, $id_misi);
+
+    $checklist = [];
+    $total = 0;
+    $sudah = 0;
+
+    foreach ($list_kata_mentah as $kata) {
+        $status = cek_status_kata($koneksi, $id_user, $kata);
+
+        $checklist[] = [
+            'kata'   => $kata,
+            'status' => $status
+        ];
+
+        $total++;
+        if ($status) $sudah++;
+    }
+
+    $persen = ($total > 0) ? round(($sudah / $total) * 100) : 0;
+
+    return [
+        'checklist' => $checklist,
+        'persen'    => $persen,
+        'total'     => $total,
+        'sudah'     => $sudah
+    ];
+}
 ?>

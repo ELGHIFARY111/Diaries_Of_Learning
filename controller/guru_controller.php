@@ -319,15 +319,29 @@ function detail_progres_misi_page($koneksi) {
     include "./views/guru/detail_progres_misi.php";
 }
 function leaderboard_guru_page($koneksi) {
-    $id_guru = $_SESSION['user_id'];
-    $data_guru = cari_data_guru($koneksi, $id_guru);
-    $id_sekolah = $data_guru['id_sekolah'];
-
-    $scope  = $_GET['scope'] ?? 'school';
-    $time   = $_GET['time'] ?? 'all';
+    $active = 'leaderboard';
+    $id_user = $_SESSION['user_id'];
+    
+    $time = $_GET['time'] ?? 'all';
+    $scope = $_GET['scope'] ?? 'school';
     $search = $_GET['search'] ?? '';
 
-    $leaderboard_data = ambil_data_leaderboard($koneksi, $id_sekolah, $scope, $time, $search);
+    $data_murid = cari_data_murid($koneksi, $id_user);
+    $id_sekolah = $data_murid['id_sekolah'] ?? 0;
+    $raw_data = ambil_data_leaderboard($koneksi, $id_sekolah, $scope, $time, '');
+
+    $leaderboard_final = [];
+    $rank_counter = 1;
+
+    while ($row = mysqli_fetch_assoc($raw_data)) {
+        $row['rank_asli'] = $rank_counter;
+        if (empty($search) || stripos($row['nama_lengkap'], $search) !== false) {
+            $leaderboard_final[] = $row;
+        }
+
+        $rank_counter++;
+    }
+
 
     include "./views/guru/leaderboard.php";
 }

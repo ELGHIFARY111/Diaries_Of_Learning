@@ -24,18 +24,24 @@
                 <?php if (!empty($daftar_misi)): ?>
                     <?php foreach ($daftar_misi as $misi): ?>
                         <?php 
-                            // Pastikan variabel ada isinya
+                            // Hitung sisa hari untuk display
                             $sisa = $misi['sisa_hari'] ?? null;
                             $deadline_text = ($sisa !== null) ? "$sisa Days Left" : "∞ No Deadline";
-                            $nilai = $misi['progres_nilai'] ?? 0;
                             
-                            $id_misi = $misi['id_misi'] ?? 0;
-                            $link_kerjakan = "index.php?page=murid/kerjakanMisiMurid&active=misi&aktif=true&id=" . $id_misi;
+                            // Tentukan Badge Kategori
+                            if (isset($misi['kategori']) && $misi['kategori'] == 'global') {
+                                // Style inline untuk membedakan Global (Ungu)
+                                $badge_html = '<span class="badge" style="background-color: #6c5ce7; color: white;">Global Mission</span>';
+                            } else {
+                                // Default class badge-school
+                                $badge_html = '<span class="badge badge-school">School Mission</span>';
+                            }
                         ?>
 
                         <div class="mission-card active-card">
                             <div class="card-top">
-                                <span class="badge badge-school">School Mission</span>
+                                <?= $badge_html ?>
+                                
                                 <span class="deadline" style="<?= ($sisa !== null && $sisa < 3) ? 'color: red;' : 'color: green;' ?>">
                                     <?= $deadline_text ?>
                                 </span>

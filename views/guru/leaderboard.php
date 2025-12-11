@@ -21,30 +21,30 @@
                 <div class="leaderboard-controls" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
                     
                     <div class="leaderboard-type-filters" style="background: #f1f2f6; padding: 5px; border-radius: 25px;">
-                        <a href="index.php?page=murid/leaderboard_murid&active=leaderboard&aktif=true&scope=global&time=<?= $time ?>&search=<?= $search ?>" 
+                        <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=global&time=<?= $time ?>&search=<?= $search ?>" 
                            class="filter-link <?= $scope == 'global' ? 'active' : '' ?>">
                             Global
                         </a>
-                        <a href="index.php?page=murid/leaderboard_murid&active=leaderboard&aktif=true&scope=school&time=<?= $time ?>&search=<?= $search ?>" 
+                        <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=school&time=<?= $time ?>&search=<?= $search ?>" 
                            class="filter-link <?= $scope == 'school' ? 'active' : '' ?>">
                             My School
                         </a>
                     </div>
                     
                     <div class="time-filters">
-                        <a href="index.php?page=murid/leaderboard_murid&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=all&search=<?= $search ?>" 
+                        <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=all&search=<?= $search ?>" 
                            class="filter-link <?= $time == 'all' ? 'active' : '' ?>">All time</a>
                         
-                        <a href="index.php?page=murid/leaderboard_murid&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=month&search=<?= $search ?>" 
+                        <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=month&search=<?= $search ?>" 
                            class="filter-link <?= $time == 'month' ? 'active' : '' ?>">This Month</a>
                         
-                        <a href="index.php?page=murid/leaderboard_murid&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=week&search=<?= $search ?>" 
+                        <a href="index.php?page=guru/leaderboard_guru&active=leaderboard&aktif=true&scope=<?= $scope ?>&time=week&search=<?= $search ?>" 
                            class="filter-link <?= $time == 'week' ? 'active' : '' ?>">This Week</a>
                     </div>
 
                     <div class="search-area">
                         <form action="index.php" method="GET" style="display: flex; gap: 5px;">
-                            <input type="hidden" name="page" value="murid/leaderboard_murid">
+                            <input type="hidden" name="page" value="guru/leaderboard_guru">
                             <input type="hidden" name="active" value="leaderboard">
                             <input type="hidden" name="aktif" value="true">
                             <input type="hidden" name="scope" value="<?= $scope ?>">
@@ -74,10 +74,8 @@
                                 $id_saya = $_SESSION['user_id'] ?? 0;
                                 $is_me = ($row['id_user'] == $id_saya);
                                 
-                                // Tentukan Class CSS (Bukan Inline Style lagi)
                                 $row_class = $is_me ? 'is-me' : '';
                                 
-                                // Tambah class untuk ranking 1, 2, 3 agar berwarna
                                 if ($row['rank_asli'] == 1) $row_class .= ' rank-1';
                                 elseif ($row['rank_asli'] == 2) $row_class .= ' rank-2';
                                 elseif ($row['rank_asli'] == 3) $row_class .= ' rank-3';

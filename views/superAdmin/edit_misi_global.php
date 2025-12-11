@@ -8,54 +8,53 @@
             <a href="index.php?page=manajemen_misi_global" class="btn-back">← Kembali</a>
         </div>
 
-        <!-- PREVIEW MISI SAAT INI -->
-        <div class="misi-preview">
-            <h3>Preview Misi</h3>
-            <div class="misi-card">
-                <b><?= htmlspecialchars($data['judul']) ?></b>
-                <p><?= htmlspecialchars($data['deskripsi']) ?></p>
-                <p><b>Target:</b> <?= $data['target_jumlah_kata'] ?> kata</p>
-                <p><b>Tanggal Mulai:</b> <?= $data['tanggal_mulai'] ?></p>
-                <p><b>Tanggal Akhir:</b> <?= $data['tanggal_akhir'] ?>
-                    <?php
-                    $today = date('Y-m-d');
-                    if ($data['tanggal_akhir'] < $today) {
-                        echo '<span class="badge badge-late">Lewat Deadline</span>';
-                    } elseif (strtotime($data['tanggal_akhir']) - strtotime($today) <= 3*24*60*60) {
-                        echo '<span class="badge badge-soon">Dekat Deadline</span>';
-                    }
-                    ?>
-                </p>
-                <p><b>Progres:</b></p>
-                <div class="progress-bar">
-                    <div class="progress" style="width: <?= $data['progres'] ?? 0 ?>%;"></div>
+        <div class="box form-container" style="background: white; padding: 25px; border-radius: 8px; margin-top: 20px;">
+            
+            <form action="index.php?page=proses_edit_misi_global" method="POST">
+                <input type="hidden" name="id_misi" value="<?= $data['id_misi'] ?>">
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="display:block; font-weight:bold; margin-bottom:5px;">Judul Misi</label>
+                    <input type="text" name="judul" value="<?= htmlspecialchars($data['judul']) ?>" required 
+                           style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
                 </div>
-                <small><?= $data['progres'] ?? 0 ?>%</small>
-                <p>
-                    <b>Status:</b>
-                    <?= ($data['progres'] ?? 0) == 100 ? '<span class="badge badge-complete">Selesai</span>' : '<span class="badge badge-pending">Berjalan</span>' ?>
-                </p>
-            </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="display:block; font-weight:bold; margin-bottom:5px;">Deskripsi</label>
+                    <textarea name="deskripsi" rows="3" required 
+                              style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"><?= htmlspecialchars($data['deskripsi']) ?></textarea>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px;">
+                    <div class="form-group">
+                        <label style="display:block; font-weight:bold; margin-bottom:5px;">Tanggal Mulai</label>
+                        <input type="date" name="tanggal_mulai" value="<?= $data['tanggal_mulai'] ?>" required
+                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block; font-weight:bold; margin-bottom:5px;">Tanggal Akhir</label>
+                        <input type="date" name="tanggal_akhir" value="<?= $data['tanggal_akhir'] ?>" required
+                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                </div>
+
+                <div class="form-group" style="background: #f0f8ff; padding: 15px; border-radius: 8px; border: 1px solid #bde0fe; margin-bottom: 20px;">
+                    <label style="color: #0056b3; font-weight:bold;">📝 Daftar Kata Target (Pisahkan dengan koma)</label>
+                    <p style="font-size: 12px; margin-bottom: 8px; color: #666;">
+                        Contoh: Apple, Banana, Orange
+                    </p>
+                    <textarea name="kata_target" rows="5" required
+                              style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"><?= htmlspecialchars($kata_kata_string ?? '') ?></textarea>
+                </div>
+
+                <div class="action-buttons" style="display:flex; justify-content: flex-end; gap: 10px;">
+                    <button type="submit" class="btn-action" 
+                            style="background: #2ecc71; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                        Simpan Perubahan
+                    </button>
+                </div>
+            </form>
         </div>
 
-        <!-- FORM EDIT -->
-        <form method="POST" class="form-misi">
-            <label>Judul:</label>
-            <input type="text" name="judul" value="<?= htmlspecialchars($data['judul']) ?>" required>
-
-            <label>Deskripsi:</label>
-            <textarea name="deskripsi" required><?= htmlspecialchars($data['deskripsi']) ?></textarea>
-
-            <label>Target Jumlah Kata:</label>
-            <input type="number" name="target" value="<?= $data['target_jumlah_kata'] ?>" required min="1">
-
-            <label>Tanggal Mulai:</label>
-            <input type="date" name="mulai" value="<?= $data['tanggal_mulai'] ?>" required>
-
-            <label>Tanggal Akhir:</label>
-            <input type="date" name="akhir" value="<?= $data['tanggal_akhir'] ?>" required>
-
-            <button type="submit" class="btn-submit">Update</button>
-        </form>
     </div>
 </div>

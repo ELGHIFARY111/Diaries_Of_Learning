@@ -25,10 +25,17 @@ function update_profil($koneksi) {
 }
 
 function manajemen_misi_global($koneksi) {
-    $daftar_misi_global = misi_global_get_all($koneksi);
+    $daftar_misi_global = misi_global_get_all($koneksi); 
+    
+    if (is_array($daftar_misi_global)) {
+        foreach ($daftar_misi_global as &$misi) {
+            $misi['target_jumlah_kata'] = misi_global_hitung_kosakata($koneksi, $misi['id_misi']);
+        }
+        unset($misi);
+    }
+
     include "./views/superAdmin/manajemen_misi_global.php";
 }
-
 function tambah_misi_global_page($koneksi) {
     include "./views/superAdmin/tambah_misi_global.php";
 }
@@ -41,69 +48,59 @@ function proses_tambah_misi_global($koneksi) {
     }
 
     $id_pembuat  = $_SESSION['user_id'];
-    $judul       = trim($_POST['judul']);
-    $deskripsi   = trim($_POST['deskripsi']);
-    $mulai       = $_POST['tanggal_mulai'];
-    $akhir       = $_POST['tanggal_akhir'];
-    $kata_target = trim($_POST['kata_target']);
+    $judul       = $_POST['judul'];
+    $deskripsi   = $_POST['deskripsi'];
+    $tgl_mulai   = $_POST['tanggal_mulai'];
+    $tgl_akhir   = $_POST['tanggal_akhir'];
+    $kata_target = $_POST['kata_target'];
 
-    if ($judul === "" || $mulai === "" || $akhir === "" || $kata_target === "") {
-        echo "<script>alert('Semua field wajib diisi'); history.back();</script>";
-        exit;
+    $daftar_kata = explode(',', $kata_target);
+    $jumlah_kata = count($daftar_kata); 
+
+    $data = [
+        'id_pembuat'    => $id_pembuat,
+        'judul'         => $judul,
+        'deskripsi'     => $deskripsi,
+        'tanggal_mulai' => $tgl_mulai,
+        'tanggal_akhir' => $tgl_akhir,
+        'target_jumlah' => $jumlah_kata 
+    ];
+
+    $id_misi_baru = misi_global_tambah($koneksi, $data);
+
+    if ($id_misi_baru) {
+        foreach ($daftar_kata as $kata) {
+            $kata_bersih = trim($kata);
+            if (!empty($kata_bersih)) {
+                misi_global_tambah_detail($koneksi, $id_misi_baru, $kata_bersih);
+            }
+        }
+
+        echo "<script>
+                alert('Misi Global berhasil dibuat!'); 
+                window.location.href='index.php?page=manajemen_misi_global';
+              </script>";
+    } else {
+        echo "<script>alert('Gagal membuat misi.'); window.history.back();</script>";
     }
-
-    $insert = misi_global_insert(
-        $koneksi,
-        $id_pembuat,
-        $judul,
-        $deskripsi,
-        $mulai,
-        $akhir,
-        $kata_target
-    );
-
-    if (!$insert) {
-        echo "<h3>Query gagal:</h3><pre>" . mysqli_error($koneksi) . "</pre>";
-        exit;
-    }
-
-    header("Location: index.php?page=manajemen_misi_global&success=1");
-    exit;
 }
 
 
 
-function edit_misi_global_page($koneksi) {
-
-    $id = $_GET['id'];
-    $data = misi_global_get_by_id($koneksi, $id);
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        misi_global_update(
-            $koneksi,
-            $id,
-            $_POST['judul'],
-            $_POST['deskripsi'],
-            $_POST['target'],
-            $_POST['tanggal_mulai'],
-            $_POST['tanggal_akhir']
-        );
-
-        header("Location: index.php?page=manajemen_misi_global");
-        exit;
-    }
-
-    include "./views/superAdmin/edit_misi_global.php";
-}
 
 function hapus_misi_global_page($koneksi) {
-    $id = $_GET['id'];
-    misi_global_delete($koneksi, $id);
-    header("Location: index.php?page=manajemen_misi_global");
+    
+    $id_misi = $_GET['id'];
+    
+    if (misi_global_delete($koneksi, $id_misi)) {
+        $_SESSION['pesan'] = "Misi Global berhasil dihapus.";
+    } else {
+        $_SESSION['pesan'] = "Gagal menghapus Misi Global. (Mungkin tidak ditemukan atau masalah DB)";
+    }
+    
+    header('Location: index.php?page=manajemen_misi_global');
     exit;
 }
-
 function profil_user_page($koneksi) {
 
     if (!isset($_SESSION['user_id'])) {
@@ -254,6 +251,62 @@ function controller_proses_update($koneksi) {
         } else {
             die("Error update database.");
         }
+    }
+}
+// Halaman Form Edit
+function edit_misi_global_page($koneksi) {
+    if (!isset($_GET['id'])) {
+        header("Location: index.php?page=manajemen_misi_global");
+        exit;
+    }
+
+    $id_misi = $_GET['id'];
+    
+    $data = misi_global_ambil_detail($koneksi, $id_misi);
+    
+    $kata_kata_string = misi_global_ambil_kosakata_string($koneksi, $id_misi);
+
+    include "./views/superAdmin/edit_misi_global.php";
+}
+
+function proses_edit_misi_global($koneksi) {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header("Location: index.php?page=manajemen_misi_global");
+        exit;
+    }
+
+    $kata_target = $_POST['kata_target'];
+    
+    $daftar_kata = explode(',', $kata_target);
+    $jumlah_kata = count($daftar_kata);
+
+    $data = [
+        'id_misi'       => $_POST['id_misi'],
+        'judul'         => $_POST['judul'],
+        'deskripsi'     => $_POST['deskripsi'],
+        'tanggal_mulai' => $_POST['tanggal_mulai'],
+        'tanggal_akhir' => $_POST['tanggal_akhir'],
+        'target_jumlah' => $jumlah_kata 
+    ];
+
+    if (misi_global_update($koneksi, $data)) {
+        
+        $id_misi = $data['id_misi'];
+        misi_global_reset_kosakata($koneksi, $id_misi);
+
+        foreach ($daftar_kata as $kata) {
+            $kata_bersih = trim($kata);
+            if (!empty($kata_bersih)) {
+                misi_global_tambah_detail($koneksi, $id_misi, $kata_bersih);
+            }
+        }
+
+        echo "<script>
+                alert('Misi global berhasil diperbarui!'); 
+                window.location.href='index.php?page=manajemen_misi_global';
+              </script>";
+    } else {
+        echo "<script>alert('Gagal update data misi.'); window.history.back();</script>";
     }
 }
 
